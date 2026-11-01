@@ -35,7 +35,7 @@ def _settings():
         "host": os.getenv("SMTP_HOST", ""),
         "port": int(os.getenv("SMTP_PORT", "587")),
         "user": os.getenv("SMTP_USER", ""),
-        "password": os.getenv("SMTP_PASSWORD", ""),
+        "password": os.getenv("SMTP_PASSWORD", "").replace(" ", ""),   # Gmail shows it with spaces
         "sender": os.getenv("ALERT_FROM") or os.getenv("SMTP_USER", "shield-demo@localhost"),
         "demo_to": os.getenv("ALERT_TO", ""),
     }
@@ -93,6 +93,38 @@ Approved by a Shield analyst before sending. Do not open the domain in a normal 
     return msg
 
 
+def smtp_send(msg, s):
+    """Send through Gmail: try STARTTLS on the configured port (587), then SSL on 465.
+    Some networks block one port but not the other. Returns the method that worked."""
+    errors = []
+    attempts = []
+    if s["port"] == 465:
+        attempts.append(("SSL", 465))
+    else:
+        attempts += [("STARTTLS", s["port"]), ("SSL", 465)]
+    for mode, port in attempts:
+        try:
+            if mode == "SSL":
+                with smtplib.SMTP_SSL(s["host"], port, timeout=20) as server:
+                    server.login(s["user"], s["password"])
+                    server.send_message(msg)
+            else:
+                with smtplib.SMTP(s["host"], port, timeout=20) as server:
+                    server.ehlo()
+                    server.starttls()
+                    server.ehlo()
+                    server.login(s["user"], s["password"])
+                    server.send_message(msg)
+            return f"{mode} port {port}"
+        except smtplib.SMTPAuthenticationError as ex:
+            raise RuntimeError("Gmail rejected the login: check SMTP_USER and the App password "
+                               f"(no spaces). Details: {ex}") from ex
+        except Exception as ex:
+            errors.append(f"{mode} {port}: {ex}")
+    raise RuntimeError("Could not reach Gmail. " + " | ".join(errors) +
+                       " — try another network (e.g. phone hotspot) or pause antivirus email scanning.")
+
+
 def send_alert(det: dict) -> dict:
     s = _settings()
     brand = det.get("brand") or ""
@@ -102,12 +134,9 @@ def send_alert(det: dict) -> dict:
 
     if s["host"] and s["user"] and s["password"] and s["demo_to"]:
         try:
-            with smtplib.SMTP(s["host"], s["port"], timeout=20) as server:
-                server.starttls()
-                server.login(s["user"], s["password"])
-                server.send_message(msg)
+            how = smtp_send(msg, s)
             status = "sent"
-            detail = f"Emailed to demo inbox {recipient}"
+            detail = f"Emailed to demo inbox {recipient} ({how})"
         except Exception as ex:
             status, detail = "failed", f"Email error: {ex}"
     else:
