@@ -52,7 +52,10 @@
   td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
   tr:last-child td{border-bottom:none}
   .score{display:inline-block;min-width:38px;text-align:center;padding:3px 7px;border-radius:6px;font-weight:600;font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace}
-  .s-high{background:var(--red-soft);color:var(--red)} .s-mid{background:var(--amber-soft);color:var(--amber)} .s-low{background:var(--green-soft);color:var(--green)}
+  .s-high{background:var(--red-soft);color:var(--red)} .s-mid{background:var(--amber-soft);color:var(--amber)} .s-low{background:rgba(139,153,181,.15);color:var(--mute)} .s-ok{background:var(--green-soft);color:var(--green)}
+  .lvl{display:block;font-size:11px;color:var(--mute);margin-top:4px;white-space:nowrap}
+  .result h4{margin:10px 0 2px;font-size:12px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+  .result .meta{font-size:12px;color:var(--mute);margin-top:8px}
   .dom{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;word-break:break-all}
   .why{color:var(--mute);font-size:12px;margin-top:3px}
   .tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--mute)}
@@ -138,7 +141,7 @@
       <section class="card">
         <h2>Model</h2>
         <div class="body">
-          <div class="kv" id="modelKv"><span>Status</span><span>Baseline model (90.6% accuracy, 63/66 UAE fakes)</span></div>
+          <div class="kv" id="modelKv"><span>Status</span><span>Loading…</span></div>
           <div style="margin-top:10px"><button id="retrainBtn" onclick="retrain()">Retrain on fresh feeds + analyst labels</button></div>
           <div class="log" id="trainLog"></div>
         </div>
@@ -158,7 +161,8 @@ const $ = id => document.getElementById(id);
 let source = "", radarOn = false;
 
 function el(tag, cls, text){ const e=document.createElement(tag); if(cls) e.className=cls; if(text!==undefined) e.textContent=text; return e; }
-function scoreCls(s){ return s>=60?"s-high":s>=30?"s-mid":"s-low"; }
+function lvlCls(v){ return v==="high risk"?"s-high":v==="suspicious"?"s-mid":v==="official"?"s-ok":"s-low"; }
+const LVL = {"high risk":"High risk","suspicious":"Suspicious","official":"Verified official","no warning signs":"No warning signs","unknown":"Unknown"};
 function toast(msg){ const t=$("toast"); t.textContent=msg; t.style.display="block"; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display="none",4500); }
 async function api(path, opts={}){
   const r = await fetch(path, {headers:{"Content-Type":"application/json"}, ...opts});
@@ -190,7 +194,7 @@ async function refreshRadar(){
 
 function row(d){
   const tr = el("tr");
-  const s = el("td"); s.append(el("span", "score " + scoreCls(d.score), d.score)); tr.append(s);
+  const s = el("td"); s.append(el("span", "score " + lvlCls(d.verdict), d.score === null ? "—" : d.score)); s.append(el("span","lvl", LVL[d.verdict] || d.verdict)); tr.append(s);
   const dm = el("td"); dm.append(el("div", "dom", d.domain));
   if(d.reasons && d.reasons.length) dm.append(el("div", "why", d.reasons[0]));
   else if(d.note) dm.append(el("div", "why", "UAE watch: " + d.note + (d.verdict === "official" ? " (official domain)" : " — no warning signs")));
@@ -208,7 +212,7 @@ function row(d){
 }
 
 async function refreshFeed(){
-  const q = source === "watch" ? "&source=live&min_score=0" : (source ? "&source=" + source : "");
+  const q = source === "watch" ? "&source=live&flagged_only=false" : (source ? "&source=" + source : "");
   const rows = await api("/feed?limit=150" + q);
   const tb = $("feed");
   if(!rows.length){ tb.replaceChildren(); const tr=el("tr"); const td=el("td","empty","No detections yet. Start the live radar, load the real UAE cases, or check a link."); td.colSpan=6; tr.append(td); tb.append(tr); return; }
@@ -228,14 +232,22 @@ async function refreshAlerts(){
 async function refreshModel(){
   const m = await api("/model");
   $("retrainBtn").disabled = m.running;
-  $("retrainBtn").textContent = m.running ? "Retraining… (1–3 min)" : "Retrain on fresh feeds + analyst labels";
+  $("retrainBtn").textContent = m.running ? "Retraining… (about 5–10 min)" : "Retrain on fresh feeds + analyst labels";
   $("trainLog").textContent = m.log.join("\n");
-  if(m.metrics){
-    const k = $("modelKv"); const x = m.metrics;
-    const pairs = [["Accuracy", (x.accuracy*100).toFixed(1)+"%"],["Precision",(x.precision*100).toFixed(1)+"%"],["Recall",(x.recall*100).toFixed(1)+"%"],
-      ["UAE fakes caught", x.uae_caught],["Fresh feed domains", x.fresh_feed_domains.toLocaleString()],["Analyst labels", x.analyst_labels],["Trained", x.trained_at]];
-    k.replaceChildren(...pairs.flatMap(([a,b]) => [el("span","",a), el("span","",String(b))]));
-  }
+  const k = $("modelKv"); const info = m.model;
+  if(!info){ k.replaceChildren(el("span","","Status"), el("span","","Not trained: run python ml\\train_baseline.py")); return; }
+  const x = info.results || {}; const s = x.at_suspicious || {}; const h = x.at_high || {}; const u = x.uae_fakes || {};
+  const pct = v => v === undefined ? "—" : (v*100).toFixed(1) + "%";
+  const pairs = [["AUC (test set)", x.auc ?? "—"],
+    ["Suspicious+: precision / recall", pct(s.precision) + " / " + pct(s.recall)],
+    ["High risk: precision / recall", pct(h.precision) + " / " + pct(h.recall)],
+    ["False alarms (legit test)", pct(s.false_positive_rate) + " susp. · " + pct(h.false_positive_rate) + " high"],
+    ["False alarms (legit hostnames)", pct(x.legit_hostnames_flagged_suspicious_or_higher)],
+    ["Real UAE fakes (model alone)", (u.total ? (u["high risk"] + " high · " + u.suspicious + " susp. · " + u["no warning signs"] + " missed") : "—")],
+    ["Real UAE fakes (model + rules)", (x.with_rules ? (x.with_rules.uae_fakes["high risk"] + " high · " + x.with_rules.uae_fakes.suspicious + " susp. · " + x.with_rules.uae_fakes.missed + " missed") : "—")],
+    ["Training rows", (info.train_rows||0).toLocaleString()], ["Trained", info.trained_at]];
+  if(m.last && m.last.analyst_labels !== undefined) pairs.push(["Analyst labels used", m.last.analyst_labels], ["Fresh feed domains", (m.last.fresh_feed_domains||0).toLocaleString()]);
+  k.replaceChildren(...pairs.flatMap(([a,b]) => [el("span","",a), el("span","",String(b))]));
 }
 
 async function toggleRadar(){
@@ -264,14 +276,24 @@ async function checkLink(){
   const box = $("result"); box.style.display="block"; box.className="result"; box.replaceChildren(el("div","","Checking…"));
   try{
     const r = await api("/report", {method:"POST", body:JSON.stringify({url:v})});
-    const cls = r.verdict==="official"?"official":r.score>=60?"high":r.score>=30?"mid":"low";
+    const cls = {"official":"official","high risk":"high","suspicious":"mid"}[r.verdict] || "low";
     box.className = "result " + cls;
-    const title = r.verdict==="official" ? "✓ Official " + r.brand + " website" :
-      r.score>=60 ? "⚠ High risk — likely a scam (" + r.score + "/100)" : r.score>=30 ? "Suspicious (" + r.score + "/100)" : "Low risk (" + r.score + "/100)";
+    const sc = r.score === null || r.score === undefined ? "" : " · risk score " + r.score + "/100";
+    const title = {"official":"✓ Verified official" + (r.brand ? " — " + r.brand : ""),
+      "high risk":"⚠ High risk" + sc, "suspicious":"Suspicious — be careful" + sc,
+      "unknown":"Unknown — Shield can't verify this link",
+      "no warning signs":"No warning signs found" + sc}[r.verdict] || r.verdict;
     const kids = [el("h3","",title)];
-    if(r.brand && r.verdict!=="official") kids.push(el("div","","Pretends to be: " + r.brand));
-    if(r.reasons && r.reasons.length){ const ul=el("ul"); r.reasons.forEach(x=>ul.append(el("li","",x))); kids.push(ul); }
+    if(r.brand && r.verdict!=="official") kids.push(el("div","","Looks like: " + r.brand));
+    const section = (name, items) => { if(items && items.length){ kids.push(el("h4","",name)); const ul=el("ul"); items.forEach(x=>ul.append(el("li","",x))); kids.push(ul);} };
+    const strip = a => (a||[]).map(x => x.replace(/^(Fact|Rule): /, ""));
+    section("Facts", strip(r.facts));
+    section("Rules", strip(r.rules));
+    section("Learned warning signs", (r.signals||[]).filter(x=>x.effect>0.3).map(x=>x.text));
+    section("Other observations", r.notes);
+    if(r.verdict==="no warning signs" && !(r.facts||[]).length && !(r.rules||[]).length) kids.push(el("div","","Nothing in the name matches known scam patterns."));
     if(r.advice) kids.push(el("div","adv",r.advice));
+    if(r.thresholds) kids.push(el("div","meta","Score = risk model probability. Suspicious from " + Math.round(r.thresholds.suspicious*100) + ", High risk from " + Math.round(r.thresholds.high*100) + " (cut-offs set for 3% / 0.5% false alarms on legitimate domains)."));
     box.replaceChildren(...kids);
     refreshAll();
   }catch(e){ box.className="result mid"; box.replaceChildren(el("div","",e.message)); }

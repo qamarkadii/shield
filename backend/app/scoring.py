@@ -1,172 +1,161 @@
 """
-Shield scoring: lookalike rules + ML model -> risk score 0-100 with reasons.
+Shield scoring: how one domain gets its score, level and reasons.
 
-The rules catch what the ML model misses (clean-looking fakes such as
-emirates-post.org), and the model catches generic phishing patterns.
+1. Official check (fact): the domain belongs to a registered UAE brand -> "official".
+2. Learned score: the risk model (ml/model.py) turns the warning signs into a
+   probability. score = 100 x probability. Nothing is added on top.
+3. Level:
+   - "high risk"        learned score >= the High threshold (0.5% false alarms on legit data)
+   - "suspicious"       learned score >= the Suspicious threshold (3% false alarms), OR the
+                        UAE-impersonation RULE fires (see below)
+   - "no warning signs" otherwise. This is NOT "safe": Shield cannot prove a site is safe.
+4. UAE-impersonation rule (not learned): if a domain imitates a REGISTERED UAE brand
+   (look-alike letters, re-spelling, brand + lure word, brand in front of an unrelated
+   domain, fake '.ae'), it is always sent for analyst review. Public phishing data has
+   too few of these patterns to learn their weight, and for government brands review is
+   a policy choice. The rule never changes the score; it is shown as "Rule".
+5. Reasons: each warning sign's learned effect (weight x value), largest first.
 """
 
+import math
 import os
-import re
 
 import joblib
-import tldextract
 
-# Offline: use the suffix list bundled with tldextract (no network call)
-_extract = tldextract.TLDExtract(suffix_list_urls=())
-
-# Brand keyword -> the brand's real registered domains.
-# VERIFY every domain on the entity's official website before the demo.
-BRANDS = {
-    "salik":        ("Salik", ["salik.ae"]),
-    "uaepass":      ("UAE PASS", ["uaepass.ae"]),
-    "dubaipolice":  ("Dubai Police", ["dubaipolice.gov.ae"]),
-    "adpolice":     ("Abu Dhabi Police", ["adpolice.gov.ae"]),
-    "emiratespost": ("Emirates Post", ["emiratespost.ae"]),
-    "etisalat":     ("Etisalat (e&)", ["etisalat.ae", "eand.com"]),
-    "eimae":        ("Etisalat (e&) webmail", ["eim.ae"]),
-    "aramex":       ("Aramex", ["aramex.com"]),
-    "emiratesnbd":  ("Emirates NBD", ["emiratesnbd.com"]),
-    "adcb":         ("ADCB", ["adcb.com"]),
-    "mashreq":      ("Mashreq", ["mashreq.com", "mashreqbank.com"]),
-    "rta":          ("RTA", ["rta.ae"]),
-    "tdra":         ("TDRA", ["tdra.gov.ae"]),
-}
-
-# Short keywords that appear inside normal words: only match as a whole token
-SHORT = {"rta", "adcb", "tdra"}
-
-SUSPICIOUS_TLDS = {"xyz", "top", "icu", "live", "shop", "sbs", "cfd", "online",
-                   "site", "click", "info", "buzz", "rest", "cyou", "one"}
-
-FREE_HOSTS = ("000webhostapp.com", "webflow.io", "workers.dev", "pages.dev",
-              "github.io", "firebaseapp.com", "web.app", "repl.co", "ewp.live",
-              "duckdns.org", "ddns.net", "r2.dev", "umbler.net", "easywp.com")
-
-HOMOGLYPHS = str.maketrans({"0": "o", "1": "l", "3": "e", "4": "a", "5": "s", "7": "t", "@": "a"})
+from .features import DESCRIBE, FEATURE_NAMES, clean, extract, split_domain
+from .registry import UAE_BRANDS
 
 _MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "ml", "domain_model.joblib")
 _model = None
+
+IMPERSONATION = ("brand_typosquat", "brand_with_lure", "brand_in_subdomain", "brand_homoglyph")
+HOW = {"brand_typosquat": "the name is re-spelled",
+       "brand_with_lure": "the name is combined with a lure word",
+       "brand_in_subdomain": "the name is placed in front of an unrelated domain",
+       "brand_homoglyph": "the name is written with look-alike characters",
+       "fake_country_label": "'.ae' is placed inside a foreign domain"}
 
 
 def _load_model():
     global _model
     if _model is None and os.path.exists(_MODEL_PATH):
-        _model = joblib.load(_MODEL_PATH)
+        m = joblib.load(_MODEL_PATH)
+        _model = m if isinstance(m, dict) and "combiner" in m else None   # old format -> retrain
     return _model
 
 
 def reload_model():
-    """Load the model file again (after retraining)."""
     global _model
     _model = None
     return _load_model() is not None
 
 
+def model_info():
+    m = _load_model()
+    if not m:
+        return None
+    return {"trained_at": m["trained_at"], "thresholds": m["thresholds"], "weights": m["weights"],
+            "results": m.get("results"), "train_rows": m.get("train_rows")}
+
+
+# ---------- UAE watch helpers (used by the live radar) ----------
+
 UAE_TERMS = ("dubai", "abudhabi", "sharjah", "ajman", "fujairah", "rasalkhaimah",
              "ummalquwain", "emirates", "uae")
 
 
+def mentions_brand(domain: str) -> bool:
+    r = extract(domain, UAE_BRANDS)
+    b = r["brand"]
+    return bool(b) and "(global brand)" not in b
+
+
 def uae_reason(domain: str):
     """Why a live domain belongs on the UAE watch (None = not UAE-related)."""
+    import re
     d = domain.lower().rstrip(".")
     if d == "ae" or d.endswith(".ae"):
         return ".ae domain"
-    if mentions_brand(d):
-        return "mentions a watched UAE brand"
     flat = re.sub(r"[-.]", "", d)
     tokens = set(re.split(r"[-.]", d))
     for term in UAE_TERMS:
         if (term == "uae" and term in tokens) or (term != "uae" and term in flat):
             return f"mentions '{term}'"
+    if mentions_brand(d):
+        return "mentions a watched UAE brand"
     return None
 
 
-def mentions_brand(domain: str) -> bool:
-    """Cheap pre-filter for the live stream: does this name mention a watched brand?"""
-    d = domain.lower()
-    flat = re.sub(r"[-.]", "", d)
-    unglyphed = flat.translate(HOMOGLYPHS).replace("rn", "m")
-    tokens = set(re.split(r"[-.]", d))
-    for key in BRANDS:
-        if key in SHORT:
-            if key in tokens:
-                return True
-        elif key in flat or key in unglyphed:
-            return True
-    return False
+# ---------- scoring ----------
 
-
-def _clean(domain: str) -> str:
-    d = domain.strip().lower()
-    d = re.sub(r"^[a-z]+://", "", d).split("/")[0].split(":")[0]
-    return d[4:] if d.startswith("www.") else d
+def _reason_text(key, info, suffix):
+    return DESCRIBE[key].format(brand=info["brand"] or "the brand", registered=info["registered"], suffix=suffix)
 
 
 def score_domain(domain: str) -> dict:
-    d = _clean(domain)
-    ext = _extract(d)
-    registered = ".".join(p for p in (ext.domain, ext.suffix) if p)
-    flat = re.sub(r"[-.]", "", d)                 # "emirates-post.org" -> "emiratespostorg"
-    unglyphed = flat.translate(HOMOGLYPHS).replace("rn", "m")
-    tokens = set(re.split(r"[-.]", d))
-
-    score, reasons, brand_hit = 0, [], None
-
-    for key, (name, official) in BRANDS.items():
-        if key in SHORT:
-            found = key in tokens
-            glyph = False
-        else:
-            found = key in flat
-            glyph = not found and key in unglyphed
-        if not (found or glyph):
-            continue
-        if registered in official:
-            return {"domain": d, "score": 0, "verdict": "official",
-                    "brand": name, "reasons": [f"Official {name} domain"]}
-        brand_hit = name
-        if glyph:
-            score += 55
-            reasons.append(f"Imitates '{key}' using look-alike characters (e.g. 0 for o)")
-        elif ext.subdomain and key in ext.subdomain.replace("-", "").replace(".", "") \
-                and key not in ext.domain.replace("-", ""):
-            score += 55
-            reasons.append(f"Puts the {name} name in front of an unrelated domain ({registered})")
-        else:
-            score += 50
-            reasons.append(f"Uses the {name} name on a domain {name} does not own ({registered})")
-        break
-
-    # only the registered part + subdomains, never the official suffix (e.g. gov.uk)
-    labels = [l for l in (ext.subdomain.split(".") + [ext.domain]) if l]
-    if not (ext.suffix == "ae" or ext.suffix.endswith(".ae")) and \
-            any(l in ("ae", "gov") or l.endswith("-ae") or l.startswith("ae-") for l in labels):
-        score += 35
-        reasons.append(f"Puts '.ae' / 'gov' inside the name to look like a UAE address, but the real domain is {registered}")
-    if ext.suffix.split(".")[-1] in SUSPICIOUS_TLDS:
-        score += 10
-        reasons.append(f"Uses a top-level domain often abused by scammers (.{ext.suffix})")
-    if any(d.endswith(h) for h in FREE_HOSTS):
-        score += 10
-        reasons.append("Hosted on a free hosting or site-builder service")
-    if d.count("-") >= 3:
-        score += 5
-        reasons.append("Unusually many hyphens")
-    if re.search(r"(login|verify|secure|update|pay|bill|kyc|track|parcel|refund|fine)", d):
-        score += 10
-        reasons.append("Contains a pressure or payment word (login, pay, verify...)")
-
+    d = clean(domain)
+    if not d:
+        return {"domain": domain, "score": 0, "verdict": "unknown", "reasons": ["Not a valid domain"], "brand": None}
+    ext, registered = split_domain(d)
     model = _load_model()
-    ml_prob = None
-    if model is not None:
-        vec, clf = model
-        ml_prob = float(clf.predict_proba(vec.transform([d]))[0][1])
-        score += round(ml_prob * 35)
-        if ml_prob >= 0.5:
-            reasons.append(f"ML model rates it as phishing-like ({ml_prob:.0%})")
 
-    score = min(score, 100)
-    verdict = "high risk" if score >= 60 else "suspicious" if score >= 30 else "low risk"
-    return {"domain": d, "registered_domain": registered, "score": score,
-            "verdict": verdict, "brand": brand_hit, "ml_probability": ml_prob,
-            "reasons": reasons}
+    probe = extract(d, UAE_BRANDS)
+    brand = probe["brand"]
+    if probe["official"] and brand and "(global brand)" not in brand:
+        return {"domain": d, "registered_domain": registered, "score": 0, "verdict": "official",
+                "brand": brand, "ml_probability": None, "reasons": [f"Official {brand} domain (registry)"],
+                "rule": None, "signals": []}
+
+    if model is None:
+        return {"domain": d, "registered_domain": registered, "score": None, "verdict": "unknown",
+                "brand": brand, "ml_probability": None, "rule": None, "signals": [],
+                "reasons": ["Risk model not trained yet: run python ml\\train_baseline.py"]}
+
+    vec, tc, comb, th = model["vec"], model["text_clf"], model["combiner"], model["thresholds"]
+    text_p = float(tc.predict_proba(vec.transform([d]))[0][1])
+    text_p_c = min(max(text_p, 1e-6), 1 - 1e-6)
+    info = extract(d, UAE_BRANDS, math.log(text_p_c / (1 - text_p_c)))
+    x = [info["features"][k] for k in FEATURE_NAMES]
+    p = float(comb.predict_proba([x])[0][1])
+    score = min(int(100 * p), 99)          # never 100: no model is certain
+
+    # explain: each sign's learned effect on the log-odds
+    signals = []
+    for k, v in zip(FEATURE_NAMES, x):
+        if not v:
+            continue
+        w = model["weights"][k]
+        effect = w * v
+        if k == "ml_logit":
+            text = f"{DESCRIBE[k]}: {text_p:.0%} phishing-like"
+        else:
+            text = _reason_text(k, info, ext.suffix)
+            text += f" (learned effect: x{math.exp(w):.1f} odds)" if w > 0.05 else " (learned effect: little or none)"
+        signals.append({"feature": k, "effect": round(effect, 2), "text": text})
+    signals.sort(key=lambda s: s["effect"], reverse=True)
+
+    is_uae_brand = brand and "(global brand)" not in brand
+    rule = None
+    fired = [k for k in IMPERSONATION if info["features"][k]]
+    if is_uae_brand and (fired or info["features"]["fake_country_label"]):
+        what = fired[0] if fired else "fake_country_label"
+        rule = (f"Rule: imitates {brand}, a registered UAE brand ({HOW[what]}; real domain: {registered}). "
+                f"Always sent for analyst review.")
+    elif info["features"]["fake_country_label"]:
+        rule = "Rule: puts '.ae' / 'gov' inside a foreign domain to look official. Sent for analyst review."
+
+    if p >= th["high"]:
+        verdict = "high risk"
+    elif p >= th["suspicious"] or rule:
+        verdict = "suspicious"
+    else:
+        verdict = "no warning signs"
+
+    reasons = ([rule] if rule else []) + [s["text"] for s in signals if s["effect"] > 0.3]
+    if verdict == "no warning signs" and not reasons:
+        reasons = ["No warning signs found in the name. This does not prove the site is safe."]
+    return {"domain": d, "registered_domain": registered, "score": score, "verdict": verdict,
+            "brand": brand.replace(" (global brand)", "") if brand else None,
+            "ml_probability": round(text_p, 3), "probability": round(p, 4),
+            "thresholds": {k: round(v, 3) for k, v in th.items()},
+            "rule": rule, "signals": signals, "reasons": reasons}

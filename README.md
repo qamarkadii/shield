@@ -43,21 +43,30 @@ Without `.env`, alerts are saved as `.eml` files in `data/outbox/`, so the demo 
 | `frontend/` | Space for a React dashboard if the team builds one | C: Frontend |
 | `docs/` | Build guide link | D: Pitch and product |
 
-## Results (Nov 1, measured)
+## How the risk score works
 
-| Measure | Before hostname fix | Now |
-|---|---|---|
-| Test accuracy (10,000 unseen domains) | 90.6% | 89.7% |
-| Precision / recall | 93.0% / 87.9% | 92.6% / 86.3% |
-| False alarms on legitimate hostnames (mail.company.com style) | **66.0%** | **0.5%** |
-| Real UAE fakes caught by the model alone | 63/66 | 61/66 |
-| Real UAE fakes flagged by model + lookalike rules | 66/66 | 66/66 (51 high risk, 15 suspicious) |
+1. **Official check (fact)**: the domain belongs to a registered UAE brand (`backend/app/registry.py`).
+2. **Learned score**: a two-stage model (`ml/model.py`) — a character-pattern text model, then a combiner that
+   **learns the weight of each warning sign** from labelled data. Score = 100 × probability (capped at 99). Nothing is added by hand.
+3. **Levels**: *High risk* / *Suspicious* cut-offs are set on held-out data for 0.5% / 3% false alarms on legitimate domains.
+4. **Labelled rules**: imitating a *registered UAE brand* (look-alike letters, re-spelling, brand + lure word, brand in front of an
+   unrelated domain, fake `.ae`) always sends the domain to analyst review. Public data has too few of these to learn a weight.
+   Rules never change the score and are shown as "Rule".
+5. **Link facts** (citizen check): on a phishing list, `@` trick, raw IP, foreign look-alike letters, shortened link (→ *Unknown*).
 
-Why the change: the legitimate training examples were bare names (company.com) while many
-phishing examples had subdomains, so the first model learned "subdomain = phishing" and
-flagged most live certificate hostnames. Training now adds realistic subdomain copies of
-legitimate domains (`ml/common.py`). Variants compared: replace 50% (acc 0.866),
-**add copies 50% (acc 0.897, chosen)**, add copies + balanced weights (0.887), replace 30% (0.887).
+## Results (Nov 1, measured — full report in `docs/model_card.md`)
+
+| Measure (test data never used in training) | Result |
+|---|---|
+| AUC | 0.951 |
+| Suspicious or higher: precision / recall / false alarms | 95.4% / 84.1% / 4.1% |
+| High risk: precision / recall / false alarms | 99.3% / 77.1% / 0.58% |
+| Legitimate hostnames (mail.company.com) flagged | 0.38% |
+| 66 real UAE fakes, model alone | 57 high, 6 suspicious, 3 missed |
+| 66 real UAE fakes, full app (model + rules) | 57 high, 9 suspicious, **0 missed** |
+
+Earlier versions added hand-picked points (+50 brand, +10 .xyz ...), double-counted signs the model already saw, and
+matched brands too loosely (`hyderabadpolice.gov.in` was read as Abu Dhabi Police). All replaced by the above.
 
 ## Honest limits (say these if judges ask)
 

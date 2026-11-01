@@ -54,15 +54,32 @@ def reload_known():
     return len(known_phishing())
 
 
+LEVELS = ["no warning signs", "unknown", "suspicious", "high risk"]
+
+
+def _raise(result, level):
+    """Raise the level (never lower it). 'official' / unknown values are replaced."""
+    current = result.get("verdict")
+    if current not in LEVELS or LEVELS.index(level) > LEVELS.index(current):
+        result["verdict"] = level
+
+
 def check_link(raw: str) -> dict:
+    """Score the domain (learned model), then add link-level FACTS and labelled RULES.
+    None of them changes the learned score; they can only raise the level, and each says why."""
     raw = raw.strip()
+    if not raw or len(raw) > 2000:
+        return {"error": "Please paste a link or domain (up to 2,000 characters)."}
     url = raw if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", raw) else "http://" + raw
-    p = urlparse(url)
-    host = (p.hostname or "").lower().rstrip(".")
-    if not host:
+    try:
+        p = urlparse(url)
+        host = (p.hostname or "").lower().rstrip(".")
+    except ValueError:
+        return {"error": "That doesn't look like a valid link."}
+    if not host or ("." not in host and ":" not in host):
         return {"error": "That doesn't look like a link or domain."}
 
-    extra, lead, bonus = [], [], 0
+    facts, rules, notes = [], [], []
     is_ip = False
     try:
         ipaddress.ip_address(host)
@@ -71,60 +88,69 @@ def check_link(raw: str) -> dict:
         pass
 
     if is_ip:
-        result = {"domain": host, "registered_domain": host, "score": 0, "verdict": "low risk",
-                  "brand": None, "ml_probability": None, "reasons": []}
-        bonus += 40
-        extra.append("Uses a raw IP address instead of a website name")
+        result = {"domain": host, "registered_domain": host, "score": None, "verdict": "unknown",
+                  "brand": None, "ml_probability": None, "reasons": [], "signals": []}
+        rules.append("Rule: uses a raw IP address instead of a website name. Official UAE services always use their own named domain.")
+        _raise(result, "suspicious")
     else:
         result = score_domain(host)
 
-    if result.get("verdict") == "official":
-        result.update(url=raw, known_phishing=False)
-        return result
-
-    if "@" in p.netloc:
-        bonus += 30
-        extra.append("Contains '@', a trick that hides the real destination")
-    if host in SHORTENERS or result.get("registered_domain") in SHORTENERS:
-        bonus += 25
-        extra.append("Shortened link: the real destination is hidden. Don't open it; ask the sender or check the official app")
-    if host.startswith("xn--") or ".xn--" in host:
-        bonus += 30
+    shown = None
+    if not is_ip and (host.startswith("xn--") or ".xn--" in host):
         try:
             shown = host.encode("ascii").decode("idna")
             folded = unicodedata.normalize("NFKD", shown).encode("ascii", "ignore").decode()
-            lead.append(f"Uses look-alike foreign letters: it displays as '{shown}'")
             imitated = score_domain(folded)
-            if imitated.get("brand"):
-                result["brand"] = imitated["brand"]
-                bonus += 25
-                lead.append(f"Imitates {imitated['brand']} ('{folded}')")
+            facts.append(f"Fact: uses foreign look-alike letters; it displays as '{shown}'")
+            if imitated.get("verdict") == "official" or imitated.get("brand"):
+                b = imitated.get("brand") or folded
+                rules.append(f"Rule: foreign letters make it look like {b} ('{folded}'). Impersonation by design.")
+                result["brand"] = b
+                _raise(result, "high risk")
         except Exception:
-            lead.append("Uses look-alike foreign letters (punycode) to imitate a real name")
-    if len(raw) > 120:
-        bonus += 5
-        extra.append("Unusually long link")
-    if re.search(r"(login|signin|verify|update|pay|payment|fine|refund|otp|card|bank|kyc)", p.path.lower() + p.query.lower()):
-        bonus += 10
-        extra.append("The link leads to a login, payment or verification page")
-    if raw.lower().startswith("http://"):
-        bonus += 5
-        extra.append("Not encrypted (http, not https)")
+            facts.append("Fact: uses foreign letters (punycode) in the name")
 
-    known = host in known_phishing() or result.get("registered_domain") in known_phishing()
+    if result.get("verdict") == "official" and "@" not in p.netloc:
+        result.update(url=raw, known_phishing=False, facts=[], rules=[], notes=[],
+                      advice="This is the official website according to Shield's registry. "
+                             "Still never share OTP codes, and check the address bar matches exactly.")
+        return result
+
+    if "@" in p.netloc:
+        before = p.netloc.split("@")[0]
+        rules.append(f"Rule: the link starts with '{before}@', a trick: the browser actually goes to {host}.")
+        _raise(result, "suspicious")
+
+    reg = result.get("registered_domain") or host
+    if host in SHORTENERS or reg in SHORTENERS:
+        # the score would judge the shortening service, not the hidden destination
+        facts.append("Fact: shortened link. The real destination is hidden, so Shield cannot check it "
+                     "(Shield never opens links to find out).")
+        result.update(score=None, verdict="unknown", signals=[], rule=None,
+                      reasons=[], brand=None)
+
+    known = host in known_phishing() or reg in known_phishing()
     if known:
-        bonus += 60
+        facts.insert(0, "Fact: listed in a public phishing database (Phishing.Database / OpenPhish)")
+        _raise(result, "high risk")
 
-    result["score"] = min(100, result.get("score", 0) + bonus)
-    # most important first: known list, then the domain itself, then link details
-    result["reasons"] = (["Already listed in a public phishing database"] if known else []) \
-        + lead + result.get("reasons", []) + extra
-    s = result["score"]
-    result["verdict"] = "high risk" if s >= 60 else "suspicious" if s >= 30 else "low risk"
-    result["url"] = raw
-    result["known_phishing"] = known
-    result["advice"] = ("Do not open this link or enter any details. If it claims to be a government "
-                        "service, open the official app or type the official website yourself."
-                        if s >= 30 else
-                        "No strong warning signs found, but stay careful: never share OTP codes or card details from a link.")
+    if re.search(r"(login|signin|verify|update|pay|payment|fine|refund|otp|card|bank|kyc)", (p.path + p.query).lower()):
+        notes.append("The link points to a login, payment or verification page")
+    if raw.lower().startswith("http://"):
+        notes.append("Not encrypted (http instead of https)")
+
+    result["reasons"] = facts + rules + result.get("reasons", [])
+    result.update(url=raw, known_phishing=known, facts=facts, rules=rules + ([result["rule"]] if result.get("rule") else []),
+                  notes=notes)
+    v = result["verdict"]
+    result["advice"] = {
+        "high risk": "Do not open this link or enter any details. If it claims to be a government service, "
+                     "open the official app or type the official website yourself, and report the message.",
+        "suspicious": "Be careful: this link shows warning signs. Don't enter passwords, card details or OTP codes. "
+                      "Use the official app or website instead.",
+        "unknown": "Shield can't check where this link really goes. Don't open it unless you trust the sender; "
+                   "use the official app or website instead.",
+        "no warning signs": "Shield found no warning signs, but that does not prove the link is safe. "
+                            "Never share OTP codes or card details from a link in a message.",
+    }.get(v, "")
     return result

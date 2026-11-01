@@ -159,9 +159,9 @@ def _process(entries, log_name):
             result = score_domain(name)
             with _lock:
                 state["uae_seen"] += 1
-                if result["score"] >= 30 and result["verdict"] != "official":
+                if result["verdict"] in ("suspicious", "high risk"):
                     state["matches"] += 1
-            # every UAE-related domain goes to the UAE watch; only score >= 30 counts as flagged
+            # every UAE-related domain goes to the UAE watch; only Suspicious / High risk count as flagged
             db.add_detection(result, "live", cert_issuer=issuer_of(cert), ct_log=log_name, note=why)
 
 

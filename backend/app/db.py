@@ -84,13 +84,19 @@ def _row(r):
     return d
 
 
-def list_detections(limit=100, source=None, min_score=0):
-    q = "SELECT * FROM detections WHERE score >= ?"
-    args = [min_score]
+FLAGGED = ("suspicious", "high risk")
+
+
+def list_detections(limit=100, source=None, flagged_only=True):
+    """flagged_only: only Suspicious / High risk (levels come from the risk model + rules)."""
+    q = "SELECT * FROM detections WHERE 1=1"
+    args = []
+    if flagged_only:
+        q += " AND verdict IN ('suspicious', 'high risk')"
     if source:
         q += " AND source = ?"
         args.append(source)
-    q += " ORDER BY last_seen DESC, score DESC LIMIT ?"
+    q += " ORDER BY last_seen DESC, COALESCE(score, 0) DESC LIMIT ?"
     args.append(limit)
     with _lock:
         return [_row(r) for r in conn().execute(q, args).fetchall()]
@@ -154,8 +160,8 @@ def get_stats():
                 out[r["key"]] = json.loads(r["value"])
             except (ValueError, TypeError):
                 out[r["key"]] = r["value"]
-        out["flagged"] = c.execute("SELECT COUNT(*) FROM detections WHERE score >= 30").fetchone()[0]
-        out["high_risk"] = c.execute("SELECT COUNT(*) FROM detections WHERE score >= 60").fetchone()[0]
+        out["flagged"] = c.execute("SELECT COUNT(*) FROM detections WHERE verdict IN ('suspicious','high risk')").fetchone()[0]
+        out["high_risk"] = c.execute("SELECT COUNT(*) FROM detections WHERE verdict = 'high risk'").fetchone()[0]
         out["citizen_reports"] = c.execute("SELECT COUNT(*) FROM detections WHERE source='citizen'").fetchone()[0]
         out["alerts_sent"] = c.execute("SELECT COUNT(*) FROM alerts").fetchone()[0]
         out["labels"] = c.execute("SELECT COUNT(*) FROM labels").fetchone()[0]

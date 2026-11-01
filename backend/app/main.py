@@ -19,7 +19,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from . import alerts, ctlog, db, linkcheck
-from .scoring import reload_model, score_domain
+from .scoring import model_info, reload_model, score_domain
 
 app = FastAPI(title="Shield API", version="0.2")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
@@ -104,8 +104,8 @@ def replay_load():
 # ---------- feed, labels, alerts ----------
 
 @app.get("/feed")
-def feed(limit: int = 100, source: str | None = None, min_score: int = 30):
-    return db.list_detections(limit=limit, source=source, min_score=min_score)
+def feed(limit: int = 100, source: str | None = None, flagged_only: bool = True):
+    return db.list_detections(limit=limit, source=source, flagged_only=flagged_only)
 
 
 @app.post("/detections/{det_id}/label")
@@ -163,7 +163,7 @@ def model_retrain():
 @app.get("/model")
 def model_status():
     return {"running": training["running"], "log": training["log"][-5:],
-            "metrics": training["last"] or db.get_stats().get("model")}
+            "last": training["last"] or db.get_stats().get("model"), "model": model_info()}
 
 
 @app.get("/stats")
