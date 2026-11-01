@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shield · درع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1220; --panel:#111a2e; --panel2:#16213a; --line:#22304d;
+    --ink:#e8edf6; --mute:#8b99b5; --gold:#c9a24b; --gold-soft:rgba(201,162,75,.14);
+    --red:#e5534b; --red-soft:rgba(229,83,75,.15); --amber:#d9a03f; --amber-soft:rgba(217,160,63,.15);
+    --green:#3fb37f; --green-soft:rgba(63,179,127,.15); --blue:#5b8def;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "IBM Plex Sans",system-ui,sans-serif}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+  header{display:flex;align-items:center;gap:16px;padding:14px 24px;border-bottom:1px solid var(--line);background:#0d1526;position:sticky;top:0;z-index:5}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand svg{width:30px;height:30px}
+  .brand h1{margin:0;font-size:18px;font-weight:600;letter-spacing:.2px}
+  .brand .ar{font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;color:var(--gold);font-weight:700;margin-left:6px}
+  .brand small{display:block;color:var(--mute);font-size:12px;font-weight:400}
+  .spacer{flex:1}
+  .pill{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);color:var(--mute);font-size:12px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--mute)}
+  .pill.live{color:var(--green);border-color:rgba(63,179,127,.4)}
+  .pill.live .dot{background:var(--green);animation:pulse 1.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,179,127,.6)}100%{box-shadow:0 0 0 8px rgba(63,179,127,0)}}
+  button{font:inherit;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);padding:7px 13px;cursor:pointer}
+  button:hover{border-color:var(--gold)}
+  button.primary{background:var(--gold);color:#1a1405;border-color:var(--gold);font-weight:600}
+  button.small{padding:4px 9px;font-size:12px}
+  button:disabled{opacity:.5;cursor:default}
+  main{padding:20px 24px;display:grid;gap:18px;max-width:1500px;margin:0 auto}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat .k{color:var(--mute);font-size:12px}
+  .stat .v{font-size:26px;font-weight:600;margin-top:2px}
+  .stat.hl .v{color:var(--gold)}
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:18px;align-items:start}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .card h2{margin:0;font-size:14px;font-weight:600;padding:13px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+  .card h2 .sub{color:var(--mute);font-weight:400;font-size:12px}
+  .card .body{padding:14px 16px}
+  .tabs{display:flex;gap:6px;margin-left:auto}
+  .tabs button{padding:3px 10px;font-size:12px}
+  .tabs button.on{border-color:var(--gold);color:var(--gold)}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;color:var(--mute);font-weight:500;font-size:12px;padding:9px 12px;border-bottom:1px solid var(--line)}
+  td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .score{display:inline-block;min-width:38px;text-align:center;padding:3px 7px;border-radius:6px;font-weight:600;font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace}
+  .s-high{background:var(--red-soft);color:var(--red)} .s-mid{background:var(--amber-soft);color:var(--amber)} .s-low{background:var(--green-soft);color:var(--green)}
+  .dom{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;word-break:break-all}
+  .why{color:var(--mute);font-size:12px;margin-top:3px}
+  .tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--mute)}
+  .tag.live{color:var(--green);border-color:rgba(63,179,127,.4)} .tag.citizen{color:var(--blue);border-color:rgba(91,141,239,.4)} .tag.replay{color:var(--gold);border-color:rgba(201,162,75,.4)}
+  .st-confirmed{color:var(--red)} .st-legit{color:var(--green)} .st-pending{color:var(--mute)}
+  .actions{display:flex;gap:5px;flex-wrap:nowrap}
+  .empty{color:var(--mute);padding:28px;text-align:center}
+  input,textarea{width:100%;font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+  input:focus,textarea:focus{outline:none;border-color:var(--gold)}
+  .row{display:flex;gap:8px}
+  .result{margin-top:12px;border-radius:10px;padding:12px 14px;display:none}
+  .result.high{background:var(--red-soft);border:1px solid rgba(229,83,75,.4)}
+  .result.mid{background:var(--amber-soft);border:1px solid rgba(217,160,63,.4)}
+  .result.low,.result.official{background:var(--green-soft);border:1px solid rgba(63,179,127,.4)}
+  .result h3{margin:0 0 6px;font-size:15px}
+  .result ul{margin:6px 0 0;padding-left:18px}
+  .result .adv{margin-top:8px;font-size:13px}
+  .ticker{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-size:12px;color:var(--mute);height:180px;overflow:hidden;line-height:1.75}
+  .ticker div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ticker div:first-child{color:var(--ink)}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px}
+  .kv span:nth-child(odd){color:var(--mute)}
+  .log{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;white-space:pre-wrap;font-size:11px;color:var(--mute);margin-top:8px;max-height:90px;overflow:auto}
+  .alerts div{padding:8px 0;border-bottom:1px solid var(--line);font-size:12px}
+  .alerts div:last-child{border:none}
+  .toast{position:fixed;bottom:20px;right:20px;background:var(--panel2);border:1px solid var(--gold);padding:11px 15px;border-radius:10px;max-width:420px;display:none;z-index:9}
+  .note{color:var(--mute);font-size:12px;margin-top:8px}
+  @media (max-width:1100px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <svg viewBox="0 0 32 32" fill="none"><path d="M16 3l11 4v8c0 7-4.7 12-11 14C9.7 27 5 22 5 15V7l11-4z" stroke="#c9a24b" stroke-width="2"/><path d="M11 16l3.5 3.5L21.5 12" stroke="#c9a24b" stroke-width="2" stroke-linecap="round"/></svg>
+    <div><h1>Shield <span class="ar">درع</span></h1><small>Early warning for fake UAE government sites</small></div>
+  </div>
+  <div class="spacer"></div>
+  <span id="radarPill" class="pill"><span class="dot"></span><span id="radarText">Radar off</span></span>
+  <button id="radarBtn" class="primary" onclick="toggleRadar()">Start live radar</button>
+  <button onclick="loadReplay()">Load real UAE cases</button>
+</header>
+
+<main>
+  <section class="stats">
+    <div class="stat hl"><div class="k">Certificates checked (live)</div><div class="v mono" id="sCerts">0</div></div>
+    <div class="stat"><div class="k">Flagged domains</div><div class="v" id="sFlagged">0</div></div>
+    <div class="stat"><div class="k">High risk</div><div class="v" id="sHigh" style="color:var(--red)">0</div></div>
+    <div class="stat"><div class="k">Citizen reports</div><div class="v" id="sReports">0</div></div>
+    <div class="stat"><div class="k">Alerts sent</div><div class="v" id="sAlerts">0</div></div>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Detections <span class="sub">— analyst review</span>
+        <div class="tabs" id="tabs">
+          <button class="on" data-s="">All</button><button data-s="live">Live</button>
+          <button data-s="citizen">Citizen</button><button data-s="replay">Replay</button>
+        </div>
+      </h2>
+      <table>
+        <thead><tr><th>Risk</th><th>Domain</th><th>Impersonates</th><th>Source</th><th>Status</th><th>Analyst</th></tr></thead>
+        <tbody id="feed"><tr><td colspan="6" class="empty">No detections yet. Start the live radar, load the real UAE cases, or check a link.</td></tr></tbody>
+      </table>
+    </section>
+
+    <div style="display:grid;gap:18px">
+      <section class="card">
+        <h2>Is this link official?</h2>
+        <div class="body">
+          <div class="row"><input id="link" placeholder="Paste a suspicious link, e.g. salik-fines.xyz/pay" onkeydown="if(event.key==='Enter')checkLink()"><button class="primary" onclick="checkLink()">Check</button></div>
+          <div class="note">Shield never opens the link. It judges it from the outside.</div>
+          <div id="result" class="result"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Live certificate stream <span class="sub" id="logsUsed"></span></h2>
+        <div class="body"><div class="ticker" id="ticker"><div>Start the radar to watch new certificates arrive.</div></div>
+          <div class="log" id="radarErr"></div></div>
+      </section>
+
+      <section class="card">
+        <h2>Model</h2>
+        <div class="body">
+          <div class="kv" id="modelKv"><span>Status</span><span>Baseline model (90.6% accuracy, 63/66 UAE fakes)</span></div>
+          <div style="margin-top:10px"><button id="retrainBtn" onclick="retrain()">Retrain on fresh feeds + analyst labels</button></div>
+          <div class="log" id="trainLog"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Alerts <span class="sub">— demo inbox only</span></h2>
+        <div class="body alerts" id="alerts"><div style="color:var(--mute)">No alerts yet.</div></div>
+      </section>
+    </div>
+  </div>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+let source = "", radarOn = false;
+
+function el(tag, cls, text){ const e=document.createElement(tag); if(cls) e.className=cls; if(text!==undefined) e.textContent=text; return e; }
+function scoreCls(s){ return s>=60?"s-high":s>=30?"s-mid":"s-low"; }
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.style.display="block"; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display="none",4500); }
+async function api(path, opts={}){
+  const r = await fetch(path, {headers:{"Content-Type":"application/json"}, ...opts});
+  const j = await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(j.detail || r.statusText);
+  return j;
+}
+
+async function refreshStats(){
+  const s = await api("/stats");
+  $("sCerts").textContent = (s.certs_checked_now||0).toLocaleString();
+  $("sFlagged").textContent = s.flagged; $("sHigh").textContent = s.high_risk;
+  $("sReports").textContent = s.citizen_reports; $("sAlerts").textContent = s.alerts_sent;
+}
+
+async function refreshRadar(){
+  const r = await api("/radar");
+  radarOn = r.running;
+  $("radarPill").className = "pill" + (r.running ? " live" : "");
+  $("radarText").textContent = r.running ? "Radar live" : "Radar off";
+  $("radarBtn").textContent = r.running ? "Stop radar" : "Start live radar";
+  $("logsUsed").textContent = r.logs.length ? "— " + r.logs.length + " CT logs" : "";
+  const tk = $("ticker");
+  if(r.recent.length){ tk.replaceChildren(...r.recent.map(d => el("div", "", d))); }
+  $("radarErr").textContent = r.errors.length ? "Last error: " + r.errors[0] : "";
+}
+
+function row(d){
+  const tr = el("tr");
+  const s = el("td"); s.append(el("span", "score " + scoreCls(d.score), d.score)); tr.append(s);
+  const dm = el("td"); dm.append(el("div", "dom", d.domain));
+  if(d.reasons && d.reasons.length) dm.append(el("div", "why", d.reasons[0]));
+  tr.append(dm);
+  tr.append(el("td", "", d.brand || "—"));
+  const src = el("td"); src.append(el("span", "tag " + d.source, d.source)); tr.append(src);
+  tr.append(el("td", "st-" + d.status, d.status));
+  const act = el("td"); const box = el("div", "actions");
+  const b1 = el("button", "small", "Confirm"); b1.onclick = () => label(d.id, true);
+  const b2 = el("button", "small", "Legit"); b2.onclick = () => label(d.id, false);
+  const b3 = el("button", "small primary", "Alert"); b3.onclick = () => sendAlert(d.id, d.domain);
+  if(d.status === "legit") b3.disabled = true;
+  box.append(b1, b2, b3); act.append(box); tr.append(act);
+  return tr;
+}
+
+async function refreshFeed(){
+  const rows = await api("/feed?limit=150" + (source ? "&source=" + source : ""));
+  const tb = $("feed");
+  if(!rows.length){ tb.replaceChildren(); const tr=el("tr"); const td=el("td","empty","No detections yet. Start the live radar, load the real UAE cases, or check a link."); td.colSpan=6; tr.append(td); tb.append(tr); return; }
+  tb.replaceChildren(...rows.map(row));
+}
+
+async function refreshAlerts(){
+  const a = await api("/alerts");
+  const box = $("alerts");
+  if(!a.length){ box.replaceChildren(el("div","","No alerts yet.")); box.firstChild.style.color="var(--mute)"; return; }
+  box.replaceChildren(...a.slice(0,8).map(x => {
+    const d = el("div"); d.append(el("div","", (x.status==="sent"?"✉ Sent: ":x.status==="saved"?"⤓ Saved: ":"⚠ Failed: ") + x.domain));
+    const sub = el("div","", x.created_at + " UTC · " + x.detail); sub.style.color="var(--mute)"; d.append(sub); return d;
+  }));
+}
+
+async function refreshModel(){
+  const m = await api("/model");
+  $("retrainBtn").disabled = m.running;
+  $("retrainBtn").textContent = m.running ? "Retraining… (1–3 min)" : "Retrain on fresh feeds + analyst labels";
+  $("trainLog").textContent = m.log.join("\n");
+  if(m.metrics){
+    const k = $("modelKv"); const x = m.metrics;
+    const pairs = [["Accuracy", (x.accuracy*100).toFixed(1)+"%"],["Precision",(x.precision*100).toFixed(1)+"%"],["Recall",(x.recall*100).toFixed(1)+"%"],
+      ["UAE fakes caught", x.uae_caught],["Fresh feed domains", x.fresh_feed_domains.toLocaleString()],["Analyst labels", x.analyst_labels],["Trained", x.trained_at]];
+    k.replaceChildren(...pairs.flatMap(([a,b]) => [el("span","",a), el("span","",String(b))]));
+  }
+}
+
+async function toggleRadar(){
+  try{ await api(radarOn ? "/radar/stop" : "/radar/start", {method:"POST"}); toast(radarOn ? "Radar stopping…" : "Connecting to Certificate Transparency logs…"); }
+  catch(e){ toast("Radar error: " + e.message); }
+  setTimeout(refreshRadar, 800);
+}
+async function loadReplay(){
+  const r = await api("/replay/load", {method:"POST"}); toast("Loaded " + r.loaded + " real UAE-targeted phishing domains"); refreshAll();
+}
+async function label(id, yes){
+  await api("/detections/" + id + "/label", {method:"POST", body:JSON.stringify({is_phishing:yes})});
+  toast(yes ? "Confirmed as phishing — used in the next retrain" : "Marked as not phishing — used in the next retrain"); refreshAll();
+}
+async function sendAlert(id, domain){
+  if(!confirm("Send an alert email for " + domain + "?\n\nDemo mode: it goes to your team inbox (ALERT_TO in .env), not to a real government address.")) return;
+  try{ const r = await api("/detections/" + id + "/alert", {method:"POST"}); toast(r.detail); }
+  catch(e){ toast("Alert error: " + e.message); }
+  refreshAll();
+}
+async function retrain(){
+  await api("/model/retrain", {method:"POST"}); toast("Retraining started: downloading fresh phishing feeds…"); refreshModel();
+}
+async function checkLink(){
+  const v = $("link").value.trim(); if(!v) return;
+  const box = $("result"); box.style.display="block"; box.className="result"; box.replaceChildren(el("div","","Checking…"));
+  try{
+    const r = await api("/report", {method:"POST", body:JSON.stringify({url:v})});
+    const cls = r.verdict==="official"?"official":r.score>=60?"high":r.score>=30?"mid":"low";
+    box.className = "result " + cls;
+    const title = r.verdict==="official" ? "✓ Official " + r.brand + " website" :
+      r.score>=60 ? "⚠ High risk — likely a scam (" + r.score + "/100)" : r.score>=30 ? "Suspicious (" + r.score + "/100)" : "Low risk (" + r.score + "/100)";
+    const kids = [el("h3","",title)];
+    if(r.brand && r.verdict!=="official") kids.push(el("div","","Pretends to be: " + r.brand));
+    if(r.reasons && r.reasons.length){ const ul=el("ul"); r.reasons.forEach(x=>ul.append(el("li","",x))); kids.push(ul); }
+    if(r.advice) kids.push(el("div","adv",r.advice));
+    box.replaceChildren(...kids);
+    refreshAll();
+  }catch(e){ box.className="result mid"; box.replaceChildren(el("div","",e.message)); }
+}
+
+$("tabs").onclick = e => { if(e.target.tagName!=="BUTTON") return; source = e.target.dataset.s;
+  [...$("tabs").children].forEach(b => b.classList.toggle("on", b===e.target)); refreshFeed(); };
+
+function refreshAll(){ refreshStats(); refreshFeed(); refreshAlerts(); }
+refreshAll(); refreshRadar(); refreshModel();
+setInterval(refreshStats, 2000); setInterval(refreshRadar, 2000);
+setInterval(refreshFeed, 4000); setInterval(refreshAlerts, 6000); setInterval(refreshModel, 3000);
+</script>
+</body>
+</html>

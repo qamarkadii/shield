@@ -4,4 +4,7 @@ pandas
 scikit-learn
 joblib
 tldextract
+requests
+cryptography
+python-dotenv
 certstream

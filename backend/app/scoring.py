@@ -54,6 +54,28 @@ def _load_model():
     return _model
 
 
+def reload_model():
+    """Load the model file again (after retraining)."""
+    global _model
+    _model = None
+    return _load_model() is not None
+
+
+def mentions_brand(domain: str) -> bool:
+    """Cheap pre-filter for the live stream: does this name mention a watched brand?"""
+    d = domain.lower()
+    flat = re.sub(r"[-.]", "", d)
+    unglyphed = flat.translate(HOMOGLYPHS).replace("rn", "m")
+    tokens = set(re.split(r"[-.]", d))
+    for key in BRANDS:
+        if key in SHORT:
+            if key in tokens:
+                return True
+        elif key in flat or key in unglyphed:
+            return True
+    return False
+
+
 def _clean(domain: str) -> str:
     d = domain.strip().lower()
     d = re.sub(r"^[a-z]+://", "", d).split("/")[0].split(":")[0]

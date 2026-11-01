@@ -22,3 +22,8 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# Runtime data (created when Shield runs)
+data/shield.db
+data/outbox/
+data/feeds/
