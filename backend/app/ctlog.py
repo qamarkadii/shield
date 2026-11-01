@@ -21,10 +21,11 @@ from collections import deque
 
 import requests
 from cryptography import x509
+from cryptography.hazmat.primitives import hashes
 from cryptography.x509.oid import NameOID
 
 from . import db
-from .scoring import mentions_brand, score_domain
+from .scoring import score_domain, uae_reason
 
 LOG_LIST_URL = "https://www.gstatic.com/ct/log_list/v3/log_list.json"
 HEADERS = {"User-Agent": "Shield-hackathon-radar/0.2"}
@@ -34,6 +35,7 @@ state = {
     "logs": [],
     "certs_checked": 0,
     "matches": 0,
+    "uae_seen": 0,
     "errors": deque(maxlen=10),
     "recent": deque(maxlen=25),    # newest domains seen (all, for the live ticker)
     "started_at": None,
@@ -91,7 +93,7 @@ def issuer_of(cert) -> str:
 
 # ---------- log discovery ----------
 
-def pick_logs(max_logs=3):
+def pick_logs(max_logs=6):
     """Choose currently-live RFC 6962 logs from Google's official log list."""
     data = requests.get(LOG_LIST_URL, headers=HEADERS, timeout=20).json()
     now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
@@ -120,70 +122,112 @@ def pick_logs(max_logs=3):
 
 # ---------- polling ----------
 
+_lock = threading.Lock()
+_seen_set, _seen_order = set(), deque()
+_rate = deque(maxlen=60)          # (time, certs_checked) samples for certs/second
+
+
+def _first_time(fp: bytes) -> bool:
+    """The same certificate is published in 2-3 logs; count it once."""
+    with _lock:
+        if fp in _seen_set:
+            return False
+        _seen_set.add(fp)
+        _seen_order.append(fp)
+        if len(_seen_order) > 300_000:
+            _seen_set.discard(_seen_order.popleft())
+        return True
+
+
 def _process(entries, log_name):
     for e in entries:
         try:
             cert = cert_from_entry(e["leaf_input"], e.get("extra_data", ""))
         except Exception:
             continue
-        if cert is None:
+        if cert is None or not _first_time(cert.fingerprint(hashes.SHA256())):
             continue
-        state["certs_checked"] += 1
         names = names_from_cert(cert)
-        if names:
-            state["recent"].appendleft(names[0])
+        with _lock:
+            state["certs_checked"] += 1
+            if names:
+                state["recent"].appendleft(names[0])
         for name in names:
-            if not mentions_brand(name):
+            why = uae_reason(name)
+            if not why:
                 continue
             result = score_domain(name)
-            if result["verdict"] == "official" or result["score"] < 30:
+            with _lock:
+                state["uae_seen"] += 1
+                if result["score"] >= 30 and result["verdict"] != "official":
+                    state["matches"] += 1
+            # every UAE-related domain goes to the UAE watch; only score >= 30 counts as flagged
+            db.add_detection(result, "live", cert_issuer=issuer_of(cert), ct_log=log_name, note=why)
+
+
+def _reader(lg, batch, max_lag):
+    """One thread per log: read every new entry, as fast as the log allows."""
+    url, name = lg["url"], lg["name"]
+    session = requests.Session()
+    session.headers.update(HEADERS)
+    pos, size, backoff = None, 0, 1
+    while not _stop.is_set():
+        try:
+            if pos is None or pos >= size:
+                size = session.get(url + "ct/v1/get-sth", timeout=15).json()["tree_size"]
+                if pos is None or size - pos > max_lag:
+                    pos = max(0, size - batch)          # start at (or jump to) the newest entries
+                if pos >= size:
+                    _stop.wait(2)                       # caught up: wait for new certificates
+                    continue
+            end = min(pos + batch - 1, size - 1)
+            r = session.get(url + "ct/v1/get-entries", params={"start": pos, "end": end}, timeout=20)
+            if r.status_code == 429:                    # the log asks us to slow down
+                _stop.wait(backoff)
+                backoff = min(backoff * 2, 30)
                 continue
-            state["matches"] += 1
-            db.add_detection(result, "live", cert_issuer=issuer_of(cert), ct_log=log_name)
+            r.raise_for_status()
+            entries = r.json().get("entries", [])
+            _process(entries, name)
+            pos += max(len(entries), 1)
+            backoff = 1
+        except Exception as ex:
+            with _lock:
+                state["errors"].appendleft(f"{name}: {str(ex)[:160]}")
+            _stop.wait(3)
 
 
-def _run(max_logs, batch, interval):
+def _run(max_logs, batch, max_lag):
     try:
         logs = pick_logs(max_logs)
     except Exception as ex:
         state["errors"].appendleft(f"Could not load CT log list: {ex}")
         state["running"] = False
         return
+    if not logs:
+        state["errors"].appendleft("No usable CT logs found in Google's log list.")
+        state["running"] = False
+        return
     state["logs"] = [lg["name"] for lg in logs]
-    pos = {lg["url"]: None for lg in logs}
-    session = requests.Session()
-    session.headers.update(HEADERS)
-    last_saved = 0
+    threads = [threading.Thread(target=_reader, args=(lg, batch, max_lag), daemon=True) for lg in logs]
+    for t in threads:
+        t.start()
     while not _stop.is_set():
-        for lg in logs:
-            url = lg["url"]
-            try:
-                size = session.get(url + "ct/v1/get-sth", timeout=15).json()["tree_size"]
-                if pos[url] is None or size - pos[url] > batch * 20:
-                    pos[url] = max(0, size - batch)      # jump to the newest window
-                if pos[url] < size:
-                    end = min(pos[url] + batch - 1, size - 1)
-                    r = session.get(url + "ct/v1/get-entries",
-                                    params={"start": pos[url], "end": end}, timeout=20)
-                    entries = r.json().get("entries", [])
-                    _process(entries, lg["name"])
-                    pos[url] += max(len(entries), 1)
-            except Exception as ex:
-                state["errors"].appendleft(f"{lg['name']}: {ex}")
-        if state["certs_checked"] - last_saved >= 500:
-            db.set_stat("certs_checked_total", state["certs_checked"])
-            last_saved = state["certs_checked"]
-        _stop.wait(interval)
+        _rate.append((time.time(), state["certs_checked"]))
+        db.set_stat("certs_checked_total", state["certs_checked"])
+        _stop.wait(5)
+    for t in threads:
+        t.join(timeout=5)
     state["running"] = False
 
 
-def start(max_logs=3, batch=256, interval=2.0):
+def start(max_logs=6, batch=256, max_lag=50_000):
     global _thread
     if state["running"]:
         return False
     _stop.clear()
     state.update(running=True, started_at=db.now())
-    _thread = threading.Thread(target=_run, args=(max_logs, batch, interval), daemon=True)
+    _thread = threading.Thread(target=_run, args=(max_logs, batch, max_lag), daemon=True)
     _thread.start()
     return True
 
@@ -193,11 +237,20 @@ def stop():
     return True
 
 
+def certs_per_second():
+    if len(_rate) < 2:
+        return 0.0
+    (t0, c0), (t1, c1) = _rate[0], _rate[-1]
+    return round((c1 - c0) / (t1 - t0), 1) if t1 > t0 else 0.0
+
+
 def status():
     return {
         "running": state["running"],
         "logs": state["logs"],
         "certs_checked": state["certs_checked"],
+        "certs_per_second": certs_per_second(),
+        "uae_seen": state["uae_seen"],
         "matches": state["matches"],
         "started_at": state["started_at"],
         "recent": list(state["recent"])[:15],

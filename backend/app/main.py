@@ -73,7 +73,7 @@ def report(r: Report):
 # ---------- live radar ----------
 
 @app.post("/radar/start")
-def radar_start(logs: int = 3):
+def radar_start(logs: int = 6):
     return {"started": ctlog.start(max_logs=logs), **ctlog.status()}
 
 
@@ -171,5 +171,7 @@ def stats():
     s = db.get_stats()
     r = ctlog.status()
     s["certs_checked_now"] = r["certs_checked"]
+    s["certs_per_second"] = r["certs_per_second"]
+    s["uae_seen_now"] = r["uae_seen"]
     s["radar_running"] = r["running"]
     return s

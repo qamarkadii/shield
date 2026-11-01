@@ -23,6 +23,7 @@ BRANDS = {
     "adpolice":     ("Abu Dhabi Police", ["adpolice.gov.ae"]),
     "emiratespost": ("Emirates Post", ["emiratespost.ae"]),
     "etisalat":     ("Etisalat (e&)", ["etisalat.ae", "eand.com"]),
+    "eimae":        ("Etisalat (e&) webmail", ["eim.ae"]),
     "aramex":       ("Aramex", ["aramex.com"]),
     "emiratesnbd":  ("Emirates NBD", ["emiratesnbd.com"]),
     "adcb":         ("ADCB", ["adcb.com"]),
@@ -59,6 +60,25 @@ def reload_model():
     global _model
     _model = None
     return _load_model() is not None
+
+
+UAE_TERMS = ("dubai", "abudhabi", "sharjah", "ajman", "fujairah", "rasalkhaimah",
+             "ummalquwain", "emirates", "uae")
+
+
+def uae_reason(domain: str):
+    """Why a live domain belongs on the UAE watch (None = not UAE-related)."""
+    d = domain.lower().rstrip(".")
+    if d == "ae" or d.endswith(".ae"):
+        return ".ae domain"
+    if mentions_brand(d):
+        return "mentions a watched UAE brand"
+    flat = re.sub(r"[-.]", "", d)
+    tokens = set(re.split(r"[-.]", d))
+    for term in UAE_TERMS:
+        if (term == "uae" and term in tokens) or (term != "uae" and term in flat):
+            return f"mentions '{term}'"
+    return None
 
 
 def mentions_brand(domain: str) -> bool:
@@ -117,6 +137,12 @@ def score_domain(domain: str) -> dict:
             reasons.append(f"Uses the {name} name on a domain {name} does not own ({registered})")
         break
 
+    # only the registered part + subdomains, never the official suffix (e.g. gov.uk)
+    labels = [l for l in (ext.subdomain.split(".") + [ext.domain]) if l]
+    if not (ext.suffix == "ae" or ext.suffix.endswith(".ae")) and \
+            any(l in ("ae", "gov") or l.endswith("-ae") or l.startswith("ae-") for l in labels):
+        score += 35
+        reasons.append(f"Puts '.ae' / 'gov' inside the name to look like a UAE address, but the real domain is {registered}")
     if ext.suffix.split(".")[-1] in SUSPICIOUS_TLDS:
         score += 10
         reasons.append(f"Uses a top-level domain often abused by scammers (.{ext.suffix})")

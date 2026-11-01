@@ -34,7 +34,7 @@
   button.small{padding:4px 9px;font-size:12px}
   button:disabled{opacity:.5;cursor:default}
   main{padding:20px 24px;display:grid;gap:18px;max-width:1500px;margin:0 auto}
-  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
   .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
   .stat .k{color:var(--mute);font-size:12px}
   .stat .v{font-size:26px;font-weight:600;margin-top:2px}
@@ -97,7 +97,8 @@
 
 <main>
   <section class="stats">
-    <div class="stat hl"><div class="k">Certificates checked (live)</div><div class="v mono" id="sCerts">0</div></div>
+    <div class="stat hl"><div class="k">Certificates checked (live)</div><div class="v mono" id="sCerts">0</div><div class="k" id="sRate"></div></div>
+    <div class="stat"><div class="k">UAE domains seen live</div><div class="v" id="sUae" style="color:var(--blue)">0</div></div>
     <div class="stat"><div class="k">Flagged domains</div><div class="v" id="sFlagged">0</div></div>
     <div class="stat"><div class="k">High risk</div><div class="v" id="sHigh" style="color:var(--red)">0</div></div>
     <div class="stat"><div class="k">Citizen reports</div><div class="v" id="sReports">0</div></div>
@@ -108,7 +109,7 @@
     <section class="card">
       <h2>Detections <span class="sub">— analyst review</span>
         <div class="tabs" id="tabs">
-          <button class="on" data-s="">All</button><button data-s="live">Live</button>
+          <button class="on" data-s="">All flagged</button><button data-s="live">Live flagged</button><button data-s="watch">UAE watch</button>
           <button data-s="citizen">Citizen</button><button data-s="replay">Replay</button>
         </div>
       </h2>
@@ -169,6 +170,8 @@ async function api(path, opts={}){
 async function refreshStats(){
   const s = await api("/stats");
   $("sCerts").textContent = (s.certs_checked_now||0).toLocaleString();
+  $("sUae").textContent = (s.uae_seen_now||0).toLocaleString();
+  $("sRate").textContent = s.radar_running ? (s.certs_per_second||0) + " certificates / second" : "";
   $("sFlagged").textContent = s.flagged; $("sHigh").textContent = s.high_risk;
   $("sReports").textContent = s.citizen_reports; $("sAlerts").textContent = s.alerts_sent;
 }
@@ -190,6 +193,7 @@ function row(d){
   const s = el("td"); s.append(el("span", "score " + scoreCls(d.score), d.score)); tr.append(s);
   const dm = el("td"); dm.append(el("div", "dom", d.domain));
   if(d.reasons && d.reasons.length) dm.append(el("div", "why", d.reasons[0]));
+  else if(d.note) dm.append(el("div", "why", "UAE watch: " + d.note + (d.verdict === "official" ? " (official domain)" : " — no warning signs")));
   tr.append(dm);
   tr.append(el("td", "", d.brand || "—"));
   const src = el("td"); src.append(el("span", "tag " + d.source, d.source)); tr.append(src);
@@ -204,7 +208,8 @@ function row(d){
 }
 
 async function refreshFeed(){
-  const rows = await api("/feed?limit=150" + (source ? "&source=" + source : ""));
+  const q = source === "watch" ? "&source=live&min_score=0" : (source ? "&source=" + source : "");
+  const rows = await api("/feed?limit=150" + q);
   const tb = $("feed");
   if(!rows.length){ tb.replaceChildren(); const tr=el("tr"); const td=el("td","empty","No detections yet. Start the live radar, load the real UAE cases, or check a link."); td.colSpan=6; tr.append(td); tb.append(tr); return; }
   tb.replaceChildren(...rows.map(row));

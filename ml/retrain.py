@@ -28,6 +28,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 
+try:
+    from .common import augment_legit, legit_hostname_fpr
+except ImportError:
+    from common import augment_legit, legit_hostname_fpr
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data")
@@ -83,7 +88,7 @@ def retrain(labels=None, fetch=True, feed_sample=30000, log=print) -> dict:
     feed_status = download_feeds() if fetch else {}
     log(f"Feeds: {feed_status or 'skipped'}")
 
-    base = pd.read_csv(os.path.join(DATA, "shield_training_domains.csv"))
+    base = augment_legit(pd.read_csv(os.path.join(DATA, "shield_training_domains.csv")))
     test = pd.read_csv(os.path.join(DATA, "shield_test_domains.csv"))
     uae = pd.read_csv(os.path.join(DATA, "uae_phishing_domains_real.csv"))
     held_out = set(test.domain) | set(uae.domain)
@@ -117,6 +122,7 @@ def retrain(labels=None, fetch=True, feed_sample=30000, log=print) -> dict:
         "precision": round(precision_score(test.is_phishing, pred), 3),
         "recall": round(recall_score(test.is_phishing, pred), 3),
         "uae_caught": f"{int(uae_pred.sum())}/{len(uae)}",
+        "legit_hostname_false_alarms": round(legit_hostname_fpr(vec, clf, test), 3),
         "train_rows": int(len(train)),
         "fresh_feed_domains": len(fresh),
         "analyst_labels": n_labels,

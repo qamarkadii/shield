@@ -16,11 +16,15 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 import joblib
 
+from common import augment_legit, legit_hostname_fpr
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "data")
 MODEL = os.path.join(HERE, "domain_model.joblib")
 
-train = pd.read_csv(os.path.join(DATA, "shield_training_domains.csv"))
+# legit examples get realistic subdomains (mail., www., ...) so the model doesn't learn
+# "subdomain = phishing" (see common.py)
+train = augment_legit(pd.read_csv(os.path.join(DATA, "shield_training_domains.csv")))
 test = pd.read_csv(os.path.join(DATA, "shield_test_domains.csv"))
 uae = pd.read_csv(os.path.join(DATA, "uae_phishing_domains_real.csv"))
 
@@ -37,6 +41,7 @@ print(f"Test set ({len(test)} unseen domains, different source):")
 print(f"  accuracy  {accuracy_score(test.is_phishing, pred):.3f}")
 print(f"  precision {precision_score(test.is_phishing, pred):.3f}  (of flagged, how many were really phishing)")
 print(f"  recall    {recall_score(test.is_phishing, pred):.3f}  (of real phishing, how many were caught)")
+print(f"  false alarms on legit hostnames like mail.company.com: {legit_hostname_fpr(vec, model, test):.1%}")
 
 u_pred = model.predict(vec.transform(uae.domain))
 print(f"\nReal UAE-targeted fakes caught: {u_pred.sum()}/{len(uae)}")
