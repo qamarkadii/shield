@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Trained model (rebuild with: python ml\train_baseline.py)
+*.joblib
+
+# Secrets (API keys go in .env, never in code)
+.env
+
+# Generated data
+data/crtsh_lookalikes.csv
+data/openphish_phishing.txt
+data/tranco_top10k_legit.txt
+
+# Frontend
+node_modules/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
