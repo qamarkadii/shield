@@ -109,23 +109,10 @@ def _public_view(r: dict) -> dict:
     return out
 
 
-@app.get("/", include_in_schema=False)
+@app.get("/check", include_in_schema=False)
 def page():
+    """The citizen "Is this link official?" page (the AIDA website is the home page, see the end of this file)."""
     return FileResponse(os.path.join(HERE, "static", "public.html"))
-
-
-# AIDA showcase website (3D hero, live demo, model performance), built from frontend/ into frontend/dist.
-# Open it at /site/ . Rebuild after changing the site:  cd frontend && npm install && npm run build:shield
-SITE = os.path.join(HERE, "..", "..", "frontend", "dist")
-if os.path.isdir(SITE):
-    from fastapi.responses import RedirectResponse
-    from fastapi.staticfiles import StaticFiles
-
-    @app.get("/site", include_in_schema=False)
-    def site_redirect():
-        return RedirectResponse("/site/")
-
-    app.mount("/site", StaticFiles(directory=SITE, html=True), name="site")
 
 
 @app.get("/api/health")
@@ -164,3 +151,24 @@ def chat(body: Chat, request: Request):
     msgs = [m.model_dump() for m in body.messages]
     return StreamingResponse(chatbot.run(msgs, _public_view), media_type="application/x-ndjson",
                              headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
+
+
+# ---------- AIDA website (home page) ----------
+# The 3D AIDA website, built from frontend/ into frontend/dist, is served at "/".
+# This MUST stay at the end of the file: routes added above (/check, /api/...) are matched first.
+# Rebuild after changing the site:  cd frontend && npm install && npm run build:shield
+SITE = os.path.join(HERE, "..", "..", "frontend", "dist")
+if os.path.isdir(SITE):
+    from fastapi.responses import RedirectResponse
+    from fastapi.staticfiles import StaticFiles
+
+    @app.get("/site", include_in_schema=False)
+    @app.get("/site/", include_in_schema=False)
+    def old_site_link():
+        return RedirectResponse("/")       # old links to /site/ still work
+
+    app.mount("/", StaticFiles(directory=SITE, html=True), name="site")
+else:
+    @app.get("/", include_in_schema=False)
+    def home_fallback():
+        return FileResponse(os.path.join(HERE, "static", "public.html"))

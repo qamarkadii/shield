@@ -8,7 +8,7 @@
     "dev:shield": "vite --host 127.0.0.1 --mode shield",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "build:shield": "tsc -b && vite build --mode shield --base=/site/"
+    "build:shield": "tsc -b && vite build --mode shield"
   },
   "dependencies": {
     "react": "^19.0.0",

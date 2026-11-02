@@ -10,7 +10,7 @@ export function normalizeDomain(input:string){
 }
 const env=(import.meta as unknown as {env:Record<string,string>}).env;
 export const apiBase = (env.VITE_MODEL_API_BASE||'').replace(/\/$/,'');
-// VITE_SHIELD_PUBLIC=1: the site is served by Shield's public app (/site/) and calls its POST /api/check on the same origin.
+// VITE_SHIELD_PUBLIC=1: the site is served by Shield's public app (home page) and calls its POST /api/check on the same origin.
 export const shieldPublic = env.VITE_SHIELD_PUBLIC==='1';
 export const apiConnected = shieldPublic||!!apiBase;
 const VERDICTS=['high risk','suspicious','no warning signs','official','unknown'];
