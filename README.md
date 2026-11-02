@@ -1,3 +1,14 @@
+---
+title: Shield
+emoji: 🛡️
+colorFrom: indigo
+colorTo: yellow
+sdk: docker
+app_port: 7860
+pinned: false
+short_description: Early warning for fake UAE government websites
+---
+
 # Shield (درع)
 
 AI early-warning system that helps UAE government entities find websites and domains
@@ -15,17 +26,36 @@ evidence. UAE Hackathon 2026 (TDRA) — Pioneers Track, team AIDA.
 | **Retraining** | Downloads the newest phishing feeds, adds analyst labels (weighted 20×), retrains and swaps in the new model without restarting. Test set and the 66 UAE cases are never used for training, so scores stay honest. |
 | **Replay** | Loads 66 real phishing domains that impersonated UAE brands, for a reliable demo. |
 
+## Two sites
+
+| Site | Port | Who | Code |
+|---|---|---|---|
+| Analyst dashboard | 8000 | Team only (behind Cloudflare Access) | `backend/app/main.py`, `static/index.html` |
+| Public "Is this link official?" (Arabic/English) | 8001 | Anyone | `backend/app/public.py`, `static/public.html` |
+
+The public site can only check links and, if the visitor chooses, report one to the analysts.
+It has no admin functions, hides its API docs, never opens links, stores nothing unless the visitor
+presses *Report*, and limits each visitor to 20 checks a minute.
+
+`python run_shield.py` runs both in one program (one copy of the model in memory);
+add `--radar` to start the live radar too. On Windows, just double-click **`start_shield.bat`** (both sites + radar).
+
+**Live at aidashield.tech:** the team runs Shield on a laptop behind a Cloudflare Tunnel —
+`aidashield.tech` (public) and `app.aidashield.tech` (dashboard, Cloudflare Access login). Setup: **`deploy/DEPLOY_LAPTOP.md`**.
+Other hosting options: `deploy/DEPLOY_FREE.md` (Hugging Face Docker Spaces, now needs a paid plan), `deploy/DEPLOY.md` (Azure), `deploy/DEPLOY_ORACLE.md` (Oracle).
+
 ## Setup (Windows, Command Prompt)
 
 ```
 cd C:\shield
 python -m pip install -r requirements.txt
+python backend\scripts\download_data.py
 python ml\train_baseline.py
 python backend\scripts\update_feeds.py
-python -m uvicorn backend.app.main:app --reload
+python run_shield.py
 ```
 
-Open **http://127.0.0.1:8000** for the dashboard (API docs at `/docs`).
+Dashboard: **http://127.0.0.1:8000** (API docs at `/docs`). Public check: **http://127.0.0.1:8001**.
 
 ### Alert emails (optional)
 
@@ -46,24 +76,32 @@ Without `.env`, alerts are saved as `.eml` files in `data/outbox/`, so the demo 
 ## How the risk score works
 
 1. **Official check (fact)**: the domain belongs to a registered UAE brand (`backend/app/registry.py`).
-2. **Learned score**: a two-stage model (`ml/model.py`) — a character-pattern text model, then a combiner that
-   **learns the weight of each warning sign** from labelled data. Score = 100 × probability (capped at 99). Nothing is added by hand.
+2. **Learned score**: a two-stage model (`ml/model.py`, inference in `backend/app/riskmodel.py`) — a character-pattern
+   text model, then a gradient-boosted combiner that **learns the effect of each warning sign** (brand tricks, learned
+   ending/host risk, site popularity from Tranco, look-alike letters incl. Cyrillic, ...). Training is grouped by
+   **owner** (the real registered site or hosting tenant), so no site is in both training and test.
+   Score = calibrated probability × 100 (capped at 99); `live_probability` = the same at a realistic 1% phishing rate.
 3. **Levels**: *High risk* / *Suspicious* cut-offs are set on held-out data for 0.5% / 3% false alarms on legitimate domains.
+   Each reason shows its learned effect ("x7.5 odds"), measured by switching that sign off.
 4. **Labelled rules**: imitating a *registered UAE brand* (look-alike letters, re-spelling, brand + lure word, brand in front of an
    unrelated domain, fake `.ae`) always sends the domain to analyst review. Public data has too few of these to learn a weight.
    Rules never change the score and are shown as "Rule".
 5. **Link facts** (citizen check): on a phishing list, `@` trick, raw IP, foreign look-alike letters, shortened link (→ *Unknown*).
 
-## Results (Nov 1, measured — full report in `docs/model_card.md`)
+## Results (model v2, Nov 2, measured — full report in `docs/model_card.md`)
 
-| Measure (test data never used in training) | Result |
+| Measure (owners never used in training) | Result |
 |---|---|
-| AUC | 0.951 |
-| Suspicious or higher: precision / recall / false alarms | 95.4% / 84.1% / 4.1% |
-| High risk: precision / recall / false alarms | 99.3% / 77.1% / 0.58% |
-| Legitimate hostnames (mail.company.com) flagged | 0.38% |
+| AUC | 0.943 (the earlier 0.951 was inflated: the same sites were in training and test) |
+| Suspicious or higher: recall / false alarms | 80.4% / 2.78% (was 4.1%) |
+| High risk: recall / false alarms | 70.8% / 0.30% (was 0.58%) |
+| Share of *High risk* alerts that are real if 1% of domains seen are phishing | ~70% (was ~56%) |
+| 42,284 real legitimate hostnames (console.aws.amazon.com ...) flagged | 2.0% (0.9% High) |
 | 66 real UAE fakes, model alone | 57 high, 6 suspicious, 3 missed |
 | 66 real UAE fakes, full app (model + rules) | 57 high, 9 suspicious, **0 missed** |
+
+Known weak spot: legitimate sites on free hosting (`*.vercel.app`, `*.github.io`) are flagged about half the time,
+because phishing feeds are full of them.
 
 Earlier versions added hand-picked points (+50 brand, +10 .xyz ...), double-counted signs the model already saw, and
 matched brands too loosely (`hyderabadpolice.gov.in` was read as Abu Dhabi Police). All replaced by the above.

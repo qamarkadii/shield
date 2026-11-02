@@ -8,3 +8,4 @@ requests
 cryptography
 python-dotenv
 certstream
+huggingface_hub

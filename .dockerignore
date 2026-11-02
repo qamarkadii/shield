@@ -1,0 +1,10 @@
+.git
+.venv
+venv
+__pycache__
+*.pyc
+.env
+data/shield.db
+data/outbox/
+data/feeds/
+ml/*.joblib

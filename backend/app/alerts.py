@@ -125,6 +125,23 @@ def smtp_send(msg, s):
                        " — try another network (e.g. phone hotspot) or pause antivirus email scanning.")
 
 
+def resend_send(msg, s) -> str:
+    """Send through Resend's HTTPS API (works where email ports are blocked, e.g. Hugging Face).
+    Needs RESEND_API_KEY and ALERT_FROM on a domain verified in Resend (e.g. alerts@aidashield.tech)."""
+    import base64
+    import requests
+    text = next(p for p in msg.walk() if p.get_content_type() == "text/plain").get_content()
+    attachments = [{"filename": p.get_filename(), "content": base64.b64encode(p.get_payload(decode=True)).decode()}
+                   for p in msg.walk() if p.get_filename()]
+    r = requests.post("https://api.resend.com/emails", timeout=20,
+                      headers={"Authorization": f"Bearer {os.getenv('RESEND_API_KEY')}"},
+                      json={"from": s["sender"], "to": [s["demo_to"]], "subject": msg["Subject"],
+                            "text": text, "attachments": attachments})
+    if r.status_code >= 300:
+        raise RuntimeError(f"Resend error {r.status_code}: {r.text[:200]}")
+    return "Resend API"
+
+
 def send_alert(det: dict) -> dict:
     s = _settings()
     brand = det.get("brand") or ""
@@ -132,7 +149,13 @@ def send_alert(det: dict) -> dict:
     real_contact = ENTITY_CONTACTS.get(brand)
     msg = build_email(det, recipient)
 
-    if s["host"] and s["user"] and s["password"] and s["demo_to"]:
+    if os.getenv("RESEND_API_KEY") and s["demo_to"]:
+        try:
+            how = resend_send(msg, s)
+            status, detail = "sent", f"Emailed to demo inbox {recipient} ({how})"
+        except Exception as ex:
+            status, detail = "failed", f"Email error: {ex}"
+    elif s["host"] and s["user"] and s["password"] and s["demo_to"]:
         try:
             how = smtp_send(msg, s)
             status = "sent"

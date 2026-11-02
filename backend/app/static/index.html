@@ -165,7 +165,8 @@ function lvlCls(v){ return v==="high risk"?"s-high":v==="suspicious"?"s-mid":v==
 const LVL = {"high risk":"High risk","suspicious":"Suspicious","official":"Verified official","no warning signs":"No warning signs","unknown":"Unknown"};
 function toast(msg){ const t=$("toast"); t.textContent=msg; t.style.display="block"; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display="none",4500); }
 async function api(path, opts={}){
-  const r = await fetch(path, {headers:{"Content-Type":"application/json"}, ...opts});
+  // relative path: works at "/" on a laptop and under "/admin/" on the server
+  const r = await fetch(path.replace(/^\//, ""), {headers:{"Content-Type":"application/json"}, ...opts});
   const j = await r.json().catch(()=>({}));
   if(!r.ok) throw new Error(j.detail || r.statusText);
   return j;

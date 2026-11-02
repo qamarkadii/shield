@@ -154,8 +154,9 @@ def score_domain(domain: str) -> dict:
     fired = [k for k in IMPERSONATION if info["features"][k]]
     if is_uae_brand and (fired or info["features"]["fake_country_label"]):
         what = fired[0] if fired else "fake_country_label"
-        rule = (f"Rule: imitates {brand}, a registered UAE brand ({HOW[what]}; real domain: {registered}). "
-                f"Always sent for analyst review.")
+        official = next((", ".join(doms) for name, doms in UAE_BRANDS.values() if name == brand), "?")
+        rule = (f"Rule: imitates {brand}, a registered UAE brand ({HOW[what]}; this site: {registered}, "
+                f"official: {official}). Always sent for analyst review.")
     elif info["features"]["fake_country_label"]:
         rule = "Rule: puts '.ae' / 'gov' inside a foreign domain to look official. Sent for analyst review."
 
