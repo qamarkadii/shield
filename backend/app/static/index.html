@@ -242,7 +242,10 @@ async function refreshModel(){
     ["Suspicious+: precision / recall", pct(s.precision) + " / " + pct(s.recall)],
     ["High risk: precision / recall", pct(h.precision) + " / " + pct(h.recall)],
     ["False alarms (legit test)", pct(s.false_positive_rate) + " susp. · " + pct(h.false_positive_rate) + " high"],
-    ["False alarms (legit hostnames)", pct(x.legit_hostnames_flagged_suspicious_or_higher)],
+    ["Precision if 1% of domains are phishing", pct(s["precision_at_1%_phishing"]) + " susp. · " + pct(h["precision_at_1%_phishing"]) + " high"],
+    ["False alarms (legit hostnames, unseen subdomains)", pct(x.legit_hostnames_flagged_suspicious_or_higher)],
+    ["False alarms (real legit hostnames)", x.real_legit_hostnames ? pct(x.real_legit_hostnames.suspicious_or_higher) + " of " + x.real_legit_hostnames.n.toLocaleString() : "—"],
+    ["Combiner", info.combiner || "—"],
     ["Real UAE fakes (model alone)", (u.total ? (u["high risk"] + " high · " + u.suspicious + " susp. · " + u["no warning signs"] + " missed") : "—")],
     ["Real UAE fakes (model + rules)", (x.with_rules ? (x.with_rules.uae_fakes["high risk"] + " high · " + x.with_rules.uae_fakes.suspicious + " susp. · " + x.with_rules.uae_fakes.missed + " missed") : "—")],
     ["Training rows", (info.train_rows||0).toLocaleString()], ["Trained", info.trained_at]];
@@ -293,7 +296,7 @@ async function checkLink(){
     section("Other observations", r.notes);
     if(r.verdict==="no warning signs" && !(r.facts||[]).length && !(r.rules||[]).length) kids.push(el("div","","Nothing in the name matches known scam patterns."));
     if(r.advice) kids.push(el("div","adv",r.advice));
-    if(r.thresholds) kids.push(el("div","meta","Score = risk model probability. Suspicious from " + Math.round(r.thresholds.suspicious*100) + ", High risk from " + Math.round(r.thresholds.high*100) + " (cut-offs set for 3% / 0.5% false alarms on legitimate domains)."));
+    if(r.thresholds) kids.push(el("div","meta","Score = calibrated risk (as if half of all domains were phishing)" + (r.live_probability !== undefined ? "; chance at a realistic 1% phishing rate: " + (r.live_probability*100).toFixed(1) + "%" : "") + ". Suspicious from " + Math.round(r.thresholds.suspicious*100) + ", High risk from " + Math.round(r.thresholds.high*100) + " (cut-offs set for 3% / 0.5% false alarms on legitimate domains)."));
     box.replaceChildren(...kids);
     refreshAll();
   }catch(e){ box.className="result mid"; box.replaceChildren(el("div","",e.message)); }

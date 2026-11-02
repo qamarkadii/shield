@@ -27,3 +27,6 @@ Thumbs.db
 data/shield.db
 data/outbox/
 data/feeds/
+
+# Downloaded top-sites lists (python backend\scripts\download_data.py)
+data/lists/

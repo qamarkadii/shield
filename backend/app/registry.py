@@ -23,3 +23,18 @@ UAE_BRANDS = {
     "rta":          ("RTA", ["rta.ae"]),
     "tdra":         ("TDRA", ["tdra.gov.ae"]),
 }
+
+# Other spellings people (and scammers) use, mostly Arabic transliterations.
+# Each alias matches like the brand itself and shares its official domains.
+ALIASES = {
+    "etisalat": ["itisalat", "etisalaat", "ettisalat"],
+    "emiratespost": ["emiratepost", "emaratpost", "emiratesposts"],
+    "mashreq": ["mashriq", "mashrek", "mashreqbank"],
+    "salik": ["saleek"],
+    "dubaipolice": ["dubaipolis", "shurtadubai"],
+    "adpolice": ["abudhabipolice"],
+    "emiratesnbd": ["enbd"],
+}
+for _key, _alts in ALIASES.items():
+    for _alt in _alts:
+        UAE_BRANDS.setdefault(_alt, UAE_BRANDS[_key])

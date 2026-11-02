@@ -61,3 +61,20 @@ except Exception as e:
     print("FAILED  URLhaus:", e)
 
 print("\nDone. If anything FAILED, send me the message and I'll give you another route.")
+
+# 4. Top-sites lists for the risk model (kept as .zip in data/lists):
+#    Tranco full top-1M  -> `popularity` feature (backend/app/popularity.py)
+#    Cisco Umbrella top-1M (DNS traffic, full hostnames) -> real legitimate hostnames for training
+LISTS = os.path.join(DATA, "lists")
+os.makedirs(LISTS, exist_ok=True)
+for name, url in (("tranco.zip", "https://tranco-list.eu/top-1m.csv.zip"),
+                  ("umbrella.zip", "http://s3-us-west-1.amazonaws.com/umbrella-static/top-1m.csv.zip")):
+    try:
+        raw = fetch(url)
+        zipfile.ZipFile(io.BytesIO(raw)).namelist()      # check it's a valid zip
+        with open(os.path.join(LISTS, name), "wb") as f:
+            f.write(raw)
+        print(f"OK  {name}: {len(raw) // 1024:,} KB -> {LISTS}")
+    except Exception as e:
+        print(f"FAILED  {name}:", e)
+print("\nDone. If anything FAILED, send me the message and I'll give you another route.")
