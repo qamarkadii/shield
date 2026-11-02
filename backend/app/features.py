@@ -69,8 +69,10 @@ GLOBAL_BRANDS = {
 }
 _GLOBAL = {k: (k, v) for k, v in GLOBAL_BRANDS.items()}
 
-# Brands this short collide with normal words, so they must be a whole word
+# Brands this short collide with normal words, so they must be a whole word ...
 SHORT_BRAND_LEN = 4
+# ... except short keys that are not pieces of words in any language (adcbgrp, tdra-pay)
+DISTINCTIVE_SHORT = {"adcb", "tdra", "enbd"}
 VOWELS = set("aeiou")
 
 
@@ -164,26 +166,33 @@ def _deglyph(t: str):
     return out
 
 
-def _match(token: str, key: str) -> str | None:
+def _match(token: str, key: str, embedded: bool = False) -> str | None:
     """How a single word contains a brand key: exact / prefix / homoglyph, or None.
     Prefix only counts when the brand starts the word and the rest is a real addition
     (>=3 letters or contains digits), so 'salika' != 'salik' and 'hyderabadpolice'
     does not contain 'adpolice'."""
+    long_ok = len(key) > SHORT_BRAND_LEN or key in DISTINCTIVE_SHORT
     def check(t):
         if t == key:
             return "exact"
-        if len(key) > SHORT_BRAND_LEN and t.startswith(key):
+        if long_ok and t.startswith(key):
             rest = t[len(key):]
-            if len(rest) >= 3 or any(c.isdigit() for c in rest):
+            if len(rest) >= 3 or any(c.isdigit() for c in rest) or rest in ("ae", "uae"):
                 return "prefix"
-        if len(key) > SHORT_BRAND_LEN and t.endswith(key):
+        if long_ok and t.endswith(key):
             rest = t[:-len(key)]
             if rest in ("my", "e", "i", "ae", "uae", "secure", "login", "www", "online", "the"):
                 return "prefix"
+        # long brand names glued inside a longer word (p0stalaramex10, packaginaramexs):
+        # 6+ letter UAE brand keys are not pieces of ordinary words (global ones like amazon are)
+        if embedded and len(key) >= 6 and key in t and len(t) >= len(key) + 4:
+            return "prefix"
         return None
     m = check(token)
     if m:
         return m
+    if len(key) <= SHORT_BRAND_LEN:
+        return None       # 'dew4' is not DEWA: look-alike reading of short words is mostly noise
     for g in _deglyph(token):
         if check(g):
             return "homoglyph"
@@ -193,7 +202,7 @@ def _match(token: str, key: str) -> str | None:
 _HOW_RANK = {"exact": 0, "prefix": 1, "homoglyph": 2}
 
 
-def find_brand(d: str, ext, registered: str, brands: dict):
+def find_brand(d: str, ext, registered: str, brands: dict, embedded: bool = False):
     """brands: {key: (display_name, [official registered domains])}.
     Returns the BEST (key, name, how, where): registered name before subdomain, exact
     before prefix before look-alike, longer brand before shorter. None if no brand.
@@ -205,7 +214,7 @@ def find_brand(d: str, ext, registered: str, brands: dict):
     for key, (name, official) in brands.items():
         for wi, (where, toks) in enumerate((("domain", dom_tokens + [joined_dom]), ("subdomain", sub_tokens))):
             for t in toks:
-                how = _match(t, key)
+                how = _match(t, key, embedded)
                 if how:
                     rank = (wi, _HOW_RANK[how], -len(key))
                     if best_rank is None or rank < best_rank:
@@ -226,6 +235,40 @@ def is_official(registered: str, key: str, official: list, global_brand=False) -
         # brands own their country sites (amazon.co.uk), not paypal.xyz
         return label == key and suffix in BRAND_SUFFIXES
     return False
+
+
+def official_of(registered: str, key: str, uae_brands: dict) -> bool:
+    off = uae_brands[key][1]
+    return registered in off or any(registered.endswith("." + o) for o in off)
+
+
+# Brand keys that are also ordinary words or names elsewhere (Indonesian 'dewa' = god,
+# Arabic name 'Adib'): they only count as the brand next to a lure word or a UAE sign.
+NEEDS_CONTEXT = {"dewa", "tamm", "seha", "dib", "adib", "eand", "addc", "enoc", "emaar"}
+
+UAE_TERMS = ("dubai", "abudhabi", "sharjah", "ajman", "fujairah", "rasalkhaimah", "ummalquwain")
+
+
+UAE_TERMS_ANYWHERE = {"dubai", "abudhabi", "sharjah", "fujairah", "rasalkhaimah", "ummalquwain"}
+
+
+def uae_term_in(d: str):
+    """A UAE place name in the name ('exploredubaibookings', 'dubai-visa'), or the word 'uae' /
+    'alain'. 'ajman' must start or end a word: 'maharajmandir' has no Ajman in it."""
+    for t in _tokens(d):
+        if t in ("uae", "alain"):
+            return t
+        for term in UAE_TERMS:
+            if t.startswith(term) or t.endswith(term) or (term in UAE_TERMS_ANYWHERE and term in t):
+                return term
+    return None
+
+
+def uae_context(d: str) -> bool:
+    """Any sign the name is about the UAE: .ae ending, an 'ae' label or '-ae', a UAE place."""
+    labels = d.split(".")
+    return (labels[-1] == "ae" or "ae" in labels[:-1] or any(l.endswith("-ae") for l in labels)
+            or uae_term_in(d) is not None)
 
 
 def close_spelling(a: str, b: str) -> bool:
@@ -351,9 +394,10 @@ def extract(domain: str, uae_brands: dict, ml_logit: float = 0.0, ctx=None) -> d
     fext = _extract(folded) if folded != d else ext
 
     def search(brands):
-        h = find_brand(d, ext, registered, brands)
+        emb = brands is uae_brands
+        h = find_brand(d, ext, registered, brands, emb)
         if h is None and folded != d:
-            h = find_brand(folded, fext, registered, brands)
+            h = find_brand(folded, fext, registered, brands, emb)
             if h:
                 h = (h[0], h[1], "homoglyph", h[3])
         if h is None:
@@ -362,6 +406,9 @@ def extract(domain: str, uae_brands: dict, ml_logit: float = 0.0, ctx=None) -> d
         return h
 
     hit = search(uae_brands)
+    if hit and hit[0] in NEEDS_CONTEXT and not (official_of(registered, hit[0], uae_brands) or
+                                                 _has_lure(_tokens(folded)) or uae_context(d)):
+        hit = None        # 'dewa-slot88.com' is an Indonesian word, not the Dubai utility
     is_global = False
     if hit is None:
         hit = search(_GLOBAL)

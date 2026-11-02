@@ -28,7 +28,7 @@ import joblib
 import numpy as np
 
 from . import riskmodel
-from .features import DESCRIBE, DESCRIBE_LOW, FEATURE_NAMES, clean, extract, split_domain
+from .features import DESCRIBE, DESCRIBE_LOW, FEATURE_NAMES, clean, extract, split_domain, uae_term_in
 from .registry import UAE_BRANDS
 
 _MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "ml", "domain_model.joblib")
@@ -68,10 +68,6 @@ def model_info():
 
 # ---------- UAE watch helpers (used by the live radar) ----------
 
-UAE_TERMS = ("dubai", "abudhabi", "sharjah", "ajman", "fujairah", "rasalkhaimah",
-             "ummalquwain", "emirates", "uae")
-
-
 def mentions_brand(domain: str) -> bool:
     r = extract(domain, UAE_BRANDS)
     b = r["brand"]
@@ -80,15 +76,13 @@ def mentions_brand(domain: str) -> bool:
 
 def uae_reason(domain: str):
     """Why a live domain belongs on the UAE watch (None = not UAE-related)."""
-    import re
     d = domain.lower().rstrip(".")
     if d == "ae" or d.endswith(".ae"):
         return ".ae domain"
-    flat = re.sub(r"[-.]", "", d)
-    tokens = set(re.split(r"[-.]", d))
-    for term in UAE_TERMS:
-        if (term == "uae" and term in tokens) or (term != "uae" and term in flat):
-            return f"mentions '{term}'"
+    term = uae_term_in(d) or ("emirates" if any(t.startswith("emirates") or t.endswith("emirates")
+                                                 for t in d.replace("-", ".").split(".")) else None)
+    if term:
+        return f"mentions '{term}'"
     if mentions_brand(d):
         return "mentions a watched UAE brand"
     return None
@@ -176,3 +170,86 @@ def score_domain(domain: str) -> dict:
             "live_probability": round(p_live, 4),
             "thresholds": {k: round(v, 3) for k, v in model["thresholds"].items()},
             "rule": rule, "signals": signals, "reasons": reasons}
+
+
+# ---------- name + domain facts (enrich.py, ml/train_facts.py) ----------
+
+_FACTS_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "ml", "facts_model.joblib")
+_facts_model = None
+
+
+def facts_model():
+    global _facts_model
+    if _facts_model is None and os.path.exists(_FACTS_PATH):
+        m = joblib.load(_FACTS_PATH)
+        _facts_model = m if isinstance(m, dict) and m.get("version") == 1 else None
+    return _facts_model
+
+
+def reload_facts_model():
+    global _facts_model
+    _facts_model = None
+    return facts_model() is not None
+
+
+def assess(domain: str, tls: bool = False, budget: float | None = None) -> dict:
+    """score_domain() plus what the internet says about the domain (age, registrar, certificate,
+    hosting). With a trained facts model the level is re-decided on name + facts together.
+    budget: give up on the facts after this many seconds (citizen site) and keep the name result."""
+    from concurrent.futures import ThreadPoolExecutor, TimeoutError as FTimeout
+    from . import enrich
+    r = score_domain(domain)
+    if r["verdict"] in ("official", "unknown") or r.get("score") is None:
+        return r
+    pool = ThreadPoolExecutor(1)
+    fut = pool.submit(enrich.facts, r["domain"], tls)
+    try:
+        fx = fut.result(timeout=budget)
+    except FTimeout:
+        r["facts"] = {"timed_out": True}
+        return r
+    finally:
+        pool.shutdown(wait=False)
+    r["facts"] = fx
+    fm = facts_model()
+    rd = fx.get("rdap") or {}
+    if not (fm and (fx.get("dns") or {}).get("resolves")):
+        if rd.get("age_days") is not None:
+            r["reasons"].append(f"Domain registered {rd['age_days']} days ago ({rd.get('created')})")
+        return r
+    vec = enrich.fact_vector(fx)
+    x = np.array([[riskmodel.logit(np.array([r["probability"]]))[0]] + [vec[k] for k in enrich.FACT_NAMES]])
+    p = float(fm["clf"].predict_proba(x)[0, 1])
+    w = dict(zip(fm["names"], fm["clf"].coef_[0]))
+    th = fm["thresholds"]
+    level = "high risk" if p >= th["high"] else "suspicious" if p >= th["suspicious"] else "no warning signs"
+    if r.get("rule") and level == "no warning signs":
+        level = "suspicious"
+    cert = fx.get("certificate") or {}
+    fsig = []
+    for k in enrich.FACT_NAMES:
+        if k == "age_days_log" or not vec[k]:
+            continue
+        eff = float(w[k]) * vec[k]
+        if abs(eff) < 0.1:
+            continue
+        text = enrich.FACT_DESCRIBE[k].format(age=rd.get("age_days"), issuer=cert.get("issuer") or "?",
+                                              n=cert.get("names_covered"))
+        fsig.append({"feature": k, "effect": round(eff, 2),
+                     "text": text + (f" (learned effect: x{math.exp(eff):.1f} odds)" if eff > 0
+                                     else f" (learned effect: /{math.exp(-eff):.1f} odds)")})
+    if rd.get("age_days") is not None:
+        eff = float(w["age_days_log"]) * (vec["age_days_log"] - 2.5)
+        fsig.append({"feature": "age_days_log", "effect": round(eff, 2),
+                     "text": f"Domain registered {rd['age_days']} days ago ({rd.get('created')})"})
+    fsig.sort(key=lambda s: -s["effect"])
+    r["fact_signals"] = fsig
+    r["name_verdict"] = r["verdict"]
+    r["verdict"] = level
+    r["combined_probability"] = round(p, 4)
+    r["score"] = min(int(round(100 * p)), 99)
+    r["reasons"] = r["reasons"] + [s["text"] for s in fsig if s["effect"] > 0.3]
+    if level == "no warning signs":
+        r["reasons"] = [x for x in r["reasons"] if not x.startswith("No warning signs")] or \
+            ["No warning signs found in the name or the domain's records. This does not prove the site is safe."]
+    return r

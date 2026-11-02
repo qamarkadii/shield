@@ -38,6 +38,8 @@ echo "== 3/6 Python environment"
 [ -d .venv ] || python3 -m venv .venv
 .venv/bin/pip install --upgrade pip
 .venv/bin/pip install -r requirements.txt
+sudo .venv/bin/python -m playwright install-deps chromium   # libraries for the page-check browser
+.venv/bin/python -m playwright install chromium
 
 echo "== 4/6 Model and feeds"
 if [ ! -f ml/domain_model.joblib ]; then

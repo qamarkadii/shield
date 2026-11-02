@@ -32,6 +32,7 @@ evidence. UAE Hackathon 2026 (TDRA) — Pioneers Track, team AIDA.
 |---|---|---|---|
 | Analyst dashboard | 8000 | Team only (behind Cloudflare Access) | `backend/app/main.py`, `static/index.html` |
 | Public "Is this link official?" (Arabic/English) | 8001 | Anyone | `backend/app/public.py`, `static/public.html` |
+| AIDA showcase website (3D, live demo) | 8001 at `/site/` | Anyone | `frontend/` (built into `frontend/dist`) |
 
 The public site can only check links and, if the visitor chooses, report one to the analysts.
 It has no admin functions, hides its API docs, never opens links, stores nothing unless the visitor
@@ -70,8 +71,27 @@ Without `.env`, alerts are saved as `.eml` files in `data/outbox/`, so the demo 
 | `backend/scripts/` | `update_feeds.py`, `certstream_test.py`, `crtsh_search.py`, `download_data.py` | B: Backend |
 | `ml/` | `train_baseline.py`, `retrain.py` | A: Data and ML |
 | `data/` | Training, test and real UAE phishing datasets (see `data/README.md`) | A: Data and ML |
-| `frontend/` | Space for a React dashboard if the team builds one | C: Frontend |
+| `frontend/` | AIDA showcase website (React + Three.js), served by the public site at `/site/` | C: Frontend |
 | `docs/` | Build guide link | D: Pitch and product |
+
+## Investigation (admin dashboard → *Investigate* on any detection)
+
+| Step | What it does | Code |
+|---|---|---|
+| **Domain facts** | Registration date and age, registrar and its abuse e-mail (RDAP), DNS / mail records, hosting network and country (Team Cymru) and the host's abuse e-mail, HTTPS certificate (issuer, age, names). A learned **facts model** combines them with the name score. The citizen site uses the DNS/registration part only, with a 6-second limit, and never contacts the site. | `backend/app/enrich.py`, `ml/train_facts.py` |
+| **Page check** | Opens the page **on the server** in a throwaway headless browser (own process, 45 s limit, no downloads, nothing typed or clicked, every request to private/local addresses blocked). Records a screenshot, whether it asks for a password / card / OTP / Emirates ID, where its forms send data, which UAE brand it claims to be, and how much it looks like that brand's official site (reference screenshots + icon). | `backend/app/pagecheck.py` |
+| **Evidence pack** | One bilingual report: score and reasons, facts, screenshot, timeline, SHA-256 of every file, and ready-to-send **takedown requests in English and Arabic** to the registrar's and host's abuse contacts, plus report links (Google Safe Browsing, Microsoft, Netcraft, APWG). The *Alert* e-mail attaches it. Nothing is sent automatically. | `backend/app/evidence.py` |
+
+Setup for these: `python -m pip install -r requirements.txt`, `python -m playwright install chromium`,
+`python -m backend.app.pagecheck --refs` (reference screenshots), `python ml\train_facts.py` (facts model).
+
+## Real UAE data and never-seen tests
+
+`python ml\collect_uae.py` searches ~2.5 million public phishing records for UAE-targeted ones
+(brand imitations, fake `.ae`, UAE place + lure, brand in the link path). `python ml\build_unseen.py`
+builds 160k domains from sources the base model never used. Every site is put in one of three parts:
+**train**, **dev** (never trained on; mistakes inspected to fix the logic) and **frozen** (never
+trained on, never inspected; only totals reported). `python ml\eval_unseen.py --errors 40` scores any model on them.
 
 ## How the risk score works
 

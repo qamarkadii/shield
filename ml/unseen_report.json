@@ -1,0 +1,248 @@
+{
+ "unseen_dev": {
+  "phishing": {
+   "n": 10000,
+   "model_suspicious_or_higher": 0.7277,
+   "model_high": 0.5949,
+   "app_suspicious_or_higher": 0.7278,
+   "app_high": 0.5949,
+   "kind": "detection rate (higher is better)"
+  },
+  "legit": {
+   "n": 10000,
+   "model_suspicious_or_higher": 0.0609,
+   "model_high": 0.0108,
+   "app_suspicious_or_higher": 0.0611,
+   "app_high": 0.0108,
+   "kind": "false-alarm rate (lower is better)"
+  },
+  "phishing_by_source": {
+   "destroylist.txt": {
+    "n": 2485,
+    "model_suspicious_or_higher": 0.6535,
+    "model_high": 0.4414,
+    "app_suspicious_or_higher": 0.6535,
+    "app_high": 0.4414,
+    "kind": "detection rate (higher is better)"
+   },
+   "pdb_domains_2025-11.txt": {
+    "n": 3908,
+    "model_suspicious_or_higher": 0.7728,
+    "model_high": 0.672,
+    "app_suspicious_or_higher": 0.773,
+    "app_high": 0.672,
+    "kind": "detection rate (higher is better)"
+   },
+   "pdb_domains_2026-05.txt": {
+    "n": 92,
+    "model_suspicious_or_higher": 0.7935,
+    "model_high": 0.7174,
+    "app_suspicious_or_higher": 0.7935,
+    "app_high": 0.7174,
+    "kind": "detection rate (higher is better)"
+   },
+   "pdb_links_active.txt": {
+    "n": 3021,
+    "model_suspicious_or_higher": 0.7246,
+    "model_high": 0.6111,
+    "app_suspicious_or_higher": 0.7246,
+    "app_high": 0.6111,
+    "kind": "detection rate (higher is better)"
+   },
+   "pdb_links_inactive.txt": {
+    "n": 494,
+    "model_suspicious_or_higher": 0.751,
+    "model_high": 0.6356,
+    "app_suspicious_or_higher": 0.751,
+    "app_high": 0.6356,
+    "kind": "detection rate (higher is better)"
+   }
+  },
+  "legit_by_source": {
+   "tranco_250k_1m": {
+    "n": 9872,
+    "model_suspicious_or_higher": 0.0615,
+    "model_high": 0.0109,
+    "app_suspicious_or_higher": 0.0616,
+    "app_high": 0.0109,
+    "kind": "false-alarm rate (lower is better)"
+   },
+   "tranco_ae": {
+    "n": 128,
+    "model_suspicious_or_higher": 0.0156,
+    "model_high": 0.0,
+    "app_suspicious_or_higher": 0.0234,
+    "app_high": 0.0,
+    "kind": "false-alarm rate (lower is better)"
+   }
+  },
+  "auc": 0.9017
+ },
+ "unseen_frozen": {
+  "phishing": {
+   "n": 10000,
+   "model_suspicious_or_higher": 0.7369,
+   "model_high": 0.5969,
+   "app_suspicious_or_higher": 0.7369,
+   "app_high": 0.5969,
+   "kind": "detection rate (higher is better)"
+  },
+  "legit": {
+   "n": 10000,
+   "model_suspicious_or_higher": 0.0642,
+   "model_high": 0.0096,
+   "app_suspicious_or_higher": 0.0644,
+   "app_high": 0.0096,
+   "kind": "false-alarm rate (lower is better)"
+  },
+  "phishing_by_source": {
+   "destroylist.txt": {
+    "n": 2448,
+    "model_suspicious_or_higher": 0.6675,
+    "model_high": 0.4395,
+    "app_suspicious_or_higher": 0.6675,
+    "app_high": 0.4395,
+    "kind": "detection rate (higher is better)"
+   },
+   "pdb_domains_2025-11.txt": {
+    "n": 3884,
+    "model_suspicious_or_higher": 0.7683,
+    "model_high": 0.6635,
+    "app_suspicious_or_higher": 0.7683,
+    "app_high": 0.6635,
+    "kind": "detection rate (higher is better)"
+   },
+   "pdb_domains_2026-05.txt": {
+    "n": 93,
+    "model_suspicious_or_higher": 0.8495,
+    "model_high": 0.7419,
+    "app_suspicious_or_higher": 0.8495,
+    "app_high": 0.7419,
+    "kind": "detection rate (higher is better)"
+   },
+   "pdb_links_active.txt": {
+    "n": 3118,
+    "model_suspicious_or_higher": 0.7473,
+    "model_high": 0.6299,
+    "app_suspicious_or_higher": 0.7473,
+    "app_high": 0.6299,
+    "kind": "detection rate (higher is better)"
+   },
+   "pdb_links_inactive.txt": {
+    "n": 457,
+    "model_suspicious_or_higher": 0.7484,
+    "model_high": 0.6193,
+    "app_suspicious_or_higher": 0.7484,
+    "app_high": 0.6193,
+    "kind": "detection rate (higher is better)"
+   }
+  },
+  "legit_by_source": {
+   "tranco_250k_1m": {
+    "n": 9808,
+    "model_suspicious_or_higher": 0.0652,
+    "model_high": 0.0098,
+    "app_suspicious_or_higher": 0.0652,
+    "app_high": 0.0098,
+    "kind": "false-alarm rate (lower is better)"
+   },
+   "tranco_ae": {
+    "n": 192,
+    "model_suspicious_or_higher": 0.0156,
+    "model_high": 0.0,
+    "app_suspicious_or_higher": 0.026,
+    "app_high": 0.0,
+    "kind": "false-alarm rate (lower is better)"
+   }
+  },
+  "auc": 0.905
+ },
+ "uae_dev": {
+  "all": {
+   "n": 152,
+   "model_suspicious_or_higher": 0.9211,
+   "model_high": 0.8816,
+   "app_suspicious_or_higher": 0.9276,
+   "app_high": 0.8816,
+   "kind": "detection rate (higher is better)"
+  },
+  "by_category": {
+   "brand": {
+    "n": 55,
+    "model_suspicious_or_higher": 1.0,
+    "model_high": 0.9818,
+    "app_suspicious_or_higher": 1.0,
+    "app_high": 0.9818,
+    "kind": "detection rate (higher is better)"
+   },
+   "fake_ae": {
+    "n": 21,
+    "model_suspicious_or_higher": 0.9524,
+    "model_high": 0.9048,
+    "app_suspicious_or_higher": 1.0,
+    "app_high": 0.9048,
+    "kind": "detection rate (higher is better)"
+   },
+   "path": {
+    "n": 17,
+    "model_suspicious_or_higher": 0.4118,
+    "model_high": 0.1765,
+    "app_suspicious_or_higher": 0.4118,
+    "app_high": 0.1765,
+    "kind": "detection rate (higher is better)"
+   },
+   "uae_lure": {
+    "n": 59,
+    "model_suspicious_or_higher": 0.9831,
+    "model_high": 0.9831,
+    "app_suspicious_or_higher": 0.9831,
+    "app_high": 0.9831,
+    "kind": "detection rate (higher is better)"
+   }
+  }
+ },
+ "uae_frozen": {
+  "all": {
+   "n": 157,
+   "model_suspicious_or_higher": 0.8726,
+   "model_high": 0.8217,
+   "app_suspicious_or_higher": 0.879,
+   "app_high": 0.8217,
+   "kind": "detection rate (higher is better)"
+  },
+  "by_category": {
+   "brand": {
+    "n": 38,
+    "model_suspicious_or_higher": 1.0,
+    "model_high": 0.8421,
+    "app_suspicious_or_higher": 1.0,
+    "app_high": 0.8421,
+    "kind": "detection rate (higher is better)"
+   },
+   "fake_ae": {
+    "n": 29,
+    "model_suspicious_or_higher": 0.9655,
+    "model_high": 0.9655,
+    "app_suspicious_or_higher": 1.0,
+    "app_high": 0.9655,
+    "kind": "detection rate (higher is better)"
+   },
+   "path": {
+    "n": 28,
+    "model_suspicious_or_higher": 0.3571,
+    "model_high": 0.3214,
+    "app_suspicious_or_higher": 0.3571,
+    "app_high": 0.3214,
+    "kind": "detection rate (higher is better)"
+   },
+   "uae_lure": {
+    "n": 62,
+    "model_suspicious_or_higher": 0.9839,
+    "model_high": 0.9677,
+    "app_suspicious_or_higher": 0.9839,
+    "app_high": 0.9677,
+    "kind": "detection rate (higher is better)"
+   }
+  }
+ }
+}

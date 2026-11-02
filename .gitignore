@@ -15,9 +15,8 @@ data/crtsh_lookalikes.csv
 data/openphish_phishing.txt
 data/tranco_top10k_legit.txt
 
-# Frontend
+# Frontend (frontend/dist is kept: Shield serves the built site at /site/)
 node_modules/
-dist/
 
 # OS
 .DS_Store
@@ -30,3 +29,10 @@ data/feeds/
 
 # Downloaded top-sites lists (python backend\scripts\download_data.py)
 data/lists/
+
+# Downloaded phishing lists (python ml/collect_uae.py)
+data/sources/
+
+# Domain-facts lookup cache and evidence packs (created when Shield runs)
+data/facts_cache.jsonl
+data/evidence/

@@ -19,7 +19,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from . import alerts, ctlog, db, linkcheck
-from .scoring import model_info, reload_model, score_domain
+from .scoring import assess, model_info, reload_facts_model, reload_model, score_domain
 
 app = FastAPI(title="Shield API", version="0.2")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
@@ -133,6 +133,58 @@ def alert_list():
     return db.list_alerts()
 
 
+# ---------- investigation: domain facts, page check, evidence pack ----------
+
+@app.get("/investigate")
+def investigate(domain: str):
+    """Name score + domain facts (registration age, registrar, hosting, certificate)."""
+    return assess(domain, tls=True)
+
+
+@app.post("/pagecheck")
+def page_check(domain: str, url: str | None = None):
+    """Open the page in the isolated server-side browser (never in the analyst's browser)."""
+    from . import evidence, pagecheck
+    from .features import clean
+    d = clean(domain)
+    out = os.path.join(evidence.EVIDENCE, evidence.slug(d))
+    r = pagecheck.check_page(url or ("https://" + d), out, d)
+    if r.get("screenshot"):
+        r["screenshot_url"] = f"evidence/{evidence.slug(d)}/screenshot.png"
+    return r
+
+
+@app.post("/detections/{det_id}/evidence")
+def detection_evidence(det_id: int, page: bool = True):
+    """Takedown-ready evidence pack (facts + page check + bilingual takedown requests)."""
+    from . import evidence
+    det = db.get_detection(det_id)
+    if not det:
+        raise HTTPException(404, "Not found")
+    ev = evidence.build(det["domain"], url=det.get("url"), det=det, page=page)
+    db.set_evidence(det_id, ev["report_path"])
+    return {k: ev[k] for k in ("domain", "report_path", "abuse_contacts", "summary_signs", "evidence_sha256",
+                               "timeline", "report_links")} | {"page_verdict": (ev.get("page") or {}).get("verdict")}
+
+
+@app.post("/evidence")
+def evidence_for(domain: str, url: str | None = None, page: bool = True):
+    from . import evidence
+    ev = evidence.build(domain, url=url, page=page)
+    return {k: ev[k] for k in ("domain", "report_path", "abuse_contacts", "summary_signs", "evidence_sha256")}
+
+
+@app.get("/evidence/{name}/{file}", include_in_schema=False)
+def evidence_file(name: str, file: str):
+    from . import evidence
+    if file not in ("report.html", "screenshot.png", "evidence.json", "pagecheck.json") or "/" in name or "\\" in name or ".." in name:
+        raise HTTPException(404, "Not found")
+    path = os.path.join(evidence.EVIDENCE, name, file)
+    if not os.path.isfile(path):
+        raise HTTPException(404, "Not found")
+    return FileResponse(path)
+
+
 # ---------- model ----------
 
 def _retrain_job():
@@ -143,6 +195,7 @@ def _retrain_job():
     try:
         metrics = retrain(labels=db.all_labels(), log=lambda m: training["log"].append(str(m)))
         reload_model()
+        reload_facts_model()
         linkcheck.reload_known()
         db.set_stat("model", metrics)
         training["last"] = metrics

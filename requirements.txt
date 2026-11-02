@@ -9,3 +9,5 @@ cryptography
 python-dotenv
 certstream
 huggingface_hub
+playwright
+pillow

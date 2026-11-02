@@ -52,7 +52,18 @@ def conn():
         );
         CREATE TABLE IF NOT EXISTS stats (key TEXT PRIMARY KEY, value TEXT);
         """)
+        cols = {r[1] for r in _conn.execute("PRAGMA table_info(detections)").fetchall()}
+        if "evidence" not in cols:          # added Nov 2026: path of the evidence pack
+            _conn.execute("ALTER TABLE detections ADD COLUMN evidence TEXT")
+            _conn.commit()
     return _conn
+
+
+def set_evidence(det_id: int, report_path: str):
+    with _lock:
+        c = conn()
+        c.execute("UPDATE detections SET evidence=? WHERE id=?", (report_path, det_id))
+        c.commit()
 
 
 def add_detection(result: dict, source: str, url=None, cert_issuer=None, ct_log=None, note=None):

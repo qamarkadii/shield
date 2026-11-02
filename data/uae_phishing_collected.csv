@@ -1,0 +1,671 @@
+domain,url,category,brand,owner,part,in_base_training,sources
+adcb-abudhabi.com,,brand,ADCB,adcb-abudhabi.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+adcbaupdate.yxwvutsnmlkjihgfedsummer-conference-2026.mario-s-event-organization.fullsailevents.com,,brand,ADCB,fullsailevents.com,dev,0,sources/destroylist.txt
+adcbgrp.sbs,,brand,ADCB,adcbgrp.sbs,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+adcbsecureprelgin.000webhostapp.com,http://adcbsecureprelgin.000webhostapp.com/secure.php?frmlogin=kdw_ga=ys1dv371d5hrpphunkjkfzamvjayeieknqzw0oosklndjyeofcjdekcqoj1a2p1ovkewdluxafrwabep,brand,ADCB,adcbsecureprelgin.000webhostapp.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt;uae_phishing_domains_real.csv
+adcbuaedubai.myclickfunnels.com,,brand,ADCB,myclickfunnels.com,train,0,sources/destroylist.txt
+adnocprofit.net,,brand,ADNOC,adnocprofit.net,train,0,sources/destroylist.txt
+adl-police.ml,http://www.adl-police.ml,brand,Abu Dhabi Police,adl-police.ml,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+alansarigroups.com,,brand,Al Ansari Exchange,alansarigroups.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+store.alansarigroups.com,https://store.alansarigroups.com/.millenniumbcp.pt/32726/index.php,brand,Al Ansari Exchange,alansarigroups.com,dev,0,sources/pdb_links_active.txt
+04notifservicp0stalaramex10-bc6a03.ingress-erytho.ewp.live,https://04notifservicp0stalaramex10-bc6a03.ingress-erytho.ewp.live/app/aramex/loginservices/main/news/index.php,brand,Aramex,04notifservicp0stalaramex10-bc6a03.ingress-erytho.ewp.live,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+aramex-b09d96.ingress-bonde.ewp.live,https://aramex-b09d96.ingress-bonde.ewp.live/sar/aramexx/clients/cc.php?verification,brand,Aramex,aramex-b09d96.ingress-bonde.ewp.live,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+aramex-b3dbea.ingress-daribow.ewp.live,,brand,Aramex,aramex-b3dbea.ingress-daribow.ewp.live,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+aramex-b9833c.ingress-earth.ewp.live,https://aramex-b9833c.ingress-earth.ewp.live/armex/confirm/auth.php?country.x=&locale-8731002x=e?_,brand,Aramex,aramex-b9833c.ingress-earth.ewp.live,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt;uae_phishing_domains_real.csv
+aramex-bd0770.ingress-baronn.ewp.live,https://aramex-bd0770.ingress-baronn.ewp.live/32468/ubec/aramex/clients/cc.php,brand,Aramex,aramex-bd0770.ingress-baronn.ewp.live,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+aramex-client.xyz,,brand,Aramex,aramex-client.xyz,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+aramex-confirmation.com.ae.shubhkarman.ae,https://aramex-confirmation.com.ae.shubhkarman.ae/aramex/ar/pickup.php?info=global&,brand,Aramex,shubhkarman.ae,train,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_inactive.txt
+aramex-informations.ddns.net,,brand,Aramex,aramex-informations.ddns.net,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+aramex-infos.jdevcloud.com,,brand,Aramex,aramex-infos.jdevcloud.com,dev,0,sources/pdb_domains_2025-11.txt
+aramex-internationnal-a525a3.ingress-earth.easywp.com,https://aramex-internationnal-a525a3.ingress-earth.easywp.com/aramex/aramex/en/nv6588123,brand,Aramex,ingress-earth.easywp.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+aramex-si-b8b3a6.ingress-earth.ewp.live,https://aramex-si-b8b3a6.ingress-earth.ewp.live/wp-content/aramex/aramex/clients/cc.php?verification,brand,Aramex,aramex-si-b8b3a6.ingress-earth.ewp.live,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+aramex-za-b98024.ingress-erytho.ewp.live,,brand,Aramex,aramex-za-b98024.ingress-erytho.ewp.live,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+aramex-za.tempurl.host,https://aramex-za.tempurl.host/sg/50c3961d8e4a9632d87587be52ca074e/?ynds-pxwoluahdvadpw6d4hwcgdfjeleliur:hb0xretc-ntqi6hwsbhaj5busyciiptpc8jstih0dtmlpw7zfgn6ljzmnbq,brand,Aramex,aramex-za.tempurl.host,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+aramex.adeali.cfd,,brand,Aramex,adeali.cfd,dev,0,sources/destroylist.txt
+aramex.bh-home.delivery.crba.edu.pt,,brand,Aramex,crba.edu.pt,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+aramex.buyerxx.xin,,brand,Aramex,buyerxx.xin,train,0,sources/destroylist.txt
+aramex.com-dqkof.life,,brand,Aramex,com-dqkof.life,train,0,sources/destroylist.txt
+aramex.com-vzfai.life,,brand,Aramex,com-vzfai.life,dev,0,sources/destroylist.txt
+aramex.glassy.ink,,brand,Aramex,glassy.ink,train,0,sources/destroylist.txt
+aramex.jdevcloud.com,,brand,Aramex,aramex.jdevcloud.com,dev,0,sources/pdb_domains_2025-11.txt
+aramex.one,,brand,Aramex,aramex.one,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+aramex.saddle.ink,,brand,Aramex,saddle.ink,dev,0,sources/destroylist.txt
+aramex.valeriair.com,https://aramex.valeriair.com/.well-known/pki-validation/epostn/nv1608558,brand,Aramex,valeriair.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+aramex.xknttx.ink,,brand,Aramex,xknttx.ink,dev,0,sources/destroylist.txt
+aramexaeo3.temp.swtest.ru,http://aramexaeo3.temp.swtest.ru/caixa-vbvf/caixa-vbvfinal/home/espera2.html,brand,Aramex,swtest.ru,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+aramexciam.ciamlogin.com,,brand,Aramex,ciamlogin.com,train,0,sources/destroylist.txt
+aramexservicepaye-login2.codeanyapp.com,,brand,Aramex,aramexservicepaye-login2.codeanyapp.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+aramexship.com,,brand,Aramex,aramexship.com,train,0,sources/destroylist.txt
+aramexship.com.everstakebot.com,,brand,Aramex,everstakebot.com,dev,0,sources/destroylist.txt
+aramexstore2022-b96282.ingress-comporellon.ewp.live,,brand,Aramex,aramexstore2022-b96282.ingress-comporellon.ewp.live,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+aramextingpackageformulair-bb806d.ingress-florina.ewp.live,https://aramextingpackageformulair-bb806d.ingress-florina.ewp.live/ddeded/aramex/aramex/hard_20210829_131552/zadarek21ab=1008654849/news,brand,Aramex,aramextingpackageformulair-bb806d.ingress-florina.ewp.live,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+aramextracking.shipmentdelivery.live,,brand,Aramex,shipmentdelivery.live,dev,0,sources/pdb_domains_2025-11.txt
+aramexxdelivyonlinesupport-b29c67.ingress-earth.ewp.live,https://aramexxdelivyonlinesupport-b29c67.ingress-earth.ewp.live/oss/oth/ssos_final/sso_final/sso/auth.php?country.x=&locale-8731002x=e?_,brand,Aramex,aramexxdelivyonlinesupport-b29c67.ingress-earth.ewp.live,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+dev-services-aramexpay.copytradebinarias.com.br,https://dev-services-aramexpay.copytradebinarias.com.br/crm/clients/cc.php?verification,brand,Aramex,copytradebinarias.com.br,dev,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_active.txt
+faramex.com,,brand,Aramex,faramex.com,train,0,sources/destroylist.txt
+jordan-aramex-parcel.com,,brand,Aramex,jordan-aramex-parcel.com,train,0,sources/pdb_domains_2025-11.txt
+packetlinal2545packaginaramexs-b7d90a.ingress-daribow.ewp.live,http://packetlinal2545packaginaramexs-b7d90a.ingress-daribow.ewp.live/sdedf/fedex_en,brand,Aramex,packetlinal2545packaginaramexs-b7d90a.ingress-daribow.ewp.live,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt;uae_phishing_domains_real.csv
+xn----7sbbkm5bzd.com,https://xn----7sbbkm5bzd.com/u%d1%80d%d0%b0t%d0%b5/n.php,brand,Aramex,xn----7sbbkm5bzd.com,train,0,sources/pdb_links_inactive.txt
+carefm.net,https://carefm.net,brand,Careem,carefm.net,train,0,sources/pdb_links_active.txt
+coinbase.career.pl,,brand,Careem,career.pl,dev,0,sources/destroylist.txt
+cbu4397422nj.oa.r.appspot.com,https://cbu4397422nj.oa.r.appspot.com,brand,Central Bank of the UAE,cbu4397422nj.oa.r.appspot.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+dib-cards-refunds-8cc706.netlify.app,,brand,Dubai Islamic Bank,dib-cards-refunds-8cc706.netlify.app,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+dib-digitalkyc-customer-update-cbadac.netlify.app,https://dib-digitalkyc-customer-update-cbadac.netlify.app,brand,Dubai Islamic Bank,dib-digitalkyc-customer-update-cbadac.netlify.app,train,0,sources/pdb_links_active.txt
+dib-security-verification-5790.netlify.app,,brand,Dubai Islamic Bank,dib-security-verification-5790.netlify.app,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+emiratesairlinesnewreservationumber00.wikidot.com,http://emiratesairlinesnewreservationumber00.wikidot.com,brand,Emirates (airline),wikidot.com,train,0,phiusiil_urls_labeled.csv
+emiratesairlinesreservationumber.wikidot.com,http://emiratesairlinesreservationumber.wikidot.com,brand,Emirates (airline),wikidot.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+emiratesairlinesreservationumber92.wikidot.com,http://emiratesairlinesreservationumber92.wikidot.com,brand,Emirates (airline),wikidot.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+emiratesairlinesticketreservationumber02.wikidot.com,http://emiratesairlinesticketreservationumber02.wikidot.com,brand,Emirates (airline),wikidot.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+emiratesnbd-smart.portail-allocation.wstr.fr,https://emiratesnbd-smart.portail-allocation.wstr.fr/smart,brand,Emirates NBD,wstr.fr,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+emiratesnbd.com.paintechnology.in,,brand,Emirates NBD,paintechnology.in,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+emiratesnbdkyc.com,https://emiratesnbdkyc.com/d628ad9f7a1e818/finalerr.php?id=verification-email-err&v=obweb/common/banknet.jsf,brand,Emirates NBD,emiratesnbdkyc.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt;uae_phishing_domains_real.csv
+ae-emir-atespost.pw,,brand,Emirates Post,ae-emir-atespost.pw,train,1,feeds/phishing_database_active.txt;shield_training_domains.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+ae-emiratespost-login.live,https://ae-emiratespost-login.live/user_852326323sdf/fc54a,brand,Emirates Post,ae-emiratespost-login.live,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt;uae_phishing_domains_real.csv
+emiratepostmailservices.ml,https://emiratepostmailservices.ml/emirate/post/nv6588123,brand,Emirates Post,emiratepostmailservices.ml,train,0,sources/pdb_links_active.txt
+emirates-post.org,,brand,Emirates Post,emirates-post.org,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+emiratespost.ae.parcel.emiratespost.viandjo.com,https://emiratespost.ae.parcel.emiratespost.viandjo.com/cgi-tki/f6ca051524fedac61fa0d51d5ef96fe1,brand,Emirates Post,viandjo.com,dev,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+emiratespost.check2148.sbs,,brand,Emirates Post,check2148.sbs,train,0,sources/destroylist.txt
+emiratespost.check2185.sbs,,brand,Emirates Post,check2185.sbs,train,0,sources/destroylist.txt
+emiratespost.check3059.sbs,,brand,Emirates Post,check3059.sbs,dev,0,sources/destroylist.txt
+emiratespost.check7706.sbs,,brand,Emirates Post,check7706.sbs,train,0,sources/destroylist.txt
+emiratespost.form0397.icu,,brand,Emirates Post,form0397.icu,train,0,sources/destroylist.txt
+emiratespost.form3149.cfd,,brand,Emirates Post,form3149.cfd,dev,0,sources/destroylist.txt
+emiratespost.form4729.cfd,,brand,Emirates Post,form4729.cfd,train,0,sources/destroylist.txt
+emiratespost.form5129.icu,,brand,Emirates Post,form5129.icu,train,0,sources/destroylist.txt
+emiratespost.ga,https://emiratespost.ga/emirate/post/nv6588123,brand,Emirates Post,emiratespost.ga,dev,0,sources/pdb_links_active.txt
+emiratespost.mailed.top,,brand,Emirates Post,mailed.top,dev,0,sources/destroylist.txt
+emiratespost.pkgb.top,,brand,Emirates Post,pkgb.top,train,0,sources/destroylist.txt
+emiratespost.pkgd.top,,brand,Emirates Post,pkgd.top,train,0,sources/destroylist.txt
+emiratespost.pkgg.top,,brand,Emirates Post,pkgg.top,dev,0,sources/destroylist.txt
+emiratespost.pkgk.top,,brand,Emirates Post,pkgk.top,dev,0,sources/destroylist.txt
+emiratespost.pkzp.top,,brand,Emirates Post,pkzp.top,dev,0,sources/destroylist.txt
+emiratespost.postoman.shop,,brand,Emirates Post,postoman.shop,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+emiratespost.tracking-delivery.nawabeen.com,https://emiratespost.tracking-delivery.nawabeen.com/a30abd9cae74b9aa525052f96c74ea0e,brand,Emirates Post,nawabeen.com,train,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+emiratespost.trqf.top,,brand,Emirates Post,trqf.top,train,0,sources/destroylist.txt
+emiratespost.trqg.top,,brand,Emirates Post,trqg.top,train,0,sources/destroylist.txt
+emiratespost.trqn.top,,brand,Emirates Post,trqn.top,dev,0,sources/destroylist.txt
+emiratespostdeliveryvhost270193.lowhost.ru,http://emiratespostdeliveryvhost270193.lowhost.ru/m9aym/access/,brand,Emirates Post,lowhost.ru,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+epg.emiratespost.ae.parcel.24kservices.com,https://epg.emiratespost.ae.parcel.24kservices.com/cgi-tki/0268f289925d7e642c4ee6f4e8cba7cd,brand,Emirates Post,24kservices.com,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+groupemiratespost.com,,brand,Emirates Post,groupemiratespost.com,dev,0,sources/pdb_domains_2025-11.txt
+parcel.emiratespost.ae.24kservices.com,https://parcel.emiratespost.ae.24kservices.com/parcel-info/6830b74441e4bb4868005f3e5804af3d,brand,Emirates Post,24kservices.com,train,0,sources/pdb_links_active.txt
+parcel.emiratespost.ae.bangerpickleball.com,https://parcel.emiratespost.ae.bangerpickleball.com/uae,brand,Emirates Post,bangerpickleball.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt;uae_phishing_domains_real.csv
+parcel.emiratespost.ae.oplosmarketing.co.ke,https://parcel.emiratespost.ae.oplosmarketing.co.ke/uae,brand,Emirates Post,oplosmarketing.co.ke,dev,0,sources/pdb_links_active.txt
+parcel.emiratespost.ae.viandjo.com,https://parcel.emiratespost.ae.viandjo.com/uae/af7d2c55dfc33206a39b8b819b36592c,brand,Emirates Post,viandjo.com,dev,0,sources/pdb_links_active.txt
+pay-emiratespostgroup.service.hmccglobal.com,https://pay-emiratespostgroup.service.hmccglobal.com/mgoo,brand,Emirates Post,hmccglobal.com,train,0,sources/pdb_links_active.txt
+payment.emiratespost.ae.uaemarketvape.com,https://payment.emiratespost.ae.uaemarketvape.com,brand,Emirates Post,uaemarketvape.com,train,0,sources/pdb_links_active.txt
+b2bportal-quickpay-businessonline-etisalat.ae.comseal.xyz,http://www.b2bportal-quickpay-businessonline-etisalat.ae.comseal.xyz,brand,Etisalat (e&),comseal.xyz,dev,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_active.txt
+businessonline.etisalat.ae.b2bportal-quickpay.maxlevel.xyz,https://businessonline.etisalat.ae.b2bportal-quickpay.maxlevel.xyz,brand,Etisalat (e&),maxlevel.xyz,dev,0,sources/pdb_links_active.txt
+businessonline.etisalat.ae.b2bportal-quickpay.puredirector.xyz,,brand,Etisalat (e&),puredirector.xyz,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+businessonline.etisalat.ae.b2bportal-quickpay.showjobseeker.xyz,,brand,Etisalat (e&),showjobseeker.xyz,train,0,sources/pdb_domains_2025-11.txt
+claim.etisalat-egift-claim.info,,brand,Etisalat (e&),etisalat-egift-claim.info,train,0,sources/pdb_domains_2025-11.txt
+dcm2.eim.ae.etisalat.clinicahalito.com,,brand,Etisalat (e&),clinicahalito.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+ebill.etisalat.ae.crownmanconsulting.com,https://www.ebill.etisalat.ae.crownmanconsulting.com,brand,Etisalat (e&),crownmanconsulting.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+ebill.etisalat.ae.hajrin.com,,brand,Etisalat (e&),hajrin.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+efisalat.autos,http://www.efisalat.autos,brand,Etisalat (e&),efisalat.autos,train,0,sources/pdb_links_active.txt
+eim.ae.login-etisalat.sunset-tour.com,http://www.eim.ae.login-etisalat.sunset-tour.com/login.php?l=_jehfuq_vjoxk0qwhtogydw1774256418&fid.13inboxlight.aspxn.1774256418&fid.125289964252813inboxlight99642_product-email&email=,brand,Etisalat (e&),sunset-tour.com,train,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_inactive.txt
+etiqalat.lol,http://www.etiqalat.lol,brand,Etisalat (e&),etiqalat.lol,train,0,sources/pdb_links_active.txt
+etisakat.autos,https://etisakat.autos/?lang=en,brand,Etisalat (e&),etisakat.autos,train,0,sources/pdb_links_active.txt
+etisakat.boats,https://etisakat.boats/?lang=ar,brand,Etisalat (e&),etisakat.boats,train,0,sources/pdb_links_active.txt
+etisalat-amazonprime.com,https://etisalat-amazonprime.com,brand,Etisalat (e&),etisalat-amazonprime.com,dev,0,feeds/phishing_database_active.txt;phiusiil_urls_labeled.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+etisalat-bill.io,https://etisalat-bill.io/3179b995942af73/autherr.php,brand,Etisalat (e&),etisalat-bill.io,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+etisalat-cgi0192.joymessage.eu,https://etisalat-cgi0192.joymessage.eu/login/login.php,brand,Etisalat (e&),joymessage.eu,train,0,sources/pdb_links_active.txt
+etisalat-ebill.innovandoenti.com,https://etisalat-ebill.innovandoenti.com/etisalat,brand,Etisalat (e&),innovandoenti.com,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+etisalat.ae-operaor.dactyloteam.fr,http://etisalat.ae-operaor.dactyloteam.fr/x/last/x/?utm_source=getresponse&utm_medium=email&utm_campaign=cp02wsn&utm_content=etisalat%20sent%20you%20304%20aed,brand,Etisalat (e&),dactyloteam.fr,train,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_active.txt
+etisalat.ae-operatorgift.zoneoneme.com,,brand,Etisalat (e&),zoneoneme.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+etisalat.ae.dcm1.eim.ae.securityglobal.cl,https://www.etisalat.ae.dcm1.eim.ae.securityglobal.cl,brand,Etisalat (e&),securityglobal.cl,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+etisalat.security.eacg.co.tz,http://www.etisalat.security.eacg.co.tz,brand,Etisalat (e&),eacg.co.tz,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+etisalataae.com,https://www.etisalataae.com,brand,Etisalat (e&),etisalataae.com,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+etisalatae.sa.com,,brand,Etisalat (e&),etisalatae.sa.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+etisalatcallfrontiers.com,https://www.etisalatcallfrontiers.com,brand,Etisalat (e&),etisalatcallfrontiers.com,train,0,sources/pdb_links_active.txt
+etisalatebills.com,http://etisalatebills.com/adobe_year_2017,brand,Etisalat (e&),etisalatebills.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+etisalatonline.com,http://www.etisalatonline.com,brand,Etisalat (e&),etisalatonline.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+ettisalat19.wpenginepowered.com,,brand,Etisalat (e&),ettisalat19.wpenginepowered.com,train,0,feeds/phishing_database_active.txt;sources/destroylist.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+acm.eim.ebill.dancetrader.com,http://acm.eim.ebill.dancetrader.com/mye-bill/myetisalat.html,brand,Etisalat (e&) webmail,dancetrader.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+acm1.eim.ae-iwc-static.midasmediang.com,,brand,Etisalat (e&) webmail,midasmediang.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+acm1.eim.ae.crosslinkssolution.com,"https://acm1.eim.ae.crosslinkssolution.com/ap/?iwc_static/c11n/alldomain/layout/login.html?lang=en-us&3.0.1.0.0_15051245&svcs=abs,mail,c11n",brand,Etisalat (e&) webmail,crosslinkssolution.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+acm1.eim.ae.iwc.static.c11.abissoft.rs,,brand,Etisalat (e&) webmail,abissoft.rs,train,0,sources/pdb_domains_2025-11.txt
+acm1.eim.ae.iwc.static.c11.artigianatobrasil.com.br,https://www.acm1.eim.ae.iwc.static.c11.artigianatobrasil.com.br,brand,Etisalat (e&) webmail,artigianatobrasil.com.br,train,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_inactive.txt
+acm1.eim.ae.iwc.static.c11.virtualrealestatetrapacademy.com,,brand,Etisalat (e&) webmail,virtualrealestatetrapacademy.com,dev,0,sources/pdb_domains_2025-11.txt
+acm1.eim.ae.iwc.static.c11n.all.bcsi.ir,,brand,Etisalat (e&) webmail,bcsi.ir,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+acm1.eim.ae.iwc.static.c11n.all.circulosolidario.sv,https://acm1.eim.ae.iwc.static.c11n.all.circulosolidario.sv/etisalat-rd65/index.html,brand,Etisalat (e&) webmail,circulosolidario.sv,train,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_active.txt
+acm1.eim.ae.iwc.static.c11n.all.sirija.indramayukab.go.id,http://www.acm1.eim.ae.iwc.static.c11n.all.sirija.indramayukab.go.id,brand,Etisalat (e&) webmail,indramayukab.go.id,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+acm1.eim.ae.iwc.static.c11n.alldomain.sirena.indramayukab.go.id,,brand,Etisalat (e&) webmail,indramayukab.go.id,train,0,sources/pdb_domains_2025-11.txt
+acm1.eim.ae.iwc.static.c11n.todiplywood.com,,brand,Etisalat (e&) webmail,todiplywood.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+acm1.eim.ae.iwc.static.crystalclearcarpetcleaning.com,,brand,Etisalat (e&) webmail,crystalclearcarpetcleaning.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+acm1.eim.ae.iwc.static.eacg.co.tz,,brand,Etisalat (e&) webmail,eacg.co.tz,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+acm1.eim.ae.iwc.static.webuyhomescash.co.za,http://www.acm1.eim.ae.iwc.static.webuyhomescash.co.za,brand,Etisalat (e&) webmail,webuyhomescash.co.za,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+acm2-eim-ae.firebaseapp.com,https://acm2-eim-ae.firebaseapp.com/,brand,Etisalat (e&) webmail,acm2-eim-ae.firebaseapp.com,dev,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+acm2-eim-ae.web.app,https://acm2-eim-ae.web.app/,brand,Etisalat (e&) webmail,acm2-eim-ae.web.app,dev,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+acm2.eim.ae.iwc.static.normoeagles.com.au,http://acm2.eim.ae.iwc.static.normoeagles.com.au/mye-bill/myetisalat.html,brand,Etisalat (e&) webmail,normoeagles.com.au,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_inactive.txt;uae_phishing_domains_real.csv
+connect-acm1-eim-ae-en.weebly.com,https://connect-acm1-eim-ae-en.weebly.com,brand,Etisalat (e&) webmail,connect-acm1-eim-ae-en.weebly.com,train,0,sources/pdb_links_active.txt
+dcm2.eim.ae.ideiasmimos.pt,,brand,Etisalat (e&) webmail,ideiasmimos.pt,train,0,sources/pdb_domains_2025-11.txt
+dcm2.eim.ae.iwc.static.shawwebhosting.com,,brand,Etisalat (e&) webmail,shawwebhosting.com,dev,0,sources/pdb_domains_2025-11.txt
+dcm2.eim.ae.iwc.static.tebohomafodi.tebohomafodi.co.za,http://www.dcm2.eim.ae.iwc.static.tebohomafodi.tebohomafodi.co.za,brand,Etisalat (e&) webmail,tebohomafodi.co.za,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+eim.ae.iwc.static.royalgatetransport.ae,,brand,Etisalat (e&) webmail,royalgatetransport.ae,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+eim.ae.webmail.u1360991.cp.regruhosting.ru,,brand,Etisalat (e&) webmail,regruhosting.ru,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+eim.fewally.xyz,,brand,Etisalat (e&) webmail,fewally.xyz,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+eim.nymyracknerd.com.ng,https://eim.nymyracknerd.com.ng/adobe/index.htm,brand,Etisalat (e&) webmail,nymyracknerd.com.ng,train,0,sources/pdb_links_active.txt
+mmg.eim.nikospapadopoulos.eu,,brand,Etisalat (e&) webmail,nikospapadopoulos.eu,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+manisa1.mohapatra-ril.2erc.com.br,,brand,MOHAP,2erc.com.br,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+prachi-mohapatra.github.io,http://prachi-mohapatra.github.io/instagram-login-page-clone,brand,MOHAP,prachi-mohapatra.github.io,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+almashriqpss.com,,brand,Mashreq,almashriqpss.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+digital-mashreq-online-marouanetax95783928.codeanyapp.com,https://digital-mashreq-online-marouanetax95783928.codeanyapp.com/spaceship/spoofi/issued/6137a,brand,Mashreq,digital-mashreq-online-marouanetax95783928.codeanyapp.com,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+mashreksecuretis.com,,brand,Mashreq,mashreksecuretis.com,train,0,sources/destroylist.txt
+mashreqqfj.com,https://mashreqqfj.com/672a0e68baba26c,brand,Mashreq,mashreqqfj.com,train,0,sources/pdb_links_active.txt
+regionalmanagers-my.sharepoint.com.mashreq-c.com,,brand,Mashreq,mashreq-c.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+rakbank.wallstreetlendersusa.com,https://rakbank.wallstreetlendersusa.com/rak/index.html,brand,RAKBANK,wallstreetlendersusa.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+rta.dogestocks.com,,brand,RTA,dogestocks.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+sa-geek.com,http://www.sa-geek.com,brand,Salik,sa-geek.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+sa-geek.net,http://www.sa-geek.net,brand,Salik,sa-geek.net,dev,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+sa-geek.org,http://www.sa-geek.org,brand,Salik,sa-geek.org,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+saleekhaabbas.github.io,http://saleekhaabbas.github.io/netflix_clone,brand,Salik,saleekhaabbas.github.io,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+salik-seraj.github.io,https://salik-seraj.github.io/netflix-clone,brand,Salik,salik-seraj.github.io,train,0,sources/pdb_links_active.txt
+salikstock.xyz,,brand,Salik,salikstock.xyz,train,0,sources/destroylist.txt
+talabatfood.vip,,brand,Talabat,talabatfood.vip,train,0,sources/destroylist.txt
+5g.ae.add-on.shop,,fake_ae,,add-on.shop,dev,0,sources/pdb_domains_2025-11.txt
+5g.my-pay.ae.add-on.shop,,fake_ae,,add-on.shop,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+access-sec-ae.ml,,fake_ae,,access-sec-ae.ml,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+ae-emirates-track.com,https://ae-emirates-track.com/user/userlignes/7e7c8/code-invalid.html?i_sendid=&i_id=i6jiixlyir&i_regnr_list=ae79502309***0785,fake_ae,,ae-emirates-track.com,dev,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+ae.ae-tech365.com,,fake_ae,,ae-tech365.com,train,0,sources/destroylist.txt
+ae.ae365123.com,,fake_ae,,ae365123.com,train,0,sources/destroylist.txt
+ae.firefoxupdata.com,http://www.ae.firefoxupdata.com,fake_ae,,firefoxupdata.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+ae.mly03.my.id,,fake_ae,,mly03.my.id,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+ae.ucbcroets.top,https://www.ae.ucbcroets.top,fake_ae,,ucbcroets.top,train,0,sources/pdb_links_active.txt
+ae.whaatschat.com,,fake_ae,,whaatschat.com,train,0,sources/pdb_domains_2025-11.txt
+app.unlswap.ae.org,https://app.unlswap.ae.org/swap/index.php,fake_ae,,unlswap.ae.org,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+asafwa-ae.com,,fake_ae,,asafwa-ae.com,dev,0,sources/destroylist.txt
+authentificate-ae.online.cp-ht-11.webhostbox.net,https://authentificate-ae.online.cp-ht-11.webhostbox.net/trade_me/session-q0zamtzucaokcfk9akrldh0wyek7pj2-vkczkfekvlu1/cancelpayment.html,fake_ae,,webhostbox.net,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+bgcoceanside-ae.tk,,fake_ae,,bgcoceanside-ae.tk,train,0,sources/pdb_domains_2025-11.txt
+danadigital024.fres-ae.top,https://danadigital024.fres-ae.top,fake_ae,,fres-ae.top,train,0,sources/pdb_links_active.txt
+darb.qmobrizay-ae.com,,fake_ae,,qmobrizay-ae.com,train,0,sources/destroylist.txt
+dcm1.ae.iwc.static.tungmung.co.id,,fake_ae,,tungmung.co.id,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+dhlxpress-ae.com,https://dhlxpress-ae.com/public,fake_ae,,dhlxpress-ae.com,train,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+dibonline-ae.com,,fake_ae,,dibonline-ae.com,train,1,feeds/phishing_database_active.txt;shield_training_domains.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+dlib-ae.online,,fake_ae,,dlib-ae.online,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+dpd-cz.order.ae.org,https://dpd-cz.order.ae.org/get/1721241659379?s=74e3a934e1eb94128945b0ad8d791b30,fake_ae,,order.ae.org,train,0,sources/pdb_links_active.txt
+du-ae.art,https://du-ae.art,fake_ae,,du-ae.art,train,0,sources/pdb_links_inactive.txt
+du-ae.biz,https://du-ae.biz,fake_ae,,du-ae.biz,train,0,sources/pdb_links_active.txt
+du-ae.buzz,https://du-ae.buzz,fake_ae,,du-ae.buzz,train,0,sources/pdb_links_active.txt
+du-ae.click,https://du-ae.click,fake_ae,,du-ae.click,train,0,sources/pdb_links_active.txt
+emdad.ae.snocomb.com,,fake_ae,,snocomb.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+emirates-postmail-ae.umbler.net,http://emirates-postmail-ae.umbler.net/bin/emiv2/app,fake_ae,,emirates-postmail-ae.umbler.net,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+epg.portal.ae-payonline.digiman.co.za,,fake_ae,,digiman.co.za,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+epg.portal.ae.payonline.digiman.co.za,,fake_ae,,digiman.co.za,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+epg.portal.tracking.ae-payonline.brandsoptima.com,https://epg.portal.tracking.ae-payonline.brandsoptima.com/885ef86bd996eac,fake_ae,,brandsoptima.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+f10ba9204570385a9a28.ae-ae.xyz,https://f10ba9204570385a9a28.ae-ae.xyz/dsk5304/?=d7e7ea21abbcc786d2894a19a36413f8?=ok,fake_ae,,ae-ae.xyz,dev,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+fi-ae.com,,fake_ae,,fi-ae.com,dev,0,sources/destroylist.txt
+fi-ae.info,,fake_ae,,fi-ae.info,train,0,sources/destroylist.txt
+fi-ae.store,,fake_ae,,fi-ae.store,train,0,sources/destroylist.txt
+ganges-ae.com,,fake_ae,,ganges-ae.com,train,0,sources/destroylist.txt
+helps-ae.top,https://helps-ae.top/i,fake_ae,,helps-ae.top,train,0,sources/pdb_links_active.txt
+higharts-ae.cam,,fake_ae,,higharts-ae.cam,train,0,sources/destroylist.txt
+hsbc-ae.info,,fake_ae,,hsbc-ae.info,train,1,feeds/phishing_database_active.txt;shield_training_domains.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+imtoken-ae.fyi,,fake_ae,,imtoken-ae.fyi,dev,1,feeds/phishing_database_active.txt;shield_training_domains.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+imtoken-ae.ist,,fake_ae,,imtoken-ae.ist,dev,0,sources/pdb_domains_2025-11.txt
+imtoken-ae.org,,fake_ae,,imtoken-ae.org,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+imtoken-ae.rip,,fake_ae,,imtoken-ae.rip,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+imtoken-ae.run,,fake_ae,,imtoken-ae.run,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+info-newtrend-ae.vercel.app,,fake_ae,,info-newtrend-ae.vercel.app,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+mastiakele.ae.org,http://www.mastiakele.ae.org,fake_ae,,mastiakele.ae.org,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+moodengsol-ae.pages.dev,https://moodengsol-ae.pages.dev/dev,fake_ae,,moodengsol-ae.pages.dev,train,0,sources/pdb_links_active.txt
+my-pay.ae.add-to.shop,https://my-pay.ae.add-to.shop,fake_ae,,add-to.shop,train,0,sources/pdb_links_active.txt
+nab.ae.org,https://nab.ae.org/nabib/auth/,fake_ae,,nab.ae.org,dev,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+netflxhd.tv-ae.net,,fake_ae,,tv-ae.net,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+nord-ae.com,,fake_ae,,nord-ae.com,train,0,sources/destroylist.txt
+onllne-dlb-ae.jeffreyheilman.com,,fake_ae,,jeffreyheilman.com,dev,0,sources/pdb_domains_2025-11.txt
+orai-ae.pages.dev,,fake_ae,,orai-ae.pages.dev,train,0,sources/destroylist.txt
+owa.geebeegarments-ae.com,,fake_ae,,geebeegarments-ae.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+parcel.epg.ae.service.hmccglobal.com,https://parcel.epg.ae.service.hmccglobal.com/tkii/f5364e473e50feee35401653e87612df,fake_ae,,hmccglobal.com,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+payment.ae.add-to.shop,https://payment.ae.add-to.shop,fake_ae,,add-to.shop,train,0,sources/pdb_links_active.txt
+phila.revenue-ae.cc,,fake_ae,,revenue-ae.cc,dev,0,sources/destroylist.txt
+sabb-ae.dac-eg.com,,fake_ae,,dac-eg.com,dev,0,sources/pdb_domains_2025-11.txt
+sharaf-dgllcnew-orderdetails-ae.vercel.app,https://sharaf-dgllcnew-orderdetails-ae.vercel.app/?u=3mail@b.c,fake_ae,,sharaf-dgllcnew-orderdetails-ae.vercel.app,dev,0,sources/pdb_links_active.txt
+smbc.card-ae.biz,https://smbc.card-ae.biz/mem/index,fake_ae,,card-ae.biz,dev,0,sources/pdb_links_active.txt
+smbc.card-ae.com,https://smbc.card-ae.com/mem/index,fake_ae,,card-ae.com,train,0,sources/pdb_links_active.txt
+smbc.card-ae.info,https://smbc.card-ae.info/mem/index,fake_ae,,card-ae.info,train,0,sources/pdb_links_active.txt
+uae.netifilxs-ae.cc,https://uae.netifilxs-ae.cc/products/1028,fake_ae,,netifilxs-ae.cc,dev,0,sources/pdb_links_active.txt
+www-tomo-ae.usrfiles.com,https://www-tomo-ae.usrfiles.com/html/0e472f_4d9b2a88f72eb4191a8eb158b004ca1f.html,fake_ae,,www-tomo-ae.usrfiles.com,dev,1,phiusiil_urls_labeled.csv;shield_training_domains.csv;sources/pdb_links_active.txt
+airbnb.ae.20047281.xyz,,fake_ae,airbnb,20047281.xyz,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+airbnb.ae.20748120.xyz,,fake_ae,airbnb,20748120.xyz,train,0,sources/pdb_domains_2025-11.txt
+airbnb.ae.947267100.one,,fake_ae,airbnb,947267100.one,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+airbnb.ae.rooms.841029901.xyz,,fake_ae,airbnb,841029901.xyz,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+amazon-ae.icu,,fake_ae,amazon,amazon-ae.icu,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+dhl-ae.delivery24.me,http://dhl-ae.delivery24.me/order/ae447606204,fake_ae,dhl,delivery24.me,train,0,sources/pdb_domains_2025-11.txt;sources/pdb_links_active.txt
+cs.telegram-ae.icu,https://cs.telegram-ae.icu,fake_ae,telegram,telegram-ae.icu,train,0,sources/pdb_links_active.txt
+mt.telegram-ae.icu,https://mt.telegram-ae.icu,fake_ae,telegram,telegram-ae.icu,train,0,sources/pdb_links_active.txt
+telegram.ae.org,http://telegram.ae.org,fake_ae,telegram,telegram.ae.org,train,0,sources/pdb_links_active.txt
+telegrams-ae.org,https://telegrams-ae.org,fake_ae,telegram,telegrams-ae.org,train,0,sources/pdb_links_inactive.txt
+acougueitapema.com.br,https://acougueitapema.com.br/wp-includes/js/crop/index.php?email=ranaalf@aramex.com,path,Aramex,acougueitapema.com.br,train,0,sources/pdb_links_active.txt
+api.tportfolio.ru,https://api.tportfolio.ru/sys/sa/aramex-arabrar/aramex-9tala/aramex/confirm.php,path,Aramex,tportfolio.ru,train,0,sources/pdb_links_active.txt
+aramdelivyonlinesaudi1-b29c67.ingress-erytho.ewp.live,https://aramdelivyonlinesaudi1-b29c67.ingress-erytho.ewp.live/ara/aramexossm/sso_final/sso/auth.php?country.x=&locale-8731002x=e?_,path,Aramex,aramdelivyonlinesaudi1-b29c67.ingress-erytho.ewp.live,dev,0,sources/pdb_links_inactive.txt
+asia1click.com,https://www.asia1click.com/css/amx23/amx/aramex/aramex/amx/zadarek21ab=985736858/news,path,Aramex,asia1click.com,train,0,sources/pdb_links_active.txt
+atralooofretnoon51021-ba2210.ingress-earth.ewp.live,https://atralooofretnoon51021-ba2210.ingress-earth.ewp.live/45h554dc/azerty/aramex/loginservices/main/news/index.php,path,Aramex,atralooofretnoon51021-ba2210.ingress-earth.ewp.live,train,0,sources/pdb_links_active.txt
+aws-infra-hikaru.shop,http://aws-infra-hikaru.shop/wordpress/delivery-confirmation/aramex/clients,path,Aramex,aws-infra-hikaru.shop,train,0,sources/pdb_links_inactive.txt
+bizuz.com,https://bizuz.com/.zapan/without_sms/aramex/zadarek21ab=173484740/news,path,Aramex,bizuz.com,train,0,sources/pdb_links_inactive.txt
+bridgereps.ca,https://bridgereps.ca/envao/js/aramex/aramex-saudi/morows/clients/cc.php?verification,path,Aramex,bridgereps.ca,train,0,sources/pdb_links_active.txt
+casinocabs.com.au,https://casinocabs.com.au/aramex-jp/aramex-jp/morows/clients/cc.php?verification#_,path,Aramex,casinocabs.com.au,dev,1,phiusiil_urls_labeled.csv
+chabottfund.be,http://chabottfund.be/aramex/delivery-tracking/clients/cc.php?verification,path,Aramex,chabottfund.be,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+crm.comercialav.com,https://crm.comercialav.com/vendor/dflydev/clien/?pwd=aramex,path,Aramex,comercialav.com,train,0,sources/pdb_links_active.txt
+crm.uof.ac.ae,https://crm.uof.ac.ae/aramex/aramex/ar/index.php,path,Aramex,uof.ac.ae,dev,1,phiusiil_urls_labeled.csv;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+customerglobal-accesspostspl-ba2ca7.ingress-earth.ewp.live,https://customerglobal-accesspostspl-ba2ca7.ingress-earth.ewp.live/trackaramex/aramex/domain/clients/cc.php?verification,path,Aramex,customerglobal-accesspostspl-ba2ca7.ingress-earth.ewp.live,train,0,sources/pdb_links_active.txt
+eisi-consulting.fr,http://www.eisi-consulting.fr/ARAMEX/delivery-tracking/clients/cc.php,path,Aramex,eisi-consulting.fr,dev,0,sources/pdb_links_active.txt
+eurerivierevivante.fr,https://www.eurerivierevivante.fr/s/aramex.com/delivery-tracking/clients/cc.php?verification,path,Aramex,eurerivierevivante.fr,dev,0,sources/pdb_links_active.txt
+eurojoint.fr,https://eurojoint.fr/aramex-sc/mb/020b5cda2d4933c/payment.php,path,Aramex,eurojoint.fr,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+finlytics.de,https://finlytics.de/aramex.sa/?pwd=aramex,path,Aramex,finlytics.de,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+hoalongspa.vn,https://hoalongspa.vn/wp-admin/network/aramex.sa-en/?pwd=aramex,path,Aramex,hoalongspa.vn,train,0,sources/pdb_links_active.txt
+impactfabrics.com,https://impactfabrics.com/aramex.sa/delivery-tracking/clients/kbfixz.php?verification,path,Aramex,impactfabrics.com,dev,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+interkunst.com,https://www.interkunst.com/cli/dev/?pwd=aramex,path,Aramex,interkunst.com,dev,0,sources/pdb_links_active.txt
+invoiunpaiedsparknouvellzandnz25-b8c9bf.ingress-earth.ewp.live,https://invoiunpaiedsparknouvellzandnz25-b8c9bf.ingress-earth.ewp.live/alk/aramex/aramex/hard_20210829_131552/zadarek21ab=299546617/news,path,Aramex,invoiunpaiedsparknouvellzandnz25-b8c9bf.ingress-earth.ewp.live,dev,0,sources/pdb_links_active.txt
+iwase.vn,https://iwase.vn/aramex/postoffice/news,path,Aramex,iwase.vn,train,0,sources/pdb_links_active.txt
+jasbh.com,https://jasbh.com/aramex/ar/index.php,path,Aramex,jasbh.com,train,0,sources/pdb_links_active.txt
+lamaisondubas.fr,https://lamaisondubas.fr/track/?pwd=aramex,path,Aramex,lamaisondubas.fr,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+londonhelmets.com,http://londonhelmets.com/delivery-confirmation/aramex/clients,path,Aramex,londonhelmets.com,train,0,sources/pdb_links_active.txt
+manazelt.wwwnl1-ts9.a2hosted.com,http://manazelt.wwwnl1-ts9.a2hosted.com/aramexs/aramex/hard_20210829_131552/zadarek21ab=216603118/news,path,Aramex,wwwnl1-ts9.a2hosted.com,train,0,sources/pdb_links_active.txt
+mixup201104.com,https://mixup201104.com/aramex-confirmation.com.a/aramex/ar/index.php,path,Aramex,mixup201104.com,train,0,sources/pdb_links_active.txt
+myexamguide.com,https://myexamguide.com/aramex/delivery-tracking/clients/cc.php?verification,path,Aramex,myexamguide.com,train,0,sources/pdb_links_active.txt
+nzsparkinginvoispayed-b7e2f7.ingress-earth.ewp.live,https://nzsparkinginvoispayed-b7e2f7.ingress-earth.ewp.live/aramet/aramex/aramex/hard_20210829_131552/zadarek21ab=316140070/news,path,Aramex,nzsparkinginvoispayed-b7e2f7.ingress-earth.ewp.live,train,0,sources/pdb_links_active.txt
+pdeaf.com,https://pdeaf.com/ar/aramex-ae-com/aramex/ar/index.php,path,Aramex,pdeaf.com,train,0,sources/pdb_links_active.txt
+pompeumg.com.br,https://pompeumg.com.br/aramex/clients/cc.php?verification,path,Aramex,pompeumg.com.br,train,0,sources/pdb_links_active.txt
+post-bcc8c5.ingress-baronn.ewp.live,https://post-bcc8c5.ingress-baronn.ewp.live/103493/ubec/aramex/clients/cc.php,path,Aramex,post-bcc8c5.ingress-baronn.ewp.live,train,0,sources/pdb_links_active.txt
+qbd.qa,https://qbd.qa/aramex/clients/index.php?verification,path,Aramex,qbd.qa,train,0,sources/pdb_links_active.txt
+rntambang.co.id,https://rntambang.co.id/-/sites-aramex.com/sa-en/?pwd=aramex,path,Aramex,rntambang.co.id,train,0,sources/pdb_links_active.txt
+roosales.com,http://roosales.com/aramex/saudi/nv6588123/load.php,path,Aramex,roosales.com,train,1,sources/pdb_links_active.txt
+satis.gencinoks.com,https://satis.gencinoks.com/bah/aramex-ae/clients/cc.php?verification,path,Aramex,gencinoks.com,train,0,sources/pdb_links_active.txt
+seafrigo.sg,https://seafrigo.sg/wp-includes/css/dist/edit-post/aramex/hard_20210829_131552/za/news,path,Aramex,seafrigo.sg,dev,0,sources/pdb_links_active.txt
+secure244.inmotionhosting.com,https://secure244.inmotionhosting.com/~wellne74/jquery/track/aramex-tracking/?_ga=2.161253480.282148233.856818439-735477529.343219036,path,Aramex,inmotionhosting.com,train,0,sources/pdb_links_active.txt
+sglaxrlv8aok.theredsneakerstudio.com,https://sglaxrlv8aok.theredsneakerstudio.com/?=lokeshl@aramex.com,path,Aramex,theredsneakerstudio.com,dev,0,sources/pdb_links_active.txt
+shinjusby.com,https://shinjusby.com/wp-content/plugins/alvnpoc/aramex-ae/payment.php,path,Aramex,shinjusby.com,train,0,sources/pdb_links_active.txt
+sign-in.wpdevcloud.com,https://sign-in.wpdevcloud.com/aramex/be,path,Aramex,sign-in.wpdevcloud.com,train,0,sources/pdb_links_active.txt
+sparakasinvoipaiedunpaid-b80037.ingress-bonde.ewp.live,https://sparakasinvoipaiedunpaid-b80037.ingress-bonde.ewp.live/ardemx/aramex/aramex/hard_20210829_131552/zadarek21ab=932274366/news,path,Aramex,sparakasinvoipaiedunpaid-b80037.ingress-bonde.ewp.live,train,0,sources/pdb_links_active.txt
+sparkinginvoisunpaiedcustomercli-b9467c.ingress-comporellon.ewp.live,https://sparkinginvoisunpaiedcustomercli-b9467c.ingress-comporellon.ewp.live/545dd/aramex/aramex/hard_20210829_131552/zadarek21ab=294155071/news,path,Aramex,sparkinginvoisunpaiedcustomercli-b9467c.ingress-comporellon.ewp.live,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+sprl.in,http://sprl.in/aramex-bh,path,Aramex,sprl.in,train,0,sources/pdb_links_active.txt
+verygoodtruck.fr,https://verygoodtruck.fr/aramex/delivery-tracking/clients/cc.php?verification,path,Aramex,verygoodtruck.fr,train,0,sources/pdb_links_active.txt
+bonazagt.com,https://bonazagt.com/wp-includes/customize/emiratesnbd/emiratenbd.htm,path,Emirates NBD,bonazagt.com,train,0,sources/pdb_links_active.txt
+siaasesoria.com.mx,https://siaasesoria.com.mx/emiratesnbd/c2969b29eb951fc,path,Emirates NBD,siaasesoria.com.mx,dev,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+alimentossanmateo.cl,https://www.alimentossanmateo.cl/postal_uae/emiratespost/nv6588123,path,Emirates Post,alimentossanmateo.cl,dev,0,sources/pdb_links_active.txt
+cashappgram.com,http://www.cashappgram.com/ch/mypostes/emirates/package/delivery/delivery/emiratespost/login/envo-post.html,path,Emirates Post,cashappgram.com,train,0,sources/pdb_links_active.txt
+wordplaymarketingacademy.com,https://wordplaymarketingacademy.com/wp-content/plugins/autoptimize/emiratespost/nv6588123,path,Emirates Post,wordplaymarketingacademy.com,dev,0,sources/pdb_links_active.txt
+agrimetiersmartinique.fr,http://agrimetiersmartinique.fr/savoir_plus/ss/etisalat-update.htm,path,Etisalat (e&),agrimetiersmartinique.fr,dev,0,sources/pdb_links_active.txt
+api.djcsi.co.in,http://api.djcsi.co.in/etisalat/grlg.php?email%5c%5c=info@adeconomy.ae,path,Etisalat (e&),djcsi.co.in,train,0,sources/pdb_links_active.txt
+aroypedal.com,http://aroypedal.com/1547038732108/myebill/dcm2-etisalat-ebill.html,path,Etisalat (e&),aroypedal.com,train,0,sources/pdb_links_active.txt
+dcm2.quickpay.business-ebill.online.ruralrpm.co.nz,http://dcm2.quickpay.business-ebill.online.ruralrpm.co.nz/etisalatpage/myebill/dcm2-etisalat.html,path,Etisalat (e&),ruralrpm.co.nz,train,1,sources/pdb_links_active.txt
+diviinedynasty.com,http://diviinedynasty.com/etisalat/grlg.php?email=redacted@threatwave.com,path,Etisalat (e&),diviinedynasty.com,train,1,sources/pdb_links_active.txt
+divineinternationals.com,https://divineinternationals.com/noreply-onlineservices.etisalat.ae/etisalat-rd65,path,Etisalat (e&),divineinternationals.com,dev,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+eimratiii.xyz,http://eimratiii.xyz/etisalat-rd65,path,Etisalat (e&),eimratiii.xyz,dev,0,sources/pdb_links_active.txt
+expatsfairdeal.com,http://expatsfairdeal.com/.well-known/admin/etisalat/my%20email%20-%20etisalat%20internet%20mail.html,path,Etisalat (e&),expatsfairdeal.com,train,0,sources/pdb_links_active.txt
+kayhatch.com,https://kayhatch.com/ebill/etisalat%20new,path,Etisalat (e&),kayhatch.com,train,0,sources/pdb_links_active.txt
+mastersenergyplastics.com,http://www.mastersenergyplastics.com/wordpress/wp-content/plugins/5128097f765a43b7935ea3e3cc4e893f/y/mm/mmd/etisalat/login.alibaba-com/,path,Etisalat (e&),mastersenergyplastics.com,train,1,phiusiil_urls_labeled.csv
+pub-c447d9d5553249689fc22284cde6d349.r2.dev,https://pub-c447d9d5553249689fc22284cde6d349.r2.dev/etisalat.html,path,Etisalat (e&),pub-c447d9d5553249689fc22284cde6d349.r2.dev,train,1,sources/pdb_links_active.txt
+smithcreekwoodburn.com,http://smithcreekwoodburn.com/ebill/etisalat%20new,path,Etisalat (e&),smithcreekwoodburn.com,dev,0,sources/pdb_links_active.txt
+svcustomer.com,http://svcustomer.com/et/emirates/etisalat/logon.php?email=a@a.c,path,Etisalat (e&),svcustomer.com,train,0,sources/pdb_links_active.txt
+religie.ordevansintjacob.org,http://religie.ordevansintjacob.org/to/vinodkuma@mashreq.com,path,Mashreq,ordevansintjacob.org,train,0,sources/pdb_links_active.txt
+api.arabbooking-com-dubai-desert-safari.webflow.io,,uae_lure,,arabbooking-com-dubai-desert-safari.webflow.io,train,0,sources/destroylist.txt
+arabbooking-com-dubai-desert-safari.webflow.io,,uae_lure,,arabbooking-com-dubai-desert-safari.webflow.io,train,0,sources/destroylist.txt
+banc-dubai-7ce109.ingress-baronn.easywp.com,,uae_lure,,ingress-baronn.easywp.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+bbooking---comdubai.webflow.io,,uae_lure,,bbooking---comdubai.webflow.io,train,0,feeds/phishing_database_active.txt;sources/destroylist.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+billing.arabbooking-com-dubai-desert-safari.webflow.io,,uae_lure,,arabbooking-com-dubai-desert-safari.webflow.io,train,0,sources/destroylist.txt
+booki-ng-com-dubai-p-acka-ges.webflow.io,,uae_lure,,booki-ng-com-dubai-p-acka-ges.webflow.io,train,0,sources/destroylist.txt
+bookiing-com-dubaiii-restauraaannntts.webflow.io,,uae_lure,,bookiing-com-dubaiii-restauraaannntts.webflow.io,train,0,sources/destroylist.txt
+bookinges-com-dubai-flight-tic-aa.webflow.io,,uae_lure,,bookinges-com-dubai-flight-tic-aa.webflow.io,train,0,sources/destroylist.txt
+bookings-com-dubai-flight-tick-cbcbec.webflow.io.webflow.io,,uae_lure,,io.webflow.io,train,0,sources/destroylist.txt
+bookings-com-dubai-flights-tickets.webflow.io,,uae_lure,,bookings-com-dubai-flights-tickets.webflow.io,train,0,sources/destroylist.txt
+dev.arabbooking-com-dubai-desert-safari.webflow.io,,uae_lure,,arabbooking-com-dubai-desert-safari.webflow.io,train,0,sources/destroylist.txt
+dubai-chamber-payments.com,,uae_lure,,dubai-chamber-payments.com,train,0,sources/destroylist.txt
+dubai-chambers-payment.com,,uae_lure,,dubai-chambers-payment.com,train,0,sources/destroylist.txt
+dubaichambers-payments.com,,uae_lure,,dubaichambers-payments.com,train,0,sources/destroylist.txt
+dubain.optimistic-mcnulty.47-87-145-108.plesk.page,https://dubain.optimistic-mcnulty.47-87-145-108.plesk.page/52heartdonc12/87lythewayuna43/53atdoorife96,uae_lure,,47-87-145-108.plesk.page,train,0,sources/pdb_links_active.txt
+giftabudhabionline.com,,uae_lure,,giftabudhabionline.com,dev,1,feeds/phishing_database_active.txt;shield_training_domains.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+global-general-trackks.supercarhiredubai.com,,uae_lure,,supercarhiredubai.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+log-en-ledgr-uae.pages.dev,,uae_lure,,log-en-ledgr-uae.pages.dev,dev,0,sources/destroylist.txt
+lyofmbooking-com-dubai-ticket.webflow.io,,uae_lure,,lyofmbooking-com-dubai-ticket.webflow.io,train,0,sources/destroylist.txt
+payments-uae.com,,uae_lure,,payments-uae.com,train,0,sources/destroylist.txt
+proyecto-final-js-coder-ir6y0wnao-alain-barron.vercel.app,https://proyecto-final-js-coder-ir6y0wnao-alain-barron.vercel.app,uae_lure,,proyecto-final-js-coder-ir6y0wnao-alain-barron.vercel.app,dev,0,sources/pdb_links_active.txt
+qvjiybooking-com--dubai.webflow.io,,uae_lure,,qvjiybooking-com--dubai.webflow.io,train,0,sources/destroylist.txt
+reservation-air.bnb-uae-rentals.com,http://reservation-air.bnb-uae-rentals.com/itineraries/search/hmgtukyd81,uae_lure,,bnb-uae-rentals.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+rooms-air.bnb-uae-rentals.com,https://rooms-air.bnb-uae-rentals.com/rooms/6887499/chmgtukyd81/p1,uae_lure,,bnb-uae-rentals.com,train,0,sources/pdb_links_active.txt
+secure.projects-uae.com,https://secure.projects-uae.com/protected,uae_lure,,projects-uae.com,train,0,sources/pdb_links_active.txt
+static.arabbooking-com-dubai-desert-safari.webflow.io,,uae_lure,,arabbooking-com-dubai-desert-safari.webflow.io,train,0,sources/destroylist.txt
+techsupport.dreampooldubai.com,https://www.techsupport.dreampooldubai.com,uae_lure,,dreampooldubai.com,train,0,sources/pdb_links_active.txt
+trustwallet.masdubai.com,https://trustwallet.masdubai.com,uae_lure,,masdubai.com,train,0,sources/pdb_links_active.txt
+tussaudsdubai----madame.webflow.io,,uae_lure,,tussaudsdubai----madame.webflow.io,train,0,sources/destroylist.txt
+uae-dchamberpayment.com,,uae_lure,,uae-dchamberpayment.com,train,0,sources/destroylist.txt
+uae-dchamberpayments.com,,uae_lure,,uae-dchamberpayments.com,train,0,sources/destroylist.txt
+uae-dchamberspay.com,,uae_lure,,uae-dchamberspay.com,train,0,sources/destroylist.txt
+uae-dchamberspayment.com,,uae_lure,,uae-dchamberspayment.com,train,0,sources/destroylist.txt
+uae-dubai-chamber-payment.com,,uae_lure,,uae-dubai-chamber-payment.com,train,0,sources/destroylist.txt
+uae-dubai-chamber-payments.com,,uae_lure,,uae-dubai-chamber-payments.com,train,0,sources/destroylist.txt
+uae-dubai-chambers-payment.com,,uae_lure,,uae-dubai-chambers-payment.com,train,0,sources/destroylist.txt
+uae-dubai-chambers-payments.com,,uae_lure,,uae-dubai-chambers-payments.com,train,0,sources/destroylist.txt
+uae-dubaichamberpayment.com,,uae_lure,,uae-dubaichamberpayment.com,train,0,sources/destroylist.txt
+wallet-cinbase-uae.webflow.io,https://wallet-cinbase-uae.webflow.io,uae_lure,,wallet-cinbase-uae.webflow.io,train,0,sources/pdb_links_active.txt
+yvyuobooking-com-dubai-hotelss.webflow.io,,uae_lure,,yvyuobooking-com-dubai-hotelss.webflow.io,dev,0,sources/destroylist.txt
+ads-uae-new.s3.ap-south-1.amazonaws.com,,uae_lure,amazon,ads-uae-new.s3.ap-south-1.amazonaws.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+amazon.co.jp.csc-dubai.com,https://www.amazon.co.jp.csc-dubai.com,uae_lure,amazon,csc-dubai.com,train,0,sources/pdb_links_active.txt
+amazon.dubaide.cn,,uae_lure,amazon,dubaide.cn,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+admin.bookingsccomdubaidesertsafari.webflow.io,,uae_lure,booking,bookingsccomdubaidesertsafari.webflow.io,train,0,sources/destroylist.txt
+affiliates.bookingsccomdubaidesertsafari.webflow.io,,uae_lure,booking,bookingsccomdubaidesertsafari.webflow.io,train,0,sources/destroylist.txt
+api.booking-comdubaicom-packages.webflow.io,,uae_lure,booking,booking-comdubaicom-packages.webflow.io,train,0,sources/destroylist.txt
+api.booking-dubaii-shopping.webflow.io,,uae_lure,booking,booking-dubaii-shopping.webflow.io,train,0,sources/destroylist.txt
+app.booking-comsdubai.webflow.io,,uae_lure,booking,booking-comsdubai.webflow.io,train,0,sources/destroylist.txt
+beta.bookingcomsfdubaishopping.webflow.io,,uae_lure,booking,bookingcomsfdubaishopping.webflow.io,train,0,sources/destroylist.txt
+bimi.booking-comaeu-dubai-packages.webflow.io,,uae_lure,booking,booking-comaeu-dubai-packages.webflow.io,dev,0,sources/destroylist.txt
+bimi.bookingcomsfdubaishopping.webflow.io,,uae_lure,booking,bookingcomsfdubaishopping.webflow.io,train,0,sources/destroylist.txt
+blog.booking-comuae-dubai-desert-safari.webflow.io,,uae_lure,booking,booking-comuae-dubai-desert-safari.webflow.io,dev,0,sources/destroylist.txt
+blog.booking-comuae-dubai-things-to-do.webflow.io,,uae_lure,booking,booking-comuae-dubai-things-to-do.webflow.io,train,0,sources/destroylist.txt
+booking-----comsdubai.webflow.io,,uae_lure,booking,booking-----comsdubai.webflow.io,train,0,sources/destroylist.txt
+booking-----comsdubai.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking----comsdubai.webflow.io,,uae_lure,booking,booking----comsdubai.webflow.io,dev,0,feeds/phishing_database_active.txt;sources/destroylist.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+booking----tour--dubai.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking---com-dubai.webflow.io,,uae_lure,booking,booking---com-dubai.webflow.io,dev,0,sources/destroylist.txt
+booking---com-dubai.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking---comsdubai.webflow.io,,uae_lure,booking,booking---comsdubai.webflow.io,train,0,sources/destroylist.txt
+booking--com--dubai.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking--com-dubai.webflow.io,,uae_lure,booking,booking--com-dubai.webflow.io,train,0,sources/destroylist.txt
+booking--comdubaii.webflow.io,,uae_lure,booking,booking--comdubaii.webflow.io,train,0,sources/destroylist.txt
+booking--comdubaithingtodo.webflow.io,,uae_lure,booking,booking--comdubaithingtodo.webflow.io,train,0,sources/destroylist.txt
+booking--comsdubai.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking--dubai--com.webflow.io,,uae_lure,booking,booking--dubai--com.webflow.io,train,0,sources/destroylist.txt
+booking--tour---dubai.webflow.io,,uae_lure,booking,booking--tour---dubai.webflow.io,train,0,sources/destroylist.txt
+booking-cccccom-dubai-restaurants.webflow.io,,uae_lure,booking,booking-cccccom-dubai-restaurants.webflow.io,train,0,sources/destroylist.txt
+booking-com--dubai.webflow.io,,uae_lure,booking,booking-com--dubai.webflow.io,train,0,sources/destroylist.txt
+booking-com--dubaii.webflow.io,,uae_lure,booking,booking-com--dubaii.webflow.io,train,0,sources/destroylist.txt
+booking-com-aeudubai-desert-safari.webflow.io,,uae_lure,booking,booking-com-aeudubai-desert-safari.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubai-de-sert-saferi.webflow.io,,uae_lure,booking,booking-com-dubai-de-sert-saferi.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-desert--safarii.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-desert-safari.webflow.io,,uae_lure,booking,booking-com-dubai-desert-safari.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubai-desert-safarii.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-flight-ticke-a.webflow.io,,uae_lure,booking,booking-com-dubai-flight-ticke-a.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-flight-ticke-abd.webflow.io,,uae_lure,booking,booking-com-dubai-flight-ticke-abd.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-flight-ticke-bcab.webflow.io,,uae_lure,booking,booking-com-dubai-flight-ticke-bcab.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubai-flight-tickets-bookin.webflow.io,,uae_lure,booking,booking-com-dubai-flight-tickets-bookin.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-flight-ticketstour.webflow.io,,uae_lure,booking,booking-com-dubai-flight-ticketstour.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-flightes-tickets.webflow.io,,uae_lure,booking,booking-com-dubai-flightes-tickets.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubai-flights-tick-bccc.webflow.io,,uae_lure,booking,booking-com-dubai-flights-tick-bccc.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-flights-tickets.webflow.io,,uae_lure,booking,booking-com-dubai-flights-tickets.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-hhootels.webflow.io,,uae_lure,booking,booking-com-dubai-hhootels.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubai-hotel.webflow.io,,uae_lure,booking,booking-com-dubai-hotel.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-i-flight-tickets.webflow.io,,uae_lure,booking,booking-com-dubai-i-flight-tickets.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-packagess.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-restttaurants.webflow.io,,uae_lure,booking,booking-com-dubai-restttaurants.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-restttttaurants.webflow.io,,uae_lure,booking,booking-com-dubai-restttttaurants.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-shoooooopping.webflow.io,,uae_lure,booking,booking-com-dubai-shoooooopping.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-shoppiiing.webflow.io,,uae_lure,booking,booking-com-dubai-shoppiiing.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-shoppiinng.webflow.io,,uae_lure,booking,booking-com-dubai-shoppiinng.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubai-thiiiiiiiing--to-do.webflow.io,,uae_lure,booking,booking-com-dubai-thiiiiiiiing--to-do.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-things-to-doo.webflow.io,,uae_lure,booking,booking-com-dubai-things-to-doo.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubai-things-todo.webflow.io,,uae_lure,booking,booking-com-dubai-things-todo.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-tickettss.webflow.io,,uae_lure,booking,booking-com-dubai-tickettss.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubai-tiicckets.webflow.io,,uae_lure,booking,booking-com-dubai-tiicckets.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubai-tiiickets.webflow.io,,uae_lure,booking,booking-com-dubai-tiiickets.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubaii-flights-tickets.webflow.io,,uae_lure,booking,booking-com-dubaii-flights-tickets.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubaii-fliightt-tickets.webflow.io,,uae_lure,booking,booking-com-dubaii-fliightt-tickets.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubaiii-packages.webflow.io,,uae_lure,booking,booking-com-dubaiii-packages.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubaiii-shopping.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubaipackages.webflow.io,,uae_lure,booking,booking-com-dubaipackages.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubaishopping.webflow.io,,uae_lure,booking,booking-com-dubaishopping.webflow.io,dev,0,sources/destroylist.txt
+booking-com-dubaitickets.webflow.io,,uae_lure,booking,booking-com-dubaitickets.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubaiuae-restaurants.webflow.io,,uae_lure,booking,booking-com-dubaiuae-restaurants.webflow.io,train,0,sources/destroylist.txt
+booking-com-dubaiuae-restaurants.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking-com-waedubai-hotels.webflow.io,,uae_lure,booking,booking-com-waedubai-hotels.webflow.io,train,0,sources/destroylist.txt
+booking-comae-dubai-flight-tickets.webflow.io,,uae_lure,booking,booking-comae-dubai-flight-tickets.webflow.io,dev,0,sources/destroylist.txt
+booking-comae-dubai-flight-tickets.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking-comaeu-dubai-hotels.webflow.io,,uae_lure,booking,booking-comaeu-dubai-hotels.webflow.io,train,0,sources/destroylist.txt
+booking-comaeu-dubai-packages.webflow.io,,uae_lure,booking,booking-comaeu-dubai-packages.webflow.io,dev,0,feeds/phishing_database_active.txt;sources/destroylist.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+booking-comaeu-dubai-restaurants.webflow.io,,uae_lure,booking,booking-comaeu-dubai-restaurants.webflow.io,train,0,sources/destroylist.txt
+booking-comaeu-dubai-shopping.webflow.io,,uae_lure,booking,booking-comaeu-dubai-shopping.webflow.io,train,0,sources/destroylist.txt
+booking-comaraab-dubai-packages.webflow.io,,uae_lure,booking,booking-comaraab-dubai-packages.webflow.io,train,0,sources/destroylist.txt
+booking-comarab-dubai-restaurants.webflow.io,,uae_lure,booking,booking-comarab-dubai-restaurants.webflow.io,train,0,sources/destroylist.txt
+booking-comaue-dubai-things-to-do.webflow.io,,uae_lure,booking,booking-comaue-dubai-things-to-do.webflow.io,train,0,sources/destroylist.txt
+booking-comdubai.webflow.io,,uae_lure,booking,booking-comdubai.webflow.io,train,0,sources/destroylist.txt
+booking-comdubai.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking-comdubaicom-packages.webflow.io,,uae_lure,booking,booking-comdubaicom-packages.webflow.io,train,0,sources/destroylist.txt
+booking-come-dubai-idesertsafar.webflow.io,,uae_lure,booking,booking-come-dubai-idesertsafar.webflow.io,train,0,sources/destroylist.txt
+booking-come-dubai-idesertsafar.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+booking-comm-dubai-desert-safarii.webflow.io,,uae_lure,booking,booking-comm-dubai-desert-safarii.webflow.io,dev,0,sources/destroylist.txt
+booking-comsdubai.webflow.io,,uae_lure,booking,booking-comsdubai.webflow.io,train,0,sources/destroylist.txt
+booking-comuae-dubai-desert-safari.webflow.io,,uae_lure,booking,booking-comuae-dubai-desert-safari.webflow.io,dev,0,sources/destroylist.txt
+booking-comuae-dubai-things-to-do.webflow.io,,uae_lure,booking,booking-comuae-dubai-things-to-do.webflow.io,train,0,sources/destroylist.txt
+booking-dubai-desert-safaria.webflow.io,,uae_lure,booking,booking-dubai-desert-safaria.webflow.io,dev,0,sources/destroylist.txt
+booking-dubaii-shopping.webflow.io,,uae_lure,booking,booking-dubaii-shopping.webflow.io,train,0,sources/destroylist.txt
+booking-online-dubai.webflow.io,,uae_lure,booking,booking-online-dubai.webflow.io,train,0,sources/destroylist.txt
+bookingccomdubaishopping.webflow.io,,uae_lure,booking,bookingccomdubaishopping.webflow.io,train,0,sources/destroylist.txt
+bookingcom--dubaihotels.webflow.io,,uae_lure,booking,bookingcom--dubaihotels.webflow.io,train,0,feeds/phishing_database_active.txt;sources/destroylist.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+bookingcom-dubairestaurants.webflow.io,,uae_lure,booking,bookingcom-dubairestaurants.webflow.io,train,0,sources/destroylist.txt
+bookingcom-dubaishopping.webflow.io,,uae_lure,booking,bookingcom-dubaishopping.webflow.io,dev,0,sources/destroylist.txt
+bookingcom-dubaithingstodo.webflow.io,,uae_lure,booking,bookingcom-dubaithingstodo.webflow.io,dev,0,sources/destroylist.txt
+bookingcomdesertsafari-dubai.webflow.io,,uae_lure,booking,bookingcomdesertsafari-dubai.webflow.io,dev,0,sources/destroylist.txt
+bookingcomdubai-hotels.webflow.io,,uae_lure,booking,bookingcomdubai-hotels.webflow.io,dev,0,sources/destroylist.txt
+bookingcomdubai-restaurants.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+bookingcomdubai-thingstodo.webflow.io,,uae_lure,booking,bookingcomdubai-thingstodo.webflow.io,train,0,sources/destroylist.txt
+bookingcomdubaiae.webflow.io,,uae_lure,booking,bookingcomdubaiae.webflow.io,train,0,sources/destroylist.txt
+bookingcomdubaideserttsafari.webflow.io,,uae_lure,booking,bookingcomdubaideserttsafari.webflow.io,train,0,sources/destroylist.txt
+bookingcomdubaiihotells.webflow.io,,uae_lure,booking,bookingcomdubaiihotells.webflow.io,train,0,sources/destroylist.txt
+bookingcomdubaiipackkages.webflow.io,,uae_lure,booking,bookingcomdubaiipackkages.webflow.io,train,0,sources/destroylist.txt
+bookingcomdubaiishoppiing.webflow.io,,uae_lure,booking,bookingcomdubaiishoppiing.webflow.io,dev,0,sources/destroylist.txt
+bookingcomdubaiishoppiinng.webflow.io,,uae_lure,booking,bookingcomdubaiishoppiinng.webflow.io,train,0,sources/destroylist.txt
+bookingcomdubaiishopping.webflow.io,,uae_lure,booking,bookingcomdubaiishopping.webflow.io,dev,0,sources/destroylist.txt
+bookingcomdubain.webflow.io,,uae_lure,booking,bookingcomdubain.webflow.io,train,0,sources/destroylist.txt
+bookingcomdubaipackagess.webflow.io,,uae_lure,booking,bookingcomdubaipackagess.webflow.io,dev,0,sources/destroylist.txt
+bookingcomdubaishoppingg.webflow.io,,uae_lure,booking,bookingcomdubaishoppingg.webflow.io,train,0,sources/destroylist.txt
+bookingcomdubaithiingstoodo.webflow.io,,uae_lure,booking,bookingcomdubaithiingstoodo.webflow.io,dev,0,sources/destroylist.txt
+bookingcomdubaithingstoo-do.webflow.io,,uae_lure,booking,bookingcomdubaithingstoo-do.webflow.io,dev,0,sources/destroylist.txt
+bookingcomfordubai.webflow.io,,uae_lure,booking,bookingcomfordubai.webflow.io,dev,0,sources/destroylist.txt
+bookingcomhotels-dubai.webflow.io,,uae_lure,booking,bookingcomhotels-dubai.webflow.io,train,0,sources/destroylist.txt
+bookingcommdubaiihotels.webflow.io,,uae_lure,booking,bookingcommdubaiihotels.webflow.io,train,0,sources/destroylist.txt
+bookingcommdubaipackagess.webflow.io,,uae_lure,booking,bookingcommdubaipackagess.webflow.io,dev,0,sources/destroylist.txt
+bookingcommdubaithiingstodoo.webflow.io,,uae_lure,booking,bookingcommdubaithiingstodoo.webflow.io,train,0,sources/destroylist.txt
+bookingcommdubaithingstodo.webflow.io,,uae_lure,booking,bookingcommdubaithingstodo.webflow.io,train,0,sources/destroylist.txt
+bookingcompackages-dubai.webflow.io,,uae_lure,booking,bookingcompackages-dubai.webflow.io,train,0,sources/destroylist.txt
+bookingcomsfdubaishopping.webflow.io,,uae_lure,booking,bookingcomsfdubaishopping.webflow.io,train,0,sources/destroylist.txt
+bookingcomshopping-dubai.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+bookingcomthingstodo-dubai.webflow.io,,uae_lure,booking,bookingcomthingstodo-dubai.webflow.io,dev,0,sources/destroylist.txt
+bookingcomtickets-dubai.webflow.io,,uae_lure,booking,bookingcomtickets-dubai.webflow.io,train,0,sources/destroylist.txt
+bookingddubairestaurants.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+bookingdesert-safaridubai.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+bookingdubai--com.webflow.io,,uae_lure,booking,bookingdubai--com.webflow.io,dev,0,sources/destroylist.txt
+bookingdubai-com.webflow.io,,uae_lure,booking,bookingdubai-com.webflow.io,dev,0,sources/destroylist.txt
+bookingdubaiexperience.webflow.io,,uae_lure,booking,bookingdubaiexperience.webflow.io,train,0,sources/destroylist.txt
+bookinggcomdubaiiitickets.webflow.io,,uae_lure,booking,bookinggcomdubaiiitickets.webflow.io,train,0,sources/destroylist.txt
+bookinggcomdubairestaurants.webflow.io,,uae_lure,booking,bookinggcomdubairestaurants.webflow.io,dev,0,sources/destroylist.txt
+bookinggcomdubaithingstodo.webflow.io,,uae_lure,booking,bookinggcomdubaithingstodo.webflow.io,train,0,sources/destroylist.txt
+bookingggcomdubaiirestaurants.webflow.io,,uae_lure,booking,bookingggcomdubaiirestaurants.webflow.io,train,0,sources/destroylist.txt
+bookingndubaipackages.webflow.io,,uae_lure,booking,bookingndubaipackages.webflow.io,train,0,sources/destroylist.txt
+bookingndubaipackages.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+bookingthingsdubaicom.webflow.io,,uae_lure,booking,bookingthingsdubaicom.webflow.io,train,0,sources/destroylist.txt
+careers.booking-dubaii-hotels.webflow.io,,uae_lure,booking,booking-dubaii-hotels.webflow.io,train,0,sources/destroylist.txt
+d2ggmj18h1as73d32ltg.bookinggcomdubaithingstodo.webflow.io,,uae_lure,booking,bookinggcomdubaithingstodo.webflow.io,train,0,sources/destroylist.txt
+d2ggmm98h1as73d35ip0.bookingcomdubaihhotels.webflow.io,,uae_lure,booking,bookingcomdubaihhotels.webflow.io,train,0,sources/destroylist.txt
+d2ggp318h1as73d5an40.booking-com-dubaipackages.webflow.io,,uae_lure,booking,booking-com-dubaipackages.webflow.io,train,0,sources/destroylist.txt
+d4d5qr1cpoos73dg9ntg.booking-dubai-desert-safaria.webflow.io,,uae_lure,booking,booking-dubai-desert-safaria.webflow.io,dev,0,sources/destroylist.txt
+d4d5tlpcpoos73dgjmkg.booking-comaeu-dubai-shopping.webflow.io,,uae_lure,booking,booking-comaeu-dubai-shopping.webflow.io,train,0,sources/destroylist.txt
+d4d60s1cpoos73dgu4s0.booking-com-dubai-flight-tickets-bookin.webflow.io,,uae_lure,booking,booking-com-dubai-flight-tickets-bookin.webflow.io,train,0,sources/destroylist.txt
+dashboard.booking-com-waedubai-hotels.webflow.io,,uae_lure,booking,booking-com-waedubai-hotels.webflow.io,train,0,sources/destroylist.txt
+dashboard.bookingsccomdubaidesertsafari.webflow.io,,uae_lure,booking,bookingsccomdubaidesertsafari.webflow.io,train,0,sources/destroylist.txt
+demo.booking-comuae-dubai-desert-safari.webflow.io,,uae_lure,booking,booking-comuae-dubai-desert-safari.webflow.io,dev,0,sources/destroylist.txt
+demo.bookingsccomdubaidesertsafari.webflow.io,,uae_lure,booking,bookingsccomdubaidesertsafari.webflow.io,train,0,sources/destroylist.txt
+dev.booking-comaeu-dubai-hotels.webflow.io,,uae_lure,booking,booking-comaeu-dubai-hotels.webflow.io,train,0,sources/destroylist.txt
+drupal.aebooking-com-dubai-shopping.webflow.io,,uae_lure,booking,aebooking-com-dubai-shopping.webflow.io,dev,0,sources/destroylist.txt
+dubai---booking-com.webflow.io,,uae_lure,booking,dubai---booking-com.webflow.io,dev,0,sources/destroylist.txt
+dubai-booking-code-hmbnocy812-9823296.long-termap.rentals,https://dubai-booking-code-hmbnocy812-9823296.long-termap.rentals/airbnb/contemporary-2-bdr-apartment-high-rise-apt-in-difc-hmbnocy812,uae_lure,booking,long-termap.rentals,train,0,sources/pdb_links_active.txt
+dubai-booking-comm.webflow.io,,uae_lure,booking,dubai-booking-comm.webflow.io,train,0,sources/destroylist.txt
+dubai-bookingcomdubai.webflow.io,,uae_lure,booking,dubai-bookingcomdubai.webflow.io,train,0,sources/destroylist.txt
+dubai-ticket-booking.webflow.io,,uae_lure,booking,dubai-ticket-booking.webflow.io,dev,0,sources/destroylist.txt
+dubaii-booking-com.webflow.io.webflow.io,,uae_lure,booking,io.webflow.io,train,0,sources/destroylist.txt
+dubaii-bookingcom.webflow.io,,uae_lure,booking,dubaii-bookingcom.webflow.io,dev,0,sources/destroylist.txt
+email.bookingcomdesertsafari-dubai.webflow.io,,uae_lure,booking,bookingcomdesertsafari-dubai.webflow.io,dev,0,sources/destroylist.txt
+forum.booking-comaeu-dubai-restaurants.webflow.io,,uae_lure,booking,booking-comaeu-dubai-restaurants.webflow.io,train,0,sources/destroylist.txt
+forum.bookingdubai--com.webflow.io,,uae_lure,booking,bookingdubai--com.webflow.io,dev,0,sources/destroylist.txt
+grfhvwww.bookingcomfordubai.webflow.io,,uae_lure,booking,bookingcomfordubai.webflow.io,dev,0,sources/destroylist.txt
+help.booking-comdubaicom-packages.webflow.io,,uae_lure,booking,booking-comdubaicom-packages.webflow.io,train,0,sources/destroylist.txt
+help.bookingcomrestaurants-dubai.webflow.io,,uae_lure,booking,bookingcomrestaurants-dubai.webflow.io,train,0,sources/destroylist.txt
+hjrzrcheap-hotel-booking-dubai.webflow.io,,uae_lure,booking,hjrzrcheap-hotel-booking-dubai.webflow.io,train,0,sources/destroylist.txt
+investors.booking-dubaii-shopping.webflow.io,,uae_lure,booking,booking-dubaii-shopping.webflow.io,train,0,sources/destroylist.txt
+learn.bookingcomrestaurants-dubai.webflow.io,,uae_lure,booking,bookingcomrestaurants-dubai.webflow.io,train,0,sources/destroylist.txt
+learn.bookingdubai--com.webflow.io,,uae_lure,booking,bookingdubai--com.webflow.io,dev,0,sources/destroylist.txt
+links.booking-comaeu-dubai-packages.webflow.io,,uae_lure,booking,booking-comaeu-dubai-packages.webflow.io,dev,0,sources/destroylist.txt
+links.bookingcomsfdubaishopping.webflow.io,,uae_lure,booking,bookingcomsfdubaishopping.webflow.io,train,0,sources/destroylist.txt
+login.booking-comsdubai.webflow.io,,uae_lure,booking,booking-comsdubai.webflow.io,train,0,sources/destroylist.txt
+login.bookingdubai--com.webflow.io,,uae_lure,booking,bookingdubai--com.webflow.io,dev,0,sources/destroylist.txt
+mail.booking-dubaii-hotels.webflow.io,,uae_lure,booking,booking-dubaii-hotels.webflow.io,train,0,sources/destroylist.txt
+online-booking-dubai.webflow.io,,uae_lure,booking,online-booking-dubai.webflow.io,train,0,sources/destroylist.txt
+partners.bookingcomshopping-dubai.webflow.io,,uae_lure,booking,bookingcomshopping-dubai.webflow.io,train,0,sources/destroylist.txt
+pay.aebooking-com-dubai-shopping.webflow.io,,uae_lure,booking,aebooking-com-dubai-shopping.webflow.io,dev,0,sources/destroylist.txt
+secure.booking-com-waedubai-hotels.webflow.io,,uae_lure,booking,booking-com-waedubai-hotels.webflow.io,train,0,sources/destroylist.txt
+shop.booking-comaeu-dubai-packages.webflow.io,,uae_lure,booking,booking-comaeu-dubai-packages.webflow.io,dev,0,sources/destroylist.txt
+shopping-bookingcomdubai.webflow.io,,uae_lure,booking,shopping-bookingcomdubai.webflow.io,train,0,sources/destroylist.txt
+smtp.booking-comsdubai.webflow.io,,uae_lure,booking,booking-comsdubai.webflow.io,train,0,sources/destroylist.txt
+sso.booking-dubai-desert-safaria.webflow.io,,uae_lure,booking,booking-dubai-desert-safaria.webflow.io,dev,0,sources/destroylist.txt
+staging.booking-comsdubai.webflow.io,,uae_lure,booking,booking-comsdubai.webflow.io,train,0,sources/destroylist.txt
+staging.booking-comuae-dubai-things-to-do.webflow.io,,uae_lure,booking,booking-comuae-dubai-things-to-do.webflow.io,train,0,sources/destroylist.txt
+staging.bookingcomdubaithingstodoes.webflow.io,,uae_lure,booking,bookingcomdubaithingstodoes.webflow.io,dev,0,sources/destroylist.txt
+staging.bookingsccomdubaidesertsafari.webflow.io,,uae_lure,booking,bookingsccomdubaidesertsafari.webflow.io,train,0,sources/destroylist.txt
+static.bookingcomdubaithingstodoes.webflow.io,,uae_lure,booking,bookingcomdubaithingstodoes.webflow.io,dev,0,sources/destroylist.txt
+static.bookingcomrestaurants-dubai.webflow.io,,uae_lure,booking,bookingcomrestaurants-dubai.webflow.io,train,0,sources/destroylist.txt
+support.booking-dubaii-shopping.webflow.io,,uae_lure,booking,booking-dubaii-shopping.webflow.io,train,0,sources/destroylist.txt
+support.bookingcomhotels-dubai.webflow.io,,uae_lure,booking,bookingcomhotels-dubai.webflow.io,train,0,sources/destroylist.txt
+tcp.web-bookingcomdubai.webflow.io,,uae_lure,booking,web-bookingcomdubai.webflow.io,train,0,sources/destroylist.txt
+test.booking-com-dubaiuae-restaurants.webflow.io,,uae_lure,booking,booking-com-dubaiuae-restaurants.webflow.io,train,0,sources/destroylist.txt
+test.bookingcompackages-dubai.webflow.io,,uae_lure,booking,bookingcompackages-dubai.webflow.io,train,0,sources/destroylist.txt
+tls.bookingcompackages-dubai.webflow.io,,uae_lure,booking,bookingcompackages-dubai.webflow.io,train,0,sources/destroylist.txt
+track.booking-comaeu-dubai-packages.webflow.io,,uae_lure,booking,booking-comaeu-dubai-packages.webflow.io,dev,0,sources/destroylist.txt
+uae---booking-com.webflow.io,,uae_lure,booking,uae---booking-com.webflow.io,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+urlkey.booking-comaeu-dubai-packages.webflow.io,,uae_lure,booking,booking-comaeu-dubai-packages.webflow.io,dev,0,sources/destroylist.txt
+urlkey.booking-comdubaicom-packages.webflow.io,,uae_lure,booking,booking-comdubaicom-packages.webflow.io,train,0,sources/destroylist.txt
+urlkey.booking-dubaii-hotels.webflow.io,,uae_lure,booking,booking-dubaii-hotels.webflow.io,train,0,sources/destroylist.txt
+web-bookingcomdubai.webflow.io,,uae_lure,booking,web-bookingcomdubai.webflow.io,train,0,sources/destroylist.txt
+webmail.booking-comaeu-dubai-restaurants.webflow.io,,uae_lure,booking,booking-comaeu-dubai-restaurants.webflow.io,train,0,sources/destroylist.txt
+your-booking-com-dubai.webflow.io,,uae_lure,booking,your-booking-com-dubai.webflow.io,train,0,sources/destroylist.txt
+islington-cc.netflix-subscription-uae.com,,uae_lure,netflix,netflix-subscription-uae.com,train,0,sources/destroylist.txt
+netflix.birthday-uae.com,https://www.netflix.birthday-uae.com,uae_lure,netflix,birthday-uae.com,dev,0,sources/pdb_links_inactive.txt
+u-bbw6dofmk1.wc.netflix-subscription-uae.com,,uae_lure,netflix,netflix-subscription-uae.com,train,0,sources/destroylist.txt
+wc.netflix-subscription-uae.com,,uae_lure,netflix,netflix-subscription-uae.com,train,0,sources/destroylist.txt
+about-uae.net,,uae_plain,,about-uae.net,dev,0,sources/destroylist.txt
+abudhabi-locals.com,https://abudhabi-locals.com/catchup/chasealert.html?email=,uae_plain,,abudhabi-locals.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+abudhabisites.com,,uae_plain,,abudhabisites.com,train,0,sources/destroylist.txt
+abudhabiuniforms.com,,uae_plain,,abudhabiuniforms.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+acdubaimaintenance.com,,uae_plain,,acdubaimaintenance.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+adamluutr.dubaiishhhttt.workers.dev,,uae_plain,,dubaiishhhttt.workers.dev,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+agodad-dubai.webflow.io,,uae_plain,,agodad-dubai.webflow.io,train,0,sources/destroylist.txt
+airdubaimusic.com,https://airdubaimusic.com/onedrive/index.php,uae_plain,,airdubaimusic.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+alkawtherabudhabi.com,http://www.alkawtherabudhabi.com,uae_plain,,alkawtherabudhabi.com,dev,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+allnadodubai.com,,uae_plain,,allnadodubai.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+appindubai.com,,uae_plain,,appindubai.com,train,0,sources/destroylist.txt
+bbooking--comdubai.webflow.io,,uae_plain,,bbooking--comdubai.webflow.io,train,0,feeds/phishing_database_active.txt;sources/destroylist.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+bestdubaibookings.webflow.io,,uae_plain,,bestdubaibookings.webflow.io,train,0,sources/destroylist.txt
+bestshopdubai.com,,uae_plain,,bestshopdubai.com,dev,0,sources/pdb_domains_2025-11.txt
+bokingcomdubaii.webflow.io,,uae_plain,,bokingcomdubaii.webflow.io,train,0,sources/destroylist.txt
+bookiingcomdubaiae.webflow.io,,uae_plain,,bookiingcomdubaiae.webflow.io,dev,0,sources/destroylist.txt
+bookiingcommdubai.webflow.io.webflow.io,,uae_plain,,io.webflow.io,train,0,sources/destroylist.txt
+bookiinng-comdubai.webflow.io.webflow.io,,uae_plain,,io.webflow.io,train,0,sources/destroylist.txt
+bookingg--dubaihotel.webflow.io,,uae_plain,,bookingg--dubaihotel.webflow.io,dev,0,sources/destroylist.txt
+bookkingcom-dubai.webflow.io,,uae_plain,,bookkingcom-dubai.webflow.io,dev,0,sources/destroylist.txt
+bookkingcoom-dubai.webflow.io,,uae_plain,,bookkingcoom-dubai.webflow.io,train,0,sources/destroylist.txt
+carbatterydubai.com,,uae_plain,,carbatterydubai.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+cdn.com-dubaibooking.webflow.io,,uae_plain,,com-dubaibooking.webflow.io,dev,0,sources/destroylist.txt
+ceylondreamdubai.com,https://ceylondreamdubai.com/office,uae_plain,,ceylondreamdubai.com,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+cheapindubai.com,https://cheapindubai.com/rigim/discover.htm,uae_plain,,cheapindubai.com,dev,0,sources/pdb_links_active.txt
+citadesmrocentraldubai.spahotel.guru,,uae_plain,,spahotel.guru,train,0,sources/destroylist.txt
+com-dubaibooking.webflow.io,,uae_plain,,com-dubaibooking.webflow.io,dev,0,sources/destroylist.txt
+commercialbankofdubai.co,https://commercialbankofdubai.co/0000-3/client/logins.php??samlrequest=,uae_plain,,commercialbankofdubai.co,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+courtyardbymarriottworldtradecentredubai.spahotel.guru,,uae_plain,,spahotel.guru,train,0,sources/destroylist.txt
+craftbeerdubai.com,https://craftbeerdubai.com/jim/brown,uae_plain,,craftbeerdubai.com,train,0,sources/pdb_links_active.txt
+crm-dubaichamberfx.com,,uae_plain,,crm-dubaichamberfx.com,train,0,sources/destroylist.txt
+csc-dubai.com,https://csc-dubai.com,uae_plain,,csc-dubai.com,train,0,sources/pdb_links_active.txt
+d4d5tihcpoos73dgjbqg.bookkingcom-dubai.webflow.io,,uae_plain,,bookkingcom-dubai.webflow.io,dev,0,sources/destroylist.txt
+d4d5utpcpoos73dgnn60.dubaibybookingcom.webflow.io,,uae_plain,,dubaibybookingcom.webflow.io,dev,0,sources/destroylist.txt
+desert-safaribookingcomdubai.webflow.io,,uae_plain,,desert-safaribookingcomdubai.webflow.io,dev,0,sources/destroylist.txt
+desert-safaribookingcomdubai.webflow.io.webflow.io,,uae_plain,,io.webflow.io,train,0,sources/destroylist.txt
+dev.wwwdubaijialedejihuabiao.cracked.sh,,uae_plain,,cracked.sh,train,0,sources/destroylist.txt
+devdubai2.1next.one,https://devdubai2.1next.one,uae_plain,,1next.one,train,0,sources/pdb_links_active.txt
+dubai-book-ingcoms.webflow.io,,uae_plain,,dubai-book-ingcoms.webflow.io,train,0,sources/destroylist.txt
+dubai-boys-only.newss.web.id,https://dubai-boys-only.newss.web.id,uae_plain,,newss.web.id,train,0,sources/pdb_links_active.txt
+dubai-charms.com,,uae_plain,,dubai-charms.com,train,0,sources/destroylist.txt
+dubai-global-village.com,,uae_plain,,dubai-global-village.com,dev,1,feeds/phishing_database_active.txt;shield_training_domains.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+dubai-night.life,,uae_plain,,dubai-night.life,train,0,sources/destroylist.txt
+dubai-stars.net,,uae_plain,,dubai-stars.net,train,0,sources/destroylist.txt
+dubai-tickets.sbs,,uae_plain,,dubai-tickets.sbs,dev,0,sources/destroylist.txt
+dubaibooking-com.webflow.io,,uae_plain,,dubaibooking-com.webflow.io,train,0,sources/destroylist.txt
+dubaibooking.webflow.io,,uae_plain,,dubaibooking.webflow.io,dev,0,sources/destroylist.txt
+dubaibybookingcom.webflow.io,,uae_plain,,dubaibybookingcom.webflow.io,dev,0,sources/destroylist.txt
+dubaic3payuae.com,https://dubaic3payuae.com,uae_plain,,dubaic3payuae.com,train,0,sources/pdb_links_active.txt
+dubaidesertride.com,,uae_plain,,dubaidesertride.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+dubaidesertsafarihub.com,http://www.dubaidesertsafarihub.com,uae_plain,,dubaidesertsafarihub.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+dubaidesrthax.top,http://dubaidesrthax.top/wellsmce/wells,uae_plain,,dubaidesrthax.top,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+dubaiescortlist.com,,uae_plain,,dubaiescortlist.com,train,0,sources/destroylist.txt
+dubaiescortsgirl.com,http://www.dubaiescortsgirl.com,uae_plain,,dubaiescortsgirl.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+dubaihotelsbooking-com.webflow.io,,uae_plain,,dubaihotelsbooking-com.webflow.io,train,0,sources/destroylist.txt
+dubaiibnet.com,https://dubaiibnet.com/en/about-us/contact-us.html,uae_plain,,dubaiibnet.com,train,1,feeds/phishing_database_active.txt;shield_training_domains.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+dubailuxurypropertiess.com,,uae_plain,,dubailuxurypropertiess.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+dubaipropertycatalog.com,,uae_plain,,dubaipropertycatalog.com,train,0,sources/destroylist.txt
+dubaipropertyx.com,https://dubaipropertyx.com/office365/excel-rd42,uae_plain,,dubaipropertyx.com,train,0,sources/pdb_links_active.txt
+dubaitickets.bostpokernetwork.com,https://dubaitickets.bostpokernetwork.com,uae_plain,,bostpokernetwork.com,train,0,sources/pdb_links_active.txt
+dubaitickets.espejopoolpatios.com,https://dubaitickets.espejopoolpatios.com,uae_plain,,espejopoolpatios.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_inactive.txt
+dubaiusdtflash.com,,uae_plain,,dubaiusdtflash.com,train,0,sources/destroylist.txt
+eobusbbooking-comdubai.webflow.io,,uae_plain,,eobusbbooking-comdubai.webflow.io,dev,0,sources/destroylist.txt
+evacuationprivate-uae.com,,uae_plain,,evacuationprivate-uae.com,dev,0,sources/destroylist.txt
+ewasterasalkhaimah.com,http://ewasterasalkhaimah.com/surfa2hydrrqc/banks/atb/business.html,uae_plain,,ewasterasalkhaimah.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+exploredubaibookings.webflow.io,,uae_plain,,exploredubaibookings.webflow.io,train,0,feeds/phishing_database_active.txt;sources/destroylist.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;uae_phishing_domains_real.csv
+fazza-card-uae.com,,uae_plain,,fazza-card-uae.com,train,0,sources/destroylist.txt
+feedubai.fmsdubai.com,https://www.feedubai.fmsdubai.com/wp-admin/network/aknomi,uae_plain,,fmsdubai.com,train,1,feeds/phishing_database_active.txt;shield_training_domains.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_inactive.txt
+firstcollectiondubaibusessbay.spahotel.guru,,uae_plain,,spahotel.guru,train,0,sources/destroylist.txt
+fishing-uae.com,http://www.fishing-uae.com,uae_plain,,fishing-uae.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+fnerzbooking-s-dubai.webflow.io,,uae_plain,,fnerzbooking-s-dubai.webflow.io,dev,0,sources/destroylist.txt
+ftp.comdubaibooking.webflow.io,,uae_plain,,comdubaibooking.webflow.io,dev,0,sources/destroylist.txt
+geyhfbookinngcomdubai.webflow.io,,uae_plain,,geyhfbookinngcomdubai.webflow.io,train,0,sources/destroylist.txt
+gotoursdubai.com,https://gotoursdubai.com/n972h2/netvip/main,uae_plain,,gotoursdubai.com,train,0,sources/pdb_links_active.txt
+gracesharjah.top,http://www.gracesharjah.top/atelyfb,uae_plain,,gracesharjah.top,dev,0,sources/pdb_links_active.txt
+ideahousedubai.com,https://ideahousedubai.com/wp-content/pelaxy/idangan/emtb/email.html,uae_plain,,ideahousedubai.com,train,0,sources/pdb_links_active.txt
+imgtags-93095118.primetec-dubai.com,,uae_plain,,primetec-dubai.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+info-uae.com,https://info-uae.com/realty/ofc3,uae_plain,,info-uae.com,train,0,sources/pdb_links_active.txt
+jathemanordubai.spahotel.guru,,uae_plain,,spahotel.guru,train,0,sources/destroylist.txt
+komainu-uae.com,,uae_plain,,komainu-uae.com,train,0,sources/destroylist.txt
+kurindubaitullah.com,,uae_plain,,kurindubaitullah.com,dev,1,feeds/phishing_database_active.txt;shield_training_domains.csv;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+laughteryoga-uae.com,http://laughteryoga-uae.com/wp-content/login/customer_center/customer-idpp00c425/myaccount/identity/?cmd=_session=&dispatch=467db4a25d96d1bb054627cc22592b55e8216a79,uae_plain,,laughteryoga-uae.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+ledger-live-uae.pages.dev,,uae_plain,,ledger-live-uae.pages.dev,train,0,sources/destroylist.txt
+limitlessdubai-dp8oxsl60kva.edgeone.dev,,uae_plain,,edgeone.dev,train,0,sources/destroylist.txt
+loudpunkx.dubaidudenft.com,http://loudpunkx.dubaidudenft.com,uae_plain,,dubaidudenft.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+luxaryrestdubai.com,,uae_plain,,luxaryrestdubai.com,train,0,sources/destroylist.txt
+maidsdubai.fun,,uae_plain,,maidsdubai.fun,train,0,sources/destroylist.txt
+mail.dubaiibnet.com,https://mail.dubaiibnet.com/en/en.html,uae_plain,,dubaiibnet.com,train,0,sources/pdb_links_inactive.txt
+mattresscleaningabudhabi.com,http://mattresscleaningabudhabi.com/chase/chase.com-fix-rd161,uae_plain,,mattresscleaningabudhabi.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+mmetals-uae.com,,uae_plain,,mmetals-uae.com,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+msmoversdubai.com,http://msmoversdubai.com/chase,uae_plain,,msmoversdubai.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+namshi-uae.com,,uae_plain,,namshi-uae.com,train,0,sources/destroylist.txt
+nftexpodubai.com,https://nftexpodubai.com/fwyttw/wp.php,uae_plain,,nftexpodubai.com,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+nppfdubai.com,http://nppfdubai.com/francesocial/portailas/amelipro,uae_plain,,nppfdubai.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt
+platinumdubaimodels.com,,uae_plain,,platinumdubaimodels.com,train,0,sources/destroylist.txt
+plfcdubai.com,https://plfcdubai.com/parcel/dhl/dhl/dhl/dhl,uae_plain,,plfcdubai.com,train,0,sources/pdb_links_active.txt
+pop.comdubaibooking.webflow.io,,uae_plain,,comdubaibooking.webflow.io,dev,0,sources/destroylist.txt
+postalservice-uae.com,,uae_plain,,postalservice-uae.com,dev,0,sources/pdb_domains_2025-11.txt
+primefixdubai.com,,uae_plain,,primefixdubai.com,train,0,sources/destroylist.txt
+ramadabywyndhamdubaibarshaheights.spahotel.guru,,uae_plain,,spahotel.guru,train,0,sources/destroylist.txt
+refrigeratedvansdubai.com,,uae_plain,,refrigeratedvansdubai.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+rooms-air.bnb-uae.live,http://rooms-air.bnb-uae.live/rooms/8604157/chmeacbo4di/p1,uae_plain,,bnb-uae.live,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_inactive.txt;uae_phishing_domains_real.csv
+rooms-air.bnb-uae.me,http://rooms-air.bnb-uae.me/rooms/3936512/chm6fsq9m7g/p1,uae_plain,,bnb-uae.me,dev,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;uae_phishing_domains_real.csv
+rooms-air.bnb-uae.properties,https://rooms-air.bnb-uae.properties/rooms/4281948/chmrboph7ey/p1,uae_plain,,bnb-uae.properties,train,0,sources/pdb_links_active.txt
+roserayhaanbyrotanadubai.spahotel.guru,,uae_plain,,spahotel.guru,train,0,sources/destroylist.txt
+royalcutdubai.com,https://royalcutdubai.com/vgv/crypt,uae_plain,,royalcutdubai.com,train,0,sources/pdb_links_active.txt
+royalfoamdubai.com,https://royalfoamdubai.com/chronoopostservice-2,uae_plain,,royalfoamdubai.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt;sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+shangriladubai.spahotel.guru,,uae_plain,,spahotel.guru,train,0,sources/destroylist.txt
+sharjah-fz.com,,uae_plain,,sharjah-fz.com,dev,0,sources/destroylist.txt
+shiners-uae.com,,uae_plain,,shiners-uae.com,train,0,feeds/phishing_database_active.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+store.comdubaibooking.webflow.io,,uae_plain,,comdubaibooking.webflow.io,dev,0,sources/destroylist.txt
+subscriber.dhowdinnercruisedubai.com,https://subscriber.dhowdinnercruisedubai.com/spam?name=rb&i2fbdnz=dhulst@dcysb.com&v71fa4bqshbjutz=&h%20hi=%20with%20his%20fingers%20as%20gregory%20stepped%20outside%20and%20maud%20came%20closer%20he%20could%20see%20the%20tan%20glint,uae_plain,,dhowdinnercruisedubai.com,train,0,sources/pdb_links_active.txt;sources/pdb_links_inactive.txt
+syedubaidshah.github.io,https://syedubaidshah.github.io/amazon-clone,uae_plain,,syedubaidshah.github.io,train,0,sources/pdb_links_inactive.txt
+tmedubai.st-me.id,https://tmedubai.st-me.id,uae_plain,,st-me.id,train,0,sources/pdb_links_active.txt
+towerplazadubai.spahotel.guru,,uae_plain,,spahotel.guru,train,0,sources/destroylist.txt
+trendmoversdubai.com,http://www.trendmoversdubai.com,uae_plain,,trendmoversdubai.com,dev,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+uae-doc-online.tapper1109.repl.co,https://uae-doc-online.tapper1109.repl.co/,uae_plain,,tapper1109.repl.co,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+uae.com.br,,uae_plain,,uae.com.br,train,0,feeds/phishing_database_active.txt;sources/destroylist.txt;sources/pdb_domains_2025-11.txt;sources/pdb_domains_2026-05.txt
+uae.whaatschat.com,https://uae.whaatschat.com/ae/chat/v1/index.html,uae_plain,,whaatschat.com,train,0,sources/pdb_links_active.txt
+uaedubaiflying.com,http://uaedubaiflying.com/i8pcct,uae_plain,,uaedubaiflying.com,train,1,phiusiil_urls_labeled.csv;shield_training_domains.csv
+usdtflashdubai.shop,,uae_plain,,usdtflashdubai.shop,dev,0,sources/destroylist.txt
+usdtflasherdubai.shop,,uae_plain,,usdtflasherdubai.shop,dev,0,sources/destroylist.txt
+wa-dubai.com,https://wa-dubai.com/wp-includes/js/dist/vendor/n/auth/dv9obz/login.php?id=2714467,uae_plain,,wa-dubai.com,train,0,sources/pdb_links_active.txt
+waterionizerdubai.com,http://waterionizerdubai.com,uae_plain,,waterionizerdubai.com,train,0,sources/pdb_links_active.txt
+waterpumprepairdubai.com,http://waterpumprepairdubai.com,uae_plain,,waterpumprepairdubai.com,train,0,sources/pdb_links_active.txt
+westdubaimaseyahibeachwaterpark.spahotel.guru,,uae_plain,,spahotel.guru,train,0,sources/destroylist.txt
+wgkvwdubaibybookingcom.webflow.io,,uae_plain,,wgkvwdubaibybookingcom.webflow.io,dev,0,sources/destroylist.txt
+wigyqbookinggcodubaii-flight-tickets.webflow.io,,uae_plain,,wigyqbookinggcodubaii-flight-tickets.webflow.io,train,0,sources/destroylist.txt
+yasi.abudhabi,https://yasi.abudhabi/americafirst/cu,uae_plain,,yasi.abudhabi,train,0,sources/pdb_links_active.txt
+zumaabudhabireserve.com,,uae_plain,,zumaabudhabireserve.com,train,0,sources/destroylist.txt

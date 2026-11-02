@@ -6,6 +6,10 @@ Shield never opens the link (that would be unsafe). It judges it from the outsid
 - red flags in the full link (IP address instead of a name, '@' tricks, link shorteners,
   look-alike Unicode letters, very long links, login/payment paths)
 - whether the domain is already on a known phishing list (if the feeds are downloaded)
+- a UAE brand named in the PATH of a link on a site that isn't the brand's
+  (hacked-site.com/aramex/login): 96 of the real UAE fakes collected in Nov 2026 look like this
+- optionally (facts_budget) the domain's public records: registration age etc. (enrich.py),
+  from DNS / registration directories only - the site itself is not contacted
 """
 
 import ipaddress
@@ -14,7 +18,9 @@ import re
 import unicodedata
 from urllib.parse import urlparse
 
-from .scoring import score_domain
+from .features import _match, _tokens, split_domain
+from .registry import UAE_BRANDS
+from .scoring import assess, score_domain
 
 DATA = os.path.join(os.path.dirname(__file__), "..", "..", "data")
 FEEDS = os.path.join(DATA, "feeds")
@@ -64,7 +70,16 @@ def _raise(result, level):
         result["verdict"] = level
 
 
-def check_link(raw: str) -> dict:
+def path_brand(path: str):
+    """A UAE brand named as a whole word (or word start) in the link's path/query, 5+ letters."""
+    for t in _tokens(path.lower()):
+        for k in sorted(UAE_BRANDS, key=len, reverse=True):
+            if len(k) >= 5 and _match(t, k) in ("exact", "prefix"):
+                return UAE_BRANDS[k]
+    return None
+
+
+def check_link(raw: str, facts_budget: float | None = None) -> dict:
     """Score the domain (learned model), then add link-level FACTS and labelled RULES.
     None of them changes the learned score; they can only raise the level, and each says why."""
     raw = raw.strip()
@@ -93,7 +108,7 @@ def check_link(raw: str) -> dict:
         rules.append("Rule: uses a raw IP address instead of a website name. Official UAE services always use their own named domain.")
         _raise(result, "suspicious")
     else:
-        result = score_domain(host)
+        result = assess(host, tls=False, budget=facts_budget) if facts_budget else score_domain(host)
 
     shown = None
     if not is_ip and (host.startswith("xn--") or ".xn--" in host):
@@ -134,6 +149,15 @@ def check_link(raw: str) -> dict:
         facts.insert(0, "Fact: listed in a public phishing database (Phishing.Database / OpenPhish)")
         _raise(result, "high risk")
 
+    pb = None if is_ip else path_brand(p.path + "?" + p.query)
+    if pb and result.get("verdict") != "official":
+        name, official = pb
+        _, reg_d = split_domain(host)
+        if not any(reg_d == o or reg_d.endswith("." + o) for o in official):
+            rules.append(f"Rule: the link's path names {name}, but the site is {reg_d}, not {', '.join(official)}. "
+                         f"Real {name} pages are only on its own domain.")
+            result["brand"] = result.get("brand") or name
+            _raise(result, "suspicious")
     if re.search(r"(login|signin|verify|update|pay|payment|fine|refund|otp|card|bank|kyc)", (p.path + p.query).lower()):
         notes.append("The link points to a login, payment or verification page")
     if raw.lower().startswith("http://"):

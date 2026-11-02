@@ -1,0 +1,130 @@
+{
+  "weights": [
+    {
+      "feature": "ml_logit",
+      "weight": 1.054,
+      "odds_multiplier": null
+    },
+    {
+      "feature": "brand_typosquat",
+      "weight": -0.232,
+      "odds_multiplier": 0.79
+    },
+    {
+      "feature": "brand_with_lure",
+      "weight": 0.426,
+      "odds_multiplier": 1.53
+    },
+    {
+      "feature": "brand_in_subdomain",
+      "weight": 2.189,
+      "odds_multiplier": 8.93
+    },
+    {
+      "feature": "brand_homoglyph",
+      "weight": 0.044,
+      "odds_multiplier": 1.04
+    },
+    {
+      "feature": "brand_other_mention",
+      "weight": 0.396,
+      "odds_multiplier": 1.49
+    },
+    {
+      "feature": "fake_country_label",
+      "weight": 0.209,
+      "odds_multiplier": 1.23
+    },
+    {
+      "feature": "risky_tld",
+      "weight": 0.247,
+      "odds_multiplier": 1.28
+    },
+    {
+      "feature": "free_host",
+      "weight": 2.279,
+      "odds_multiplier": 9.76
+    },
+    {
+      "feature": "many_hyphens",
+      "weight": -0.827,
+      "odds_multiplier": 0.44
+    },
+    {
+      "feature": "lure_word",
+      "weight": -0.086,
+      "odds_multiplier": 0.92
+    },
+    {
+      "feature": "deep_subdomain",
+      "weight": 1.729,
+      "odds_multiplier": 5.64
+    },
+    {
+      "feature": "digits_in_name",
+      "weight": -0.189,
+      "odds_multiplier": 0.83
+    }
+  ],
+  "thresholds": {
+    "high": 0.8354582337106692,
+    "suspicious": 0.587241484926127
+  },
+  "results": {
+    "auc": 0.951,
+    "at_suspicious": {
+      "precision": 0.954,
+      "recall": 0.841,
+      "f1": 0.894,
+      "false_positive_rate": 0.0406,
+      "confusion": {
+        "tp": 4205,
+        "fp": 203,
+        "tn": 4797,
+        "fn": 795
+      }
+    },
+    "at_high": {
+      "precision": 0.993,
+      "recall": 0.771,
+      "f1": 0.868,
+      "false_positive_rate": 0.0058,
+      "confusion": {
+        "tp": 3854,
+        "fp": 29,
+        "tn": 4971,
+        "fn": 1146
+      }
+    },
+    "legit_hostnames_flagged_suspicious_or_higher": 0.0032,
+    "legit_hostnames_flagged_high": 0.0,
+    "uae_fakes": {
+      "high risk": 57,
+      "suspicious": 6,
+      "no warning signs": 3,
+      "total": 66
+    },
+    "uae_missed": [
+      "aramex.valeriair.com",
+      "emirates-post.org",
+      "epg.portal.tracking.ae-payonline.brandsoptima.com"
+    ],
+    "score_distribution_uae": {
+      "min": 48,
+      "median": 99,
+      "max": 99,
+      "at_100": 39
+    },
+    "with_rules": {
+      "uae_fakes": {
+        "high risk": 57,
+        "suspicious": 9,
+        "missed": 0,
+        "total": 66
+      },
+      "legit_test_flagged": 0.0406,
+      "legit_hostnames_flagged": 0.0038
+    }
+  },
+  "trained_at": "2026-11-01 18:06:15 UTC"
+}

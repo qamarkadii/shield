@@ -90,6 +90,16 @@ Approved by a Shield analyst before sending. Do not open the domain in a normal 
 """)
     msg.add_attachment(json.dumps(ev, ensure_ascii=False, indent=2).encode("utf-8"),
                        maintype="application", subtype="json", filename="shield_evidence.json")
+    # evidence pack (evidence.py), if the analyst made one: report, screenshot, full evidence
+    if det.get("evidence"):
+        from .evidence import EVIDENCE
+        folder = os.path.join(EVIDENCE, det["evidence"].strip("/").split("/")[1])
+        for name, (mt, st) in {"report.html": ("text", "html"), "screenshot.png": ("image", "png"),
+                               "evidence.json": ("application", "json")}.items():
+            p = os.path.join(folder, name)
+            if os.path.isfile(p) and os.path.getsize(p) < 5_000_000:
+                with open(p, "rb") as f:
+                    msg.add_attachment(f.read(), maintype=mt, subtype=st, filename=f"evidence_{name}")
     return msg
 
 

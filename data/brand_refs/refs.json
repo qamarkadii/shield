@@ -1,0 +1,317 @@
+{
+ "salik": {
+  "brand": "Salik",
+  "official": [
+   "salik.ae"
+  ],
+  "favicon_sha256": "48d9e4e4c5248e7abdf2893e281dc2388f5eca1384b39f561136068c0a8b1533",
+  "title": "الصفحة الرئيسية"
+ },
+ "uaepass": {
+  "brand": "UAE PASS",
+  "official": [
+   "uaepass.ae"
+  ],
+  "favicon_sha256": "23a7f9574879d8c5cb9a11a5a32695182ff819be50f478f653762f48c4703463",
+  "title": "UAE PASS | Home"
+ },
+ "dubaipolice": {
+  "brand": "Dubai Police",
+  "official": [
+   "dubaipolice.gov.ae"
+  ],
+  "favicon_sha256": "438362e942105b73a1b296c13ff00c9040f1c357ea2b00ec2e1dbe06a8967680",
+  "title": "Dubai Police - Smart Secure Together"
+ },
+ "adpolice": {
+  "brand": "Abu Dhabi Police",
+  "official": [
+   "adpolice.gov.ae"
+  ],
+  "favicon_sha256": "99896e600f0bb4cc6998250b9e911ab560046a4123d0935404daf8ff442ee661",
+  "title": "الصفحة الرئيسية | عن شرطة أبوظبي"
+ },
+ "emiratespost": {
+  "brand": "Emirates Post",
+  "official": [
+   "emiratespost.ae"
+  ],
+  "favicon_sha256": "a9d2327159946c42dc56bd96d0992a3dd2749b3163ef4d0f7654aa5715d46184",
+  "title": "Emirates Post - Delivering Happiness Wherever You Are | Emirates post"
+ },
+ "etisalat": {
+  "brand": "Etisalat (e&)",
+  "official": [
+   "etisalat.ae",
+   "eand.com"
+  ],
+  "favicon_sha256": "87f741e2c569de79fd47c39b30ac145e0ef9e7a6c677012f16301f5a595bc382",
+  "title": "etisalat UAE | Mobile plans, TV & Internet plans, WiFi & Smartphones"
+ },
+ "eim": {
+  "brand": "Etisalat (e&) webmail",
+  "official": [
+   "eim.ae"
+  ],
+  "favicon_sha256": null,
+  "title": "My Email - Etisalat by e& Internet Mail"
+ },
+ "aramex": {
+  "brand": "Aramex",
+  "official": [
+   "aramex.com"
+  ],
+  "favicon_sha256": "736c8d7dc07e4b861f3ec78f97c9b7398ab814b7f4d0e700cdb99e9b57d7688f",
+  "title": "Access Denied"
+ },
+ "emiratesnbd": {
+  "brand": "Emirates NBD",
+  "official": [
+   "emiratesnbd.com"
+  ],
+  "favicon_sha256": "5a5cdbe0054a43bbb16f6225cf1e6a088d4b2626b78a7fd7b98ed3cffbd23619",
+  "title": "Emirates NBD | Financial Services and Online Banking in Dubai and UAE"
+ },
+ "adcb": {
+  "brand": "ADCB",
+  "official": [
+   "adcb.com"
+  ],
+  "favicon_sha256": "76343fe8c8f6dbacfac8c95e4e212e8c4f07be06817d94bb0de2fbff42155ff3",
+  "title": "ADCB | A leading banking institution in the UAE"
+ },
+ "mashreq": {
+  "brand": "Mashreq",
+  "official": [
+   "mashreq.com",
+   "mashreqbank.com"
+  ],
+  "favicon_sha256": null,
+  "title": "Web Page Blocked"
+ },
+ "rta": {
+  "brand": "RTA",
+  "official": [
+   "rta.ae"
+  ],
+  "favicon_sha256": "16a880acc974adbfab87bdc0037bf4958d25d4bdfebd43388298a4e57a7909ab",
+  "title": "هيئة الطرق والمواصلات - الصفحة الرئيسية"
+ },
+ "tdra": {
+  "brand": "TDRA",
+  "official": [
+   "tdra.gov.ae"
+  ],
+  "favicon_sha256": null,
+  "title": "هيئة تنظيم الاتصالات والحكومة الرقمية"
+ },
+ "uaeicp": {
+  "brand": "ICP (Identity and Citizenship)",
+  "official": [
+   "icp.gov.ae"
+  ],
+  "favicon_sha256": "ca6ed641bf2126379e86ceb76eb4e721f9a4da02d10aff9b1e1bff41aace44da",
+  "title": "UAE ICP | الهيئة الاتحادية للهوية والجنسية والجمارك وأمن المنافذ"
+ },
+ "gdrfa": {
+  "brand": "GDRFA Dubai",
+  "official": [
+   "gdrfad.gov.ae"
+  ],
+  "favicon_sha256": "2895086795200c84483c49ae5462c5cdaeb2d4600154b1862444bac49162ea20",
+  "title": "General Directorate of Identity and Foreigners Affairs-Dubai"
+ },
+ "mohre": {
+  "brand": "MOHRE",
+  "official": [
+   "mohre.gov.ae"
+  ],
+  "favicon_sha256": "f6521b40db9568a99a52e8d8028baabd64abb9fe788bd3b479c96cc741afda2e",
+  "title": "وزارة الموارد البشرية والتوطين - دولة الإمارات - MOHRE"
+ },
+ "mohap": {
+  "brand": "MOHAP",
+  "official": [
+   "mohap.gov.ae"
+  ],
+  "favicon_sha256": "9f87ecba3d89ab2dee34e8cbbb58c6dfec735822adcdba91856b765afe631176",
+  "title": "الرئيسة | وزارة الصحة ووقاية المجتمع - الإمارات العربية المتحدة"
+ },
+ "dewa": {
+  "brand": "DEWA",
+  "official": [
+   "dewa.gov.ae"
+  ],
+  "favicon_sha256": "ef264421b311a6f27e88fba40cd5f520abc46c7d478501fb8abb938c7c1695d2",
+  "title": "Access Denied"
+ },
+ "addc": {
+  "brand": "ADDC",
+  "official": [
+   "addc.ae"
+  ],
+  "favicon_sha256": null,
+  "title": "Not Found"
+ },
+ "tamm": {
+  "brand": "TAMM Abu Dhabi",
+  "official": [
+   "tamm.abudhabi"
+  ],
+  "favicon_sha256": "587497ef7dbdef1ac146a29297c27cf49ab4d59f36ab32049aa2bf275d2f174c",
+  "title": "TAMM - Abu Dhabi Government Services"
+ },
+ "dubaicustoms": {
+  "brand": "Dubai Customs",
+  "official": [
+   "dubaicustoms.gov.ae"
+  ],
+  "favicon_sha256": "57bae969f80e5d326466a463cc5e79eed3f606cd4abb76af895374752079ce2e",
+  "title": "جمارك دبي – التجارة الذكية وخدمات الحدود"
+ },
+ "dubaimunicipality": {
+  "brand": "Dubai Municipality",
+  "official": [
+   "dm.gov.ae"
+  ],
+  "favicon_sha256": "b4de76c98bfe7df98cb9f86aaaa91af8436ab77e76086389630daa2207102eac",
+  "title": "Dubai Municipality - Home"
+ },
+ "dubaitaxi": {
+  "brand": "Dubai Taxi",
+  "official": [
+   "dubaitaxi.ae"
+  ],
+  "favicon_sha256": "bc65a7efa4bd7f97091e10b8110e1f0c0d215362ffbfb64980d668b1ff0f9b25",
+  "title": "Comprehensive Taxi Services | Dubai Taxi Company"
+ },
+ "seha": {
+  "brand": "SEHA",
+  "official": [
+   "seha.ae"
+  ],
+  "favicon_sha256": "6bba1b28763d8b6bf4eb0dbee6a9d4c7ee8ed2b9bd15530356206107592be188",
+  "title": "Seha - Hospitals"
+ },
+ "bankfab": {
+  "brand": "First Abu Dhabi Bank",
+  "official": [
+   "bankfab.com"
+  ],
+  "favicon_sha256": "972919c924cab5254d38e36059b9698811b5fb01e2df5eb52a814e08a2135627",
+  "title": "Personal Banking & Financial Services | FAB UAE"
+ },
+ "adib": {
+  "brand": "ADIB",
+  "official": [
+   "adib.ae"
+  ],
+  "favicon_sha256": "c0666d6897a00bfd8aab02005c239902adbba3e5a0302d69e630e00ccd64855f",
+  "title": "Financial & Banking Services In The UAE Cards, Financing, Accounts And More | ADIB Abu Dhabi Islamic Bank"
+ },
+ "dib": {
+  "brand": "Dubai Islamic Bank",
+  "official": [
+   "dib.ae"
+  ],
+  "favicon_sha256": "d532edf3a8786d2e76379c0bf801d67b6f5b68b4668de649886df195aaf8e191",
+  "title": "Best Islamic Bank in the UAE | DIB"
+ },
+ "rakbank": {
+  "brand": "RAKBANK",
+  "official": [
+   "rakbank.ae"
+  ],
+  "favicon_sha256": "bf264d5dbd1528b69e0eee30fecb7cfba7b9bee8edd38adda1717412c1485fc7",
+  "title": "Rakbank | Digital with a Human Touch"
+ },
+ "ajmanbank": {
+  "brand": "Ajman Bank",
+  "official": [
+   "ajmanbank.ae"
+  ],
+  "favicon_sha256": "5bc29d5e16d40c9d655d506ce948e6a86521b0851fce5cceb2421049ae9ffefb",
+  "title": "Ajman Bank"
+ },
+ "cbuae": {
+  "brand": "Central Bank of the UAE",
+  "official": [
+   "centralbank.ae"
+  ],
+  "favicon_sha256": "367d39d4939c78979153e9f9560c40d21c8fdb6de6a3d452bc1ad26ff122bde6",
+  "title": "مصرف الإمارات العربية المتحدة المركزي | الصفحة الرئيسية"
+ },
+ "alansari": {
+  "brand": "Al Ansari Exchange",
+  "official": [
+   "alansariexchange.com"
+  ],
+  "favicon_sha256": "1e55341ae6f65613f86a41bcaa8e187de55bdc431e43db88d2dc1249290cdfad",
+  "title": "Al Ansari Exchange"
+ },
+ "luluexchange": {
+  "brand": "LuLu Exchange",
+  "official": [
+   "luluexchange.com"
+  ],
+  "favicon_sha256": "687b80658a2656d0d9c525053475204298f1d9352bd94a7c63f221dfd953c89b",
+  "title": "Money Exchange UAE | UAE Exchange Rates Today - LuLu Exchange UAE"
+ },
+ "adnoc": {
+  "brand": "ADNOC",
+  "official": [
+   "adnoc.ae",
+   "adnocdistribution.ae"
+  ],
+  "favicon_sha256": null,
+  "title": "ADNOC | Home"
+ },
+ "enoc": {
+  "brand": "ENOC",
+  "official": [
+   "enoc.com"
+  ],
+  "favicon_sha256": null,
+  "title": "ENOC - Emirates National Oil Company ,U.A.E"
+ },
+ "flyemirates": {
+  "brand": "Emirates (airline)",
+  "official": [
+   "emirates.com"
+  ],
+  "favicon_sha256": "985829e36de39448697d796f80d4ce99eb492f16f7afb2ce84a5a3d171105213",
+  "title": "Book Flights | Find Hotels and Car Rental | Emirates"
+ },
+ "dubaidutyfree": {
+  "brand": "Dubai Duty Free",
+  "official": [
+   "dubaidutyfree.com"
+  ],
+  "favicon_sha256": null,
+  "title": "Dubai Duty Free Home Page"
+ },
+ "careem": {
+  "brand": "Careem",
+  "official": [
+   "careem.com"
+  ],
+  "favicon_sha256": "31f4af022e284b6a3ec58b7cde01162df4d6f4bec0df13c74b6b918331011599",
+  "title": "The everything app | Careem"
+ },
+ "talabat": {
+  "brand": "Talabat",
+  "official": [
+   "talabat.com"
+  ],
+  "favicon_sha256": "760ab88e78550e43c488703063c5b31744a5d04ef37b3b746c694a7d5c22d725",
+  "title": "Food delivery from your nearest restaurants in UAE | Talabat"
+ },
+ "emaar": {
+  "brand": "Emaar",
+  "official": [
+   "emaar.com"
+  ],
+  "favicon_sha256": "ba67e2bcf015f09614dbdf66fc4731e0cf78eda9f5a67383cd81858ba5f828f7",
+  "title": "Leading Real Estate Property Developer in Dubai, UAE"
+ }
+}

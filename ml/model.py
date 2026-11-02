@@ -66,6 +66,7 @@ LIVE_PREVALENCE = 0.01          # assumed share of phishing among live certifica
 ANALYST_WEIGHT = 25.0
 N_REAL_HOSTS = 40_000
 N_SYNTH_UAE = 3_000
+UAE_REAL_WEIGHT = 5.0           # real UAE fakes are few; each counts as 5 rows
 TEXT_C_GRID = (1.0, 4.0, 16.0)
 MASK_PLATFORMS = False          # see features.text_input: tested, made free-host false alarms worse
 SANITY = ["react-docs.vercel.app", "my-portfolio.netlify.app", "team-blog.github.io",
@@ -76,18 +77,66 @@ SANITY = ["react-docs.vercel.app", "my-portfolio.netlify.app", "team-blog.github
 
 # ---------- data ----------
 
+def _csv(name, cols=("domain",)):
+    p = os.path.join(DATA, name)
+    return pd.read_csv(p).fillna("") if os.path.exists(p) else pd.DataFrame(columns=list(cols))
+
+
 def load_eval_sets():
-    test = pd.read_csv(os.path.join(DATA, "shield_test_domains.csv"))
-    uae = pd.read_csv(os.path.join(DATA, "uae_phishing_domains_real.csv"))
-    frozen = pd.read_csv(FROZEN_UAE) if os.path.exists(FROZEN_UAE) else pd.DataFrame(columns=["domain"])
+    test = _csv("shield_test_domains.csv")
+    uae = _csv("uae_phishing_domains_real.csv")
+    frozen = _csv("uae_holdout_frozen.csv")
     for df in (test, uae, frozen):
         df["domain"] = df.domain.map(clean)
     return test, uae, frozen
 
 
+def never_train_domains():
+    """Every name that must stay unseen: the never-seen dev/frozen sets (ml/build_unseen.py),
+    the real UAE dev/frozen parts (ml/collect_uae.py), and the sites the facts model is
+    trained on (ml/train_facts.py), so its name-score input is out-of-sample."""
+    names = []
+    for f in ("unseen_dev.csv", "unseen_frozen.csv", "uae_test_frozen.csv"):
+        names += _csv(f).domain.tolist()
+    c = _csv("uae_phishing_collected.csv", ("domain", "part"))
+    names += c[c.part == "dev"].domain.tolist()
+    return [clean(d) for d in names]
+
+
+def facts_owners():
+    p = os.path.join(DATA, "facts_owners.txt")
+    return set(open(p, encoding="utf-8").read().split()) if os.path.exists(p) else set()
+
+
 def held_out_owners(platforms):
     test, uae, frozen = load_eval_sets()
-    return {owner(d, platforms) for d in pd.concat([test.domain, uae.domain, frozen.domain])}
+    names = pd.concat([test.domain, uae.domain, frozen.domain, pd.Series(never_train_domains(), dtype=str)])
+    return {owner(d, platforms) for d in names} | facts_owners()
+
+
+def real_uae_train(held, platforms):
+    """Real UAE-targeted phishing, TRAIN part only (ml/collect_uae.py). Plain business names
+    ('carbatterydubai.com', probably hacked sites) and innocent names whose LINK named a brand
+    are left out: they would teach the model that 'dubai' or any name is phishing."""
+    c = _csv("uae_phishing_collected.csv", ("domain", "part", "category"))
+    c = c[(c.part == "train") & c.category.isin(["brand", "fake_ae", "uae_lure"])].copy()
+    c["domain"] = c.domain.map(clean)
+    c["owner"] = [owner(d, platforms) for d in c.domain]
+    c = c[~c.owner.isin(held)]
+    return c.assign(is_phishing=1, weight=UAE_REAL_WEIGHT, source="uae_real")[
+        ["domain", "is_phishing", "weight", "source", "owner"]]
+
+
+def unseen_train(held, platforms):
+    """More phishing (newer/older lists) and small legit sites (Tranco 250k-1M, .ae) never in the
+    base file (ml/build_unseen.py), train part only."""
+    u = _csv("unseen_train.csv", ("domain", "is_phishing"))
+    if not len(u):
+        return u
+    u["domain"] = u.domain.map(clean)
+    u["owner"] = [owner(d, platforms) for d in u.domain]
+    u = u[~u.owner.isin(held)]
+    return u.assign(weight=1.0, source="unseen_train")[["domain", "is_phishing", "weight", "source", "owner"]]
 
 
 def _static(domains, ranks, platforms):
@@ -203,13 +252,18 @@ def build(train: pd.DataFrame, log=print, seed=SEED):
     synth["weight"] = 1.0
     log(f"Synthetic UAE impersonations (training only): {len(synth):,}")
 
-    extra = pd.concat([real_train.assign(is_phishing=0, weight=1.0, source="real_host")[
+    uae_real = real_uae_train(held, platforms)
+    more = unseen_train(held, platforms)
+    log(f"Real UAE-targeted phishing (train part): {len(uae_real):,} (weight x{UAE_REAL_WEIGHT:g}); "
+        f"extra never-in-base rows: {len(more):,} ({int(more.is_phishing.sum()) if len(more) else 0:,} phishing)")
+    extra = pd.concat([uae_real, more,
+                       real_train.assign(is_phishing=0, weight=1.0, source="real_host")[
                            ["domain", "is_phishing", "weight", "source", "owner"]],
                        synth.assign(owner=[owner(d, platforms) for d in synth.domain])], ignore_index=True)
     data = pd.concat([train, extra], ignore_index=True).drop_duplicates("domain", keep="first").reset_index(drop=True)
 
     # held-out slice for thresholds + calibration: real rows only, whole owners
-    cand = data[data.source.isin(["base", "real_host"])]
+    cand = data[data.source.isin(["base", "real_host", "unseen_train"])]
     _, hi = next(GroupShuffleSplit(n_splits=1, test_size=0.15, random_state=seed).split(cand, groups=cand.owner))
     hold_idx = cand.index[hi]
     hold_owners = set(data.owner[hold_idx])
@@ -283,6 +337,8 @@ def build(train: pd.DataFrame, log=print, seed=SEED):
               "data_summary": {"base_rows": int((data.source == "base").sum()),
                                "real_hostnames": int((data.source == "real_host").sum()),
                                "synthetic_uae": int((data.source == "synthetic_uae").sum()),
+                               "real_uae": int((data.source == "uae_real").sum()),
+                               "never_in_base": int((data.source == "unseen_train").sum()),
                                "analyst": int((data.source == "analyst").sum()),
                                "fresh_feed": int((data.source == "feed").sum()),
                                "purged_for_leakage": int(purged.sum()),
@@ -384,6 +440,11 @@ def evaluate(bundle, log=print):
     ps, pcs, _, _ = riskmodel.predict(bundle, SANITY)
     out["sanity_examples"] = {d: f"{level(a, th)} ({min(99, int(100 * b))})" for d, a, b in zip(SANITY, ps, pcs)}
     out["combiner"] = {"kept": bundle["combiner_kind"], **bundle["combiner_scores"]}
+    try:            # data the model never saw (dev = inspected, frozen = totals only)
+        import eval_unseen
+        out["never_seen"] = eval_unseen.evaluate(bundle)
+    except FileNotFoundError as ex:
+        log(f"  never-seen sets missing ({ex}); run ml/collect_uae.py and ml/build_unseen.py")
     for k, v in out.items():
         log(f"  {k}: {v}")
     return out

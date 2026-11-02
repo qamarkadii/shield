@@ -8,3 +8,4 @@ data/shield.db
 data/outbox/
 data/feeds/
 ml/*.joblib
+frontend/node_modules

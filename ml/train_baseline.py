@@ -72,6 +72,8 @@ def write_model_card(bundle, results, path):
         f"- Base: `data/shield_training_domains.csv` (PhiUSIIL 2024, CC BY 4.0; Phishing.Database, MIT; top-10k list): {ds['base_rows']:,} rows used.",
         f"- **Real legitimate hostnames** (Cisco Umbrella top-1M under Tranco top-100k sites, plus popular hosting tenants): {ds['real_hostnames']:,}.",
         f"- **Synthetic UAE impersonations** (`ml/synth_uae.py`, training only, never evaluated on): {ds['synthetic_uae']:,}.",
+        f"- **Real UAE-targeted phishing** (`ml/collect_uae.py`, from ~2.5M public phishing records; train part only, weight ×5): {ds.get('real_uae', 0):,}.",
+        f"- **Never-in-base data** (`ml/build_unseen.py`: newer/older phishing lists, Tranco sites ranked 250k–1M and .ae sites; train part only): {ds.get('never_in_base', 0):,}.",
         f"- Analyst labels (weight ×25): {ds['analyst']:,}. Fresh feed domains: {ds['fresh_feed']:,}.",
         f"- **Leakage removed:** {ds['purged_for_leakage']:,} training rows whose *owner* (registered domain, or tenant on one of "
         f"{ds['platforms']} detected hosting platforms) appears in an evaluation set. All splits keep each owner on one side.",
@@ -136,11 +138,34 @@ def write_model_card(bundle, results, path):
         f = results["uae_frozen_holdout"]
         lines += [f"**Frozen UAE holdout** (analyst-confirmed, never trained on or used for rules): {f['high risk']} High, "
                   f"{f['suspicious']} Suspicious, {f['no warning signs']} missed of {f['total']} (CI {f['detection_rate_ci']}).", ""]
+    ns = results.get("never_seen")
+    if ns:
+        def row(name, r, good):
+            return (f"| {name} | {r['n']:,} | {_pct(r['model_suspicious_or_higher'])} / {_pct(r['model_high'])} | "
+                    f"{_pct(r['app_suspicious_or_higher'])} / {_pct(r['app_high'])} | {good} |")
+        lines += ["## Never-seen data (sites never used for training, thresholds or calibration)", "",
+                  "*Dev* parts: numbers and mistakes are inspected to fix the logic. *Frozen* parts: only these totals are ever looked at.",
+                  "Columns: Suspicious-or-higher / High risk, for the model alone and for the full app (model + labelled UAE rules).", "",
+                  "| Set | n | Model alone | Full app | |", "|---|---|---|---|---|"]
+        for part in ("dev", "frozen"):
+            u = ns[f"unseen_{part}"]
+            lines.append(row(f"Phishing, new lists ({part}); AUC {u.get('auc')}", u["phishing"], "caught"))
+            lines.append(row(f"Legit small sites + .ae ({part})", u["legit"], "false alarms"))
+            if "tranco_ae" in u["legit_by_source"]:
+                lines.append(row(f"  of which legit .ae sites ({part})", u["legit_by_source"]["tranco_ae"], "false alarms"))
+            a = ns[f"uae_{part}"]
+            lines.append(row(f"**Real UAE-targeted phishing ({part})**", a["all"], "caught"))
+            for k, v in a["by_category"].items():
+                lines.append(row(f"  UAE: {k} ({part})", v, "caught"))
+        lines += ["", "UAE categories: *brand* imitates a registered UAE brand; *fake_ae* puts 'ae' inside a foreign name; "
+                  "*uae_lure* a UAE place + lure word; *path* an innocent name whose link path names a UAE brand "
+                  "(only the link check can see that, so the model alone misses these by design).", ""]
     lines += ["Sanity examples: " + "; ".join(f"`{d}` {v}" for d, v in results["sanity_examples"].items()), "",
               "## Limits",
               "",
               "- Looks at the domain name only (plus popularity). A fake with an innocent-looking name and no brand can be missed.",
-              "- Domain age, certificate issuer, DNS and page content are not used yet: the public training lists don't have them.",
+              "- The NAME model doesn't see domain age, certificate, DNS or page content. Those are added live by the facts model "
+              "(`ml/train_facts.py`, see `ml/facts_report.json`) and the isolated page check, which can't be trained from the old lists.",
               "- Popularity helps a lot but is partly an artefact of how the legit set was built (top-sites list); see the 'not popular' row.",
               f"- Precision at {LIVE_PREVALENCE:.0%} is an estimate from test recall and false-alarm rate; the real live rate is unknown.",
               "- Labels come from public lists, which contain some errors; synthetic UAE fakes follow known patterns only.",

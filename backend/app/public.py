@@ -5,6 +5,7 @@ It can ONLY:
   GET  /             the bilingual citizen page
   POST /api/check    check one link (nothing is stored)
   POST /api/report   send a checked link to the analysts' review queue (only if the person chooses to)
+  POST /api/chat     chat assistant: explains Shield's check of any link in the message (see chat.py)
   GET  /api/health
 
 It has no admin functions (no alerts, retraining, radar or labels), no API docs page,
@@ -30,7 +31,14 @@ from .registry import UAE_BRANDS
 app = FastAPI(title="Shield public check", docs_url=None, redoc_url=None, openapi_url=None)
 HERE = os.path.dirname(__file__)
 
-LIMITS = {"check": (20, 60), "report": (5, 60)}      # requests per seconds, per visitor
+
+@app.on_event("startup")
+def _warm_up():
+    # Load the model in the background so the first visitor's check/chat isn't slow (~7 s cold).
+    import threading
+    threading.Thread(target=lambda: linkcheck.check_link("example.org"), daemon=True).start()
+
+LIMITS = {"check": (20, 60), "report": (5, 60), "chat": (12, 60)}      # requests per seconds, per visitor
 _hits = defaultdict(deque)
 
 
@@ -56,6 +64,15 @@ class Link(BaseModel):
     url: str = Field(..., max_length=2000)
 
 
+class ChatMessage(BaseModel):
+    role: str = Field(..., max_length=16)
+    content: str = Field(..., max_length=4000)
+
+
+class Chat(BaseModel):
+    messages: list[ChatMessage] = Field(..., min_length=1, max_length=40)
+
+
 def _official_sites(brand):
     if not brand:
         return []
@@ -70,7 +87,8 @@ def _public_view(r: dict) -> dict:
     # Small model signs on a "no warning signs" result only confuse a citizen
     # ("looks randomly generated" on google.com), so they're shown only with a warning.
     signals = [] if r["verdict"] in ("no warning signs", "official") else \
-        [s["text"] for s in r.get("signals", []) if s.get("effect", 0) > 0.3]
+        [s["text"] for s in r.get("signals", []) + r.get("fact_signals", [])
+         if s.get("effect", 0) > 0.3 or (s.get("feature") == "age_days_log" and s.get("effect", 0) > 0)]
     cap = lambda x: x[:1].upper() + x[1:]
     facts = [cap(x.replace("Fact: ", "", 1)) for x in r.get("facts", [])]
     rules = [cap(x.replace("Rule: ", "", 1)) for x in r.get("rules", [])]
@@ -94,6 +112,20 @@ def _public_view(r: dict) -> dict:
 @app.get("/", include_in_schema=False)
 def page():
     return FileResponse(os.path.join(HERE, "static", "public.html"))
+
+
+# AIDA showcase website (3D hero, live demo, model performance), built from frontend/ into frontend/dist.
+# Open it at /site/ . Rebuild after changing the site:  cd frontend && npm install && npm run build:shield
+SITE = os.path.join(HERE, "..", "..", "frontend", "dist")
+if os.path.isdir(SITE):
+    from fastapi.responses import RedirectResponse
+    from fastapi.staticfiles import StaticFiles
+
+    @app.get("/site", include_in_schema=False)
+    def site_redirect():
+        return RedirectResponse("/site/")
+
+    app.mount("/site", StaticFiles(directory=SITE, html=True), name="site")
 
 
 @app.get("/api/health")
@@ -121,3 +153,14 @@ def report(body: Link, request: Request):
         return {"stored": False, "message": "Official site, nothing to report."}
     db.add_detection(r, "citizen", url=body.url.strip()[:2000])
     return {"stored": True}
+
+
+@app.post("/api/chat")
+def chat(body: Chat, request: Request):
+    """Streams NDJSON: Shield's check of each link in the message, then the assistant's explanation."""
+    from fastapi.responses import StreamingResponse
+    from . import chat as chatbot
+    _limit(request, "chat")
+    msgs = [m.model_dump() for m in body.messages]
+    return StreamingResponse(chatbot.run(msgs, _public_view), media_type="application/x-ndjson",
+                             headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})

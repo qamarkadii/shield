@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@theme {
+ --color-bg:#05060A; --color-threat:#FF2E4D; --color-protect:#00E5FF; --color-ink:#EDEFF5;
+ --font-sans:'Space Grotesk',sans-serif; --font-mono:'JetBrains Mono',monospace;
+ --spacing-1:4px; --spacing-2:8px; --spacing-4:16px; --spacing-6:24px; --spacing-8:32px; --spacing-12:48px; --spacing-16:64px; --spacing-24:96px; --spacing-32:128px;
+ --text-xs:12px; --text-sm:14px; --text-base:16px; --text-lg:20px; --text-xl:24px; --text-2xl:32px; --text-3xl:48px; --text-4xl:72px;
+ --radius-sm:8px; --radius-card:16px; --radius-pill:999px;
+}
+:root { --muted:rgb(237 239 245 / .6); --faint:rgb(237 239 245 / .3); --border:rgb(237 239 245 / .1); --glass:rgb(237 239 245 / .025); --max-width:1200px; --section:var(--spacing-32); --hairline:1px; --duration:240ms; --hero-height:640px; --scene-height:480px; --shadow:0 0 48px rgb(0 229 255 / .12); }
+@media(max-width:1024px){:root{--section:var(--spacing-24)}}
+@media(max-width:640px){:root{--section:var(--spacing-16);--hero-height:720px;--scene-height:400px}}

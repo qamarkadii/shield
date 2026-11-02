@@ -2,254 +2,492 @@
   "weights": [
     {
       "feature": "ml_logit",
-      "avg_effect": 0.416,
+      "avg_effect": 0.557,
       "present_in": 1.0,
-      "odds_multiplier": 1.52
+      "odds_multiplier": 1.75
     },
     {
       "feature": "brand_typosquat",
-      "avg_effect": 1.528,
-      "present_in": 0.0012,
-      "odds_multiplier": 4.61
+      "avg_effect": 1.602,
+      "present_in": 0.002,
+      "odds_multiplier": 4.96
     },
     {
       "feature": "brand_with_lure",
-      "avg_effect": 1.049,
-      "present_in": 0.0012,
-      "odds_multiplier": 2.85
+      "avg_effect": 1.624,
+      "present_in": 0.002,
+      "odds_multiplier": 5.07
     },
     {
       "feature": "brand_in_subdomain",
-      "avg_effect": 1.617,
-      "present_in": 0.0123,
-      "odds_multiplier": 5.04
+      "avg_effect": 1.582,
+      "present_in": 0.0132,
+      "odds_multiplier": 4.86
     },
     {
       "feature": "brand_homoglyph",
-      "avg_effect": 4.068,
-      "present_in": 0.0003,
-      "odds_multiplier": 58.44
+      "avg_effect": 3.286,
+      "present_in": 0.001,
+      "odds_multiplier": 26.74
     },
     {
       "feature": "brand_other_mention",
-      "avg_effect": 0.266,
-      "present_in": 0.0088,
-      "odds_multiplier": 1.3
+      "avg_effect": 0.369,
+      "present_in": 0.0107,
+      "odds_multiplier": 1.45
     },
     {
       "feature": "fake_country_label",
-      "avg_effect": 1.749,
-      "present_in": 0.0002,
-      "odds_multiplier": 5.75
+      "avg_effect": 1.3,
+      "present_in": 0.0003,
+      "odds_multiplier": 3.67
     },
     {
       "feature": "tld_risk",
-      "avg_effect": -0.249,
-      "present_in": 0.9975,
-      "odds_multiplier": 0.78
+      "avg_effect": -0.184,
+      "present_in": 0.9968,
+      "odds_multiplier": 0.83
     },
     {
       "feature": "free_host",
-      "avg_effect": 0.008,
-      "present_in": 0.1455,
-      "odds_multiplier": 1.01
+      "avg_effect": 0.031,
+      "present_in": 0.1437,
+      "odds_multiplier": 1.03
     },
     {
       "feature": "many_hyphens",
-      "avg_effect": -0.232,
-      "present_in": 0.0385,
-      "odds_multiplier": 0.79
+      "avg_effect": -0.215,
+      "present_in": 0.0367,
+      "odds_multiplier": 0.81
     },
     {
       "feature": "lure_word",
-      "avg_effect": 0.326,
-      "present_in": 0.0323,
-      "odds_multiplier": 1.39
-    },
-    {
-      "feature": "deep_subdomain",
-      "avg_effect": 0.229,
-      "present_in": 0.0337,
-      "odds_multiplier": 1.26
-    },
-    {
-      "feature": "digits_in_name",
-      "avg_effect": 0.177,
-      "present_in": 0.0312,
-      "odds_multiplier": 1.19
-    },
-    {
-      "feature": "punycode",
-      "avg_effect": 0.186,
-      "present_in": 0.0007,
-      "odds_multiplier": 1.2
-    },
-    {
-      "feature": "name_entropy",
-      "avg_effect": 0.241,
-      "present_in": 0.9977,
-      "odds_multiplier": 1.27
-    },
-    {
-      "feature": "host_length",
-      "avg_effect": 0.092,
-      "present_in": 0.9418,
-      "odds_multiplier": 1.1
-    },
-    {
-      "feature": "consonant_run",
-      "avg_effect": 0.108,
-      "present_in": 0.5705,
+      "avg_effect": 0.105,
+      "present_in": 0.0405,
       "odds_multiplier": 1.11
     },
     {
+      "feature": "deep_subdomain",
+      "avg_effect": 0.753,
+      "present_in": 0.0222,
+      "odds_multiplier": 2.12
+    },
+    {
+      "feature": "digits_in_name",
+      "avg_effect": -0.089,
+      "present_in": 0.0385,
+      "odds_multiplier": 0.91
+    },
+    {
+      "feature": "punycode",
+      "avg_effect": 0.0,
+      "present_in": 0.0007,
+      "odds_multiplier": 1.0
+    },
+    {
+      "feature": "name_entropy",
+      "avg_effect": 0.012,
+      "present_in": 0.9762,
+      "odds_multiplier": 1.01
+    },
+    {
+      "feature": "host_length",
+      "avg_effect": 0.077,
+      "present_in": 0.9415,
+      "odds_multiplier": 1.08
+    },
+    {
+      "feature": "consonant_run",
+      "avg_effect": 0.068,
+      "present_in": 0.5712,
+      "odds_multiplier": 1.07
+    },
+    {
       "feature": "popularity",
-      "avg_effect": -2.268,
-      "present_in": 0.2045,
-      "odds_multiplier": 0.1
+      "avg_effect": -2.241,
+      "present_in": 0.1442,
+      "odds_multiplier": 0.11
     }
   ],
   "thresholds": {
-    "high": 0.9115818228493271,
-    "suspicious": 0.6732792974296994
+    "high": 0.9139212424569391,
+    "suspicious": 0.6796047194780094
   },
   "raw_thresholds": {
-    "high": 0.9257009107758752,
-    "suspicious": 0.6429825692223604
+    "high": 0.928042772658963,
+    "suspicious": 0.6677561801980563
   },
   "calibration": {
-    "a": 0.8324455815794005,
-    "b": -0.06777740867290767,
-    "prevalence": 0.42529428220964516
+    "a": 0.8663623078692301,
+    "b": -0.04602444711840223,
+    "prevalence": 0.45184655558318826
   },
   "data": {
-    "base_rows": 269935,
-    "real_hostnames": 39834,
+    "base_rows": 269887,
+    "real_hostnames": 39851,
     "synthetic_uae": 3000,
+    "real_uae": 289,
+    "never_in_base": 119965,
     "analyst": 0,
     "fresh_feed": 0,
-    "purged_for_leakage": 6330,
-    "heldout_rows": 46469,
+    "purged_for_leakage": 6378,
+    "heldout_rows": 64336,
     "platforms": 131
   },
   "results": {
-    "auc": 0.943,
+    "auc": 0.947,
     "at_suspicious": {
-      "precision": 0.967,
-      "recall": 0.804,
+      "precision": 0.981,
+      "recall": 0.786,
       "recall_ci": [
-        0.793,
-        0.815
+        0.774,
+        0.797
       ],
-      "f1": 0.878,
-      "false_positive_rate": 0.0278,
+      "f1": 0.873,
+      "false_positive_rate": 0.0154,
       "fpr_ci": [
-        0.024,
-        0.033
+        0.012,
+        0.019
       ],
-      "precision_at_1%_phishing": 0.226,
+      "precision_at_1%_phishing": 0.34,
       "confusion": {
-        "tp": 4020,
-        "fp": 139,
-        "tn": 4861,
-        "fn": 980
+        "tp": 3929,
+        "fp": 77,
+        "tn": 4923,
+        "fn": 1071
       }
     },
     "at_high": {
-      "precision": 0.996,
-      "recall": 0.708,
+      "precision": 0.999,
+      "recall": 0.684,
       "recall_ci": [
-        0.695,
-        0.72
+        0.671,
+        0.697
       ],
-      "f1": 0.827,
-      "false_positive_rate": 0.003,
+      "f1": 0.812,
+      "false_positive_rate": 0.001,
       "fpr_ci": [
-        0.002,
-        0.005
+        0.0,
+        0.002
       ],
-      "precision_at_1%_phishing": 0.704,
+      "precision_at_1%_phishing": 0.874,
       "confusion": {
-        "tp": 3539,
-        "fp": 15,
-        "tn": 4985,
-        "fn": 1461
+        "tp": 3419,
+        "fp": 5,
+        "tn": 4995,
+        "fn": 1581
       }
     },
     "live_prevalence_assumed": 0.01,
-    "calibration_brier": 0.0883,
+    "calibration_brier": 0.0832,
     "legit_not_popular_flagged": {
       "n": 4029,
-      "suspicious_or_higher": 0.0343,
-      "high": 0.0037
+      "suspicious_or_higher": 0.0186,
+      "high": 0.0012
     },
-    "legit_hostnames_flagged_suspicious_or_higher": 0.0334,
-    "legit_hostnames_flagged_high": 0.0036,
+    "legit_hostnames_flagged_suspicious_or_higher": 0.032,
+    "legit_hostnames_flagged_high": 0.0034,
     "real_legit_hostnames": {
-      "n": 42284,
-      "suspicious_or_higher": 0.0201,
-      "high": 0.0087,
-      "free_host_n": 565,
-      "free_host_suspicious_or_higher": 0.4602
+      "n": 42166,
+      "suspicious_or_higher": 0.0194,
+      "high": 0.0096,
+      "free_host_n": 559,
+      "free_host_suspicious_or_higher": 0.4741
     },
     "uae_fakes": {
-      "high risk": 57,
-      "suspicious": 6,
-      "no warning signs": 3,
+      "high risk": 64,
+      "suspicious": 1,
+      "no warning signs": 1,
       "total": 66,
       "detection_rate_ci": [
-        0.875,
-        0.984
+        0.919,
+        0.997
       ],
       "note": "development set: seen while designing the rules, so optimistic"
     },
     "uae_missed": [
-      "acm1.eim.ae.iwc.static.c11n.all.sirija.indramayukab.go.id",
-      "acm2.eim.ae.iwc.static.normoeagles.com.au",
       "aramexaeo3.temp.swtest.ru"
     ],
     "score_distribution_uae": {
-      "min": 35,
+      "min": 67,
       "median": 99,
       "max": 99,
-      "at_99": 47
+      "at_99": 58
     },
     "sanity_examples": {
-      "react-docs.vercel.app": "high risk (95)",
+      "react-docs.vercel.app": "high risk (99)",
       "my-portfolio.netlify.app": "high risk (99)",
       "team-blog.github.io": "high risk (98)",
       "eu-west-1.console.aws.amazon.com": "no warning signs (0)",
       "a1b2c3.cloudfront.net": "no warning signs (0)",
       "careers.dubaiholding.com": "high risk (91)",
-      "login.microsoftonline.com": "no warning signs (35)",
-      "shop.alfuttaim.ae": "no warning signs (29)",
-      "bestpizza-dubai.com": "no warning signs (66)",
-      "emirates-post.org": "high risk (96)",
+      "login.microsoftonline.com": "no warning signs (30)",
+      "shop.alfuttaim.ae": "no warning signs (14)",
+      "bestpizza-dubai.com": "no warning signs (67)",
+      "emirates-post.org": "high risk (98)",
       "aramex.valeriair.com": "high risk (99)",
-      "salik-pay.com": "high risk (98)",
+      "salik-pay.com": "high risk (97)",
       "xn--slik-53d.com": "high risk (99)"
     },
     "combiner": {
       "kept": "gradient_boosting",
       "gradient_boosting": {
-        "holdout_log_loss": 0.2985,
-        "holdout_auc": 0.9354
+        "holdout_log_loss": 0.3215,
+        "holdout_auc": 0.9264
       },
       "logistic_regression": {
-        "holdout_log_loss": 0.3058,
-        "holdout_auc": 0.9317
+        "holdout_log_loss": 0.33,
+        "holdout_auc": 0.9234
       }
     },
-    "with_rules": {
-      "uae_fakes": {
-        "high risk": 57,
-        "suspicious": 9,
-        "missed": 0,
-        "total": 66
+    "never_seen": {
+      "unseen_dev": {
+        "phishing": {
+          "n": 10000,
+          "model_suspicious_or_higher": 0.7277,
+          "model_high": 0.5949,
+          "app_suspicious_or_higher": 0.7278,
+          "app_high": 0.5949,
+          "kind": "detection rate (higher is better)"
+        },
+        "legit": {
+          "n": 10000,
+          "model_suspicious_or_higher": 0.0609,
+          "model_high": 0.0108,
+          "app_suspicious_or_higher": 0.0611,
+          "app_high": 0.0108,
+          "kind": "false-alarm rate (lower is better)"
+        },
+        "phishing_by_source": {
+          "destroylist.txt": {
+            "n": 2485,
+            "model_suspicious_or_higher": 0.6535,
+            "model_high": 0.4414,
+            "app_suspicious_or_higher": 0.6535,
+            "app_high": 0.4414,
+            "kind": "detection rate (higher is better)"
+          },
+          "pdb_domains_2025-11.txt": {
+            "n": 3908,
+            "model_suspicious_or_higher": 0.7728,
+            "model_high": 0.672,
+            "app_suspicious_or_higher": 0.773,
+            "app_high": 0.672,
+            "kind": "detection rate (higher is better)"
+          },
+          "pdb_domains_2026-05.txt": {
+            "n": 92,
+            "model_suspicious_or_higher": 0.7935,
+            "model_high": 0.7174,
+            "app_suspicious_or_higher": 0.7935,
+            "app_high": 0.7174,
+            "kind": "detection rate (higher is better)"
+          },
+          "pdb_links_active.txt": {
+            "n": 3021,
+            "model_suspicious_or_higher": 0.7246,
+            "model_high": 0.6111,
+            "app_suspicious_or_higher": 0.7246,
+            "app_high": 0.6111,
+            "kind": "detection rate (higher is better)"
+          },
+          "pdb_links_inactive.txt": {
+            "n": 494,
+            "model_suspicious_or_higher": 0.751,
+            "model_high": 0.6356,
+            "app_suspicious_or_higher": 0.751,
+            "app_high": 0.6356,
+            "kind": "detection rate (higher is better)"
+          }
+        },
+        "legit_by_source": {
+          "tranco_250k_1m": {
+            "n": 9872,
+            "model_suspicious_or_higher": 0.0615,
+            "model_high": 0.0109,
+            "app_suspicious_or_higher": 0.0616,
+            "app_high": 0.0109,
+            "kind": "false-alarm rate (lower is better)"
+          },
+          "tranco_ae": {
+            "n": 128,
+            "model_suspicious_or_higher": 0.0156,
+            "model_high": 0.0,
+            "app_suspicious_or_higher": 0.0234,
+            "app_high": 0.0,
+            "kind": "false-alarm rate (lower is better)"
+          }
+        },
+        "auc": 0.9017
       },
-      "legit_test_flagged": 0.0278,
-      "legit_hostnames_flagged": 0.0304
+      "unseen_frozen": {
+        "phishing": {
+          "n": 10000,
+          "model_suspicious_or_higher": 0.7369,
+          "model_high": 0.5969,
+          "app_suspicious_or_higher": 0.7369,
+          "app_high": 0.5969,
+          "kind": "detection rate (higher is better)"
+        },
+        "legit": {
+          "n": 10000,
+          "model_suspicious_or_higher": 0.0642,
+          "model_high": 0.0096,
+          "app_suspicious_or_higher": 0.0644,
+          "app_high": 0.0096,
+          "kind": "false-alarm rate (lower is better)"
+        },
+        "phishing_by_source": {
+          "destroylist.txt": {
+            "n": 2448,
+            "model_suspicious_or_higher": 0.6675,
+            "model_high": 0.4395,
+            "app_suspicious_or_higher": 0.6675,
+            "app_high": 0.4395,
+            "kind": "detection rate (higher is better)"
+          },
+          "pdb_domains_2025-11.txt": {
+            "n": 3884,
+            "model_suspicious_or_higher": 0.7683,
+            "model_high": 0.6635,
+            "app_suspicious_or_higher": 0.7683,
+            "app_high": 0.6635,
+            "kind": "detection rate (higher is better)"
+          },
+          "pdb_domains_2026-05.txt": {
+            "n": 93,
+            "model_suspicious_or_higher": 0.8495,
+            "model_high": 0.7419,
+            "app_suspicious_or_higher": 0.8495,
+            "app_high": 0.7419,
+            "kind": "detection rate (higher is better)"
+          },
+          "pdb_links_active.txt": {
+            "n": 3118,
+            "model_suspicious_or_higher": 0.7473,
+            "model_high": 0.6299,
+            "app_suspicious_or_higher": 0.7473,
+            "app_high": 0.6299,
+            "kind": "detection rate (higher is better)"
+          },
+          "pdb_links_inactive.txt": {
+            "n": 457,
+            "model_suspicious_or_higher": 0.7484,
+            "model_high": 0.6193,
+            "app_suspicious_or_higher": 0.7484,
+            "app_high": 0.6193,
+            "kind": "detection rate (higher is better)"
+          }
+        },
+        "legit_by_source": {
+          "tranco_250k_1m": {
+            "n": 9808,
+            "model_suspicious_or_higher": 0.0652,
+            "model_high": 0.0098,
+            "app_suspicious_or_higher": 0.0652,
+            "app_high": 0.0098,
+            "kind": "false-alarm rate (lower is better)"
+          },
+          "tranco_ae": {
+            "n": 192,
+            "model_suspicious_or_higher": 0.0156,
+            "model_high": 0.0,
+            "app_suspicious_or_higher": 0.026,
+            "app_high": 0.0,
+            "kind": "false-alarm rate (lower is better)"
+          }
+        },
+        "auc": 0.905
+      },
+      "uae_dev": {
+        "all": {
+          "n": 152,
+          "model_suspicious_or_higher": 0.9211,
+          "model_high": 0.8816,
+          "app_suspicious_or_higher": 0.9276,
+          "app_high": 0.8816,
+          "kind": "detection rate (higher is better)"
+        },
+        "by_category": {
+          "brand": {
+            "n": 55,
+            "model_suspicious_or_higher": 1.0,
+            "model_high": 0.9818,
+            "app_suspicious_or_higher": 1.0,
+            "app_high": 0.9818,
+            "kind": "detection rate (higher is better)"
+          },
+          "fake_ae": {
+            "n": 21,
+            "model_suspicious_or_higher": 0.9524,
+            "model_high": 0.9048,
+            "app_suspicious_or_higher": 1.0,
+            "app_high": 0.9048,
+            "kind": "detection rate (higher is better)"
+          },
+          "path": {
+            "n": 17,
+            "model_suspicious_or_higher": 0.4118,
+            "model_high": 0.1765,
+            "app_suspicious_or_higher": 0.4118,
+            "app_high": 0.1765,
+            "kind": "detection rate (higher is better)"
+          },
+          "uae_lure": {
+            "n": 59,
+            "model_suspicious_or_higher": 0.9831,
+            "model_high": 0.9831,
+            "app_suspicious_or_higher": 0.9831,
+            "app_high": 0.9831,
+            "kind": "detection rate (higher is better)"
+          }
+        }
+      },
+      "uae_frozen": {
+        "all": {
+          "n": 157,
+          "model_suspicious_or_higher": 0.8726,
+          "model_high": 0.8217,
+          "app_suspicious_or_higher": 0.879,
+          "app_high": 0.8217,
+          "kind": "detection rate (higher is better)"
+        },
+        "by_category": {
+          "brand": {
+            "n": 38,
+            "model_suspicious_or_higher": 1.0,
+            "model_high": 0.8421,
+            "app_suspicious_or_higher": 1.0,
+            "app_high": 0.8421,
+            "kind": "detection rate (higher is better)"
+          },
+          "fake_ae": {
+            "n": 29,
+            "model_suspicious_or_higher": 0.9655,
+            "model_high": 0.9655,
+            "app_suspicious_or_higher": 1.0,
+            "app_high": 0.9655,
+            "kind": "detection rate (higher is better)"
+          },
+          "path": {
+            "n": 28,
+            "model_suspicious_or_higher": 0.3571,
+            "model_high": 0.3214,
+            "app_suspicious_or_higher": 0.3571,
+            "app_high": 0.3214,
+            "kind": "detection rate (higher is better)"
+          },
+          "uae_lure": {
+            "n": 62,
+            "model_suspicious_or_higher": 0.9839,
+            "model_high": 0.9677,
+            "app_suspicious_or_higher": 0.9839,
+            "app_high": 0.9677,
+            "kind": "detection rate (higher is better)"
+          }
+        }
+      }
     }
   },
-  "trained_at": "2026-11-01 19:55:38 UTC"
+  "trained_at": "2026-11-02 15:41:35 UTC"
 }
