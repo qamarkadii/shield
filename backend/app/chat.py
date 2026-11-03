@@ -107,6 +107,19 @@ def _clean(messages) -> list[dict]:
     return out
 
 
+def _offline_answer(checks, public_view, line):
+    """Used when DeepSeek is off or fails: explain Shield's own result for each link (no AI)."""
+    if checks:
+        for result in checks:
+            view = (public_view(result).get("en") or {})
+            reasons = view.get("rules", []) + view.get("facts", []) + view.get("signals", [])
+            text = f"**{result['domain']}: {result.get('verdict', 'unknown')}.** " + " ".join(reasons[:3]) + " " + view.get("advice", "")
+            yield line({"type": "delta", "text": text.strip() + "\n\n"})
+    else:
+        yield line({"type": "delta", "text": "The assistant can't answer questions right now. Paste a link and Shield will check it."})
+    yield line({"type": "done"})
+
+
 def run(messages, public_view) -> "iter[str]":
     """Generator of NDJSON lines. public_view turns a raw check into what the page shows."""
     def line(obj):
@@ -126,22 +139,8 @@ def run(messages, public_view) -> "iter[str]":
         checks.append(r)
         yield line({"type": "check", "data": public_view(r)})
 
-    # Keep the link-check experience useful without sending citizen text to a provider.
-    # This is a factual template from Shield's own result, not an LLM verdict.
     if os.environ.get("SHIELD_EXTERNAL_CHAT_ENABLED") != "1":
-        if checks:
-            for result in checks:
-                view = public_view(result)
-                reasons = (view.get("en") or {}).get("rules", []) + (view.get("en") or {}).get("facts", []) + (view.get("en") or {}).get("signals", [])
-                verdict = result.get("verdict", "unknown")
-                explanation = f"{result['domain']}: {verdict}. "
-                if reasons:
-                    explanation += " ".join(reasons[:3]) + " "
-                explanation += (view.get("en") or {}).get("advice", "")
-                yield line({"type": "delta", "text": explanation.strip() + "\n\n"})
-        else:
-            yield line({"type": "delta", "text": "Paste a link or domain and I will explain Shield's check. External chat is disabled, so questions without a link are unavailable."})
-        yield line({"type": "done"})
+        yield from _offline_answer(checks, public_view, line)
         return
 
     context = SYSTEM
@@ -153,9 +152,7 @@ def run(messages, public_view) -> "iter[str]":
 
     key = os.environ.get("DEEPSEEK_API_KEY", "")
     if not key:
-        yield line({"type": "error", "message": "The chat assistant is not configured (DEEPSEEK_API_KEY is missing). "
-                                                "Link results above still come from Shield's model."})
-        yield line({"type": "done"})
+        yield from _offline_answer(checks, public_view, line)
         return
 
     body = {"model": MODEL, "messages": [{"role": "system", "content": context}] + msgs,
@@ -165,8 +162,9 @@ def run(messages, public_view) -> "iter[str]":
         with requests.post(API_URL, json=body, stream=True, timeout=(10, 60),
                            headers={"Authorization": f"Bearer {key}"}) as resp:
             if resp.status_code != 200:
-                yield line({"type": "error", "message": f"The chat service returned an error ({resp.status_code}). "
-                                                        "Please try again."})
+                print(f"[chat] DeepSeek returned HTTP {resp.status_code}: {resp.text[:300]}")
+                yield from _offline_answer(checks, public_view, line)
+                return
             else:
                 for raw in resp.iter_lines(decode_unicode=True):
                     if not raw or not raw.startswith("data:"):
@@ -180,6 +178,8 @@ def run(messages, public_view) -> "iter[str]":
                         continue
                     if delta:
                         yield line({"type": "delta", "text": delta})
-    except requests.RequestException:
-        yield line({"type": "error", "message": "The chat service is unreachable right now. Please try again."})
+    except requests.RequestException as e:
+        print(f"[chat] DeepSeek unreachable: {e}")
+        yield from _offline_answer(checks, public_view, line)
+        return
     yield line({"type": "done"})
