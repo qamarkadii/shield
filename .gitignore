@@ -41,3 +41,6 @@ data/evidence/
 # Local backups made while editing
 _backup*/
 *.zip
+
+# Windows shortcuts
+*.lnk
