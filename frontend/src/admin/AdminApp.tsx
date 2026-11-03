@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { AnimatePresence, motion } from 'framer-motion';
 import MapFrame from '../components/MapFrame';
 import { api, post, LEVEL, tone, pct, type Alert, type CheckResult, type Detection, type EvidencePack, type Investigation, type ModelStatus, type PageCheck, type Radar, type Stats } from './api';
+import logo from '../assets/aida-logo.png';
 
 /* ---------- small hooks & helpers ---------- */
 function usePoll<T>(path: string, every: number, deps: unknown[] = []): [T | null, () => void, string] {
@@ -50,9 +51,9 @@ function publicSiteUrl() {
 function Header({ radar, onRadar, onReplay, busy }: { radar: Radar | null; onRadar: () => void; onReplay: () => void; busy: boolean }) {
   const live = !!radar?.running;
   return <header className="admin-header"><div className="admin-wrap nav">
-    <a className="brand" href="./" aria-label="AIDA Shield analyst console"><span className="brand-mark">A</span>AIDA<span className="brand-divider" /><span className="brand-sub">ANALYST CONSOLE</span></a>
+    <div className="header-left"><span className="brand-sub">ANALYST CONSOLE</span><span className={`radar-pill ${live ? 'live' : ''}`}><i className="status-dot" />{live ? `Radar live · ${radar?.certs_per_second ?? 0}/s` : 'Radar off'}</span></div>
+    <a className="brand-logo" href="./" aria-label="AIDA Shield analyst console"><img src={logo} alt="AIDA" width="720" height="205" /></a>
     <div className="header-actions">
-      <span className={`radar-pill ${live ? 'live' : ''}`}><i className="status-dot" />{live ? `Radar live · ${radar?.certs_per_second ?? 0}/s` : 'Radar off'}</span>
       <button className={`button ${live ? 'secondary' : 'primary'} small`} onClick={onRadar}>{live ? 'Stop radar' : 'Start live radar'}</button>
       <button className="button secondary small" onClick={onReplay} disabled={busy}>Load real UAE cases</button>
       <a className="text-button" href={publicSiteUrl()} target="_blank" rel="noreferrer">Public site ↗</a>

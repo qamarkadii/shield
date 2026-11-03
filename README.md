@@ -30,8 +30,8 @@ evidence. UAE Hackathon 2026 (TDRA) — Pioneers Track, team AIDA.
 
 | Site | Port | Who | Code |
 |---|---|---|---|
-| Analyst dashboard | 8000 | Team only (behind Cloudflare Access) | `backend/app/main.py`, `static/index.html` |
-| Public "Is this link official?" (Arabic/English) | 8001 | Anyone | `backend/app/public.py`, `static/public.html` |
+| Analyst console (app.aidashield.tech) | 8000 | Team only (behind Cloudflare Access) | `backend/app/main.py`, `frontend/src/admin/` |
+| Citizen website + Ask Shield chat (aidashield.tech) | 8001 | Anyone | `backend/app/public.py`, `frontend/src/` |
 | AIDA showcase website (3D, live demo) | 8001 at `/site/` | Anyone | `frontend/` (built into `frontend/dist`) |
 
 The public site can only check links and, if the visitor chooses, report one to the analysts.
@@ -43,7 +43,6 @@ add `--radar` to start the live radar too. On Windows, just double-click **`star
 
 **Live at aidashield.tech:** the team runs Shield on a laptop behind a Cloudflare Tunnel —
 `aidashield.tech` (public) and `app.aidashield.tech` (dashboard, Cloudflare Access login). Setup: **`deploy/DEPLOY_LAPTOP.md`**.
-Other hosting options: `deploy/DEPLOY_FREE.md` (Hugging Face Docker Spaces, now needs a paid plan), `deploy/DEPLOY.md` (Azure), `deploy/DEPLOY_ORACLE.md` (Oracle).
 
 ## Setup (Windows, Command Prompt)
 
@@ -67,7 +66,7 @@ Without `.env`, alerts are saved as `.eml` files in `data/outbox/`, so the demo 
 
 | Folder | What's in it | Owner |
 |---|---|---|
-| `backend/app/` | `main.py` API, `scoring.py` rules + ML, `ctlog.py` live radar, `linkcheck.py`, `alerts.py`, `db.py`, `static/index.html` dashboard | B: Backend |
+| `backend/app/` | `main.py` API, `scoring.py` rules + ML, `ctlog.py` live radar, `linkcheck.py`, `alerts.py`, `db.py`, `chat.py` + `llm.py` (DeepSeek) + `assistant.py` (built-in answers) | B: Backend |
 | `backend/scripts/` | `update_feeds.py`, `certstream_test.py`, `crtsh_search.py`, `download_data.py` | B: Backend |
 | `ml/` | `train_baseline.py`, `retrain.py` | A: Data and ML |
 | `data/` | Training, test and real UAE phishing datasets (see `data/README.md`) | A: Data and ML |

@@ -11,14 +11,13 @@ How it stays honest:
         {"type": "error", "message": "..."}               if the chat service fails
         {"type": "done"}
 
-Config (in .env, never in code):  DEEPSEEK_API_KEY=...   DEEPSEEK_MODEL=deepseek-flash
+Config: all DeepSeek settings live in .env and are read by llm.py. If DeepSeek fails, assistant.py answers.
 """
 
 import json
 import os
 import re
 
-import requests
 from dotenv import load_dotenv
 
 from . import linkcheck
@@ -26,8 +25,6 @@ from . import linkcheck
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 load_dotenv(os.path.join(ROOT, ".env"))
 
-API_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com").rstrip("/") + "/chat/completions"
-MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-flash")
 MAX_LINKS = 3            # links checked per message
 MAX_TURNS = 12           # earlier messages sent to the language model
 MAX_CHARS = 2000         # per message
@@ -107,16 +104,22 @@ def _clean(messages) -> list[dict]:
     return out
 
 
-def _offline_answer(checks, public_view, line):
-    """Used when DeepSeek is off or fails: explain Shield's own result for each link (no AI)."""
-    if checks:
-        for result in checks:
-            view = (public_view(result).get("en") or {})
-            reasons = view.get("rules", []) + view.get("facts", []) + view.get("signals", [])
-            text = f"**{result['domain']}: {result.get('verdict', 'unknown')}.** " + " ".join(reasons[:3]) + " " + view.get("advice", "")
-            yield line({"type": "delta", "text": text.strip() + "\n\n"})
-    else:
-        yield line({"type": "delta", "text": "The assistant can't answer questions right now. Paste a link and Shield will check it."})
+def _offline_answer(msgs, checks, public_view, line, busy=False):
+    """Used when DeepSeek is off, busy or failing: Shield's built-in assistant answers (see assistant.py)."""
+    from . import assistant
+    text = msgs[-1]["content"] if msgs else ""
+    views = [public_view(r) for r in checks]
+    earlier = None
+    if not views:                       # "why?" / "is it real?" refers to the last link the user sent
+        for m in reversed(msgs[:-1]):
+            if m["role"] == "user":
+                links = find_links(m["content"])
+                if links:
+                    r = linkcheck.check_link(links[-1])
+                    if "error" not in r:
+                        earlier = public_view(r)
+                    break
+    yield line({"type": "delta", "text": assistant.reply(text, views, earlier)})
     yield line({"type": "done"})
 
 
@@ -139,8 +142,9 @@ def run(messages, public_view) -> "iter[str]":
         checks.append(r)
         yield line({"type": "check", "data": public_view(r)})
 
-    if os.environ.get("SHIELD_EXTERNAL_CHAT_ENABLED") != "1":
-        yield from _offline_answer(checks, public_view, line)
+    from . import llm                    # DeepSeek connection; all settings are in .env (see llm.py)
+    if llm.settings()["provider"] == "builtin":
+        yield from _offline_answer(msgs, checks, public_view, line)
         return
 
     context = SYSTEM
@@ -150,36 +154,14 @@ def run(messages, public_view) -> "iter[str]":
     elif find_links(" ".join(m["content"] for m in msgs if m["role"] == "user")):
         context += "\n\n(No new link in the latest message. Earlier links were already explained above in the conversation.)"
 
-    key = os.environ.get("DEEPSEEK_API_KEY", "")
-    if not key:
-        yield from _offline_answer(checks, public_view, line)
-        return
-
-    body = {"model": MODEL, "messages": [{"role": "system", "content": context}] + msgs,
-            "stream": True, "temperature": 0.3, "max_tokens": 900,
-            "thinking": {"type": "disabled"}}        # answer straight away (no hidden reasoning pass)
+    sent = False
     try:
-        with requests.post(API_URL, json=body, stream=True, timeout=(10, 60),
-                           headers={"Authorization": f"Bearer {key}"}) as resp:
-            if resp.status_code != 200:
-                print(f"[chat] DeepSeek returned HTTP {resp.status_code}: {resp.text[:300]}")
-                yield from _offline_answer(checks, public_view, line)
-                return
-            else:
-                for raw in resp.iter_lines(decode_unicode=True):
-                    if not raw or not raw.startswith("data:"):
-                        continue
-                    data = raw[5:].strip()
-                    if data == "[DONE]":
-                        break
-                    try:
-                        delta = json.loads(data)["choices"][0]["delta"].get("content")
-                    except (ValueError, KeyError, IndexError):
-                        continue
-                    if delta:
-                        yield line({"type": "delta", "text": delta})
-    except requests.RequestException as e:
-        print(f"[chat] DeepSeek unreachable: {e}")
-        yield from _offline_answer(checks, public_view, line)
+        for piece in llm.stream_chat([{"role": "system", "content": context}] + msgs):
+            sent = True
+            yield line({"type": "delta", "text": piece})
+    except llm.LLMError as e:
+        print(f"[chat] using the built-in assistant ({e})")
+    if sent:
+        yield line({"type": "done"})
         return
-    yield line({"type": "done"})
+    yield from _offline_answer(msgs, checks, public_view, line)       # DeepSeek down/busy: built-in answer

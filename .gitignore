@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 .venv/
+.venv*/
 venv/
 
 # Trained model (rebuild with: python ml\train_baseline.py)
@@ -36,3 +37,7 @@ data/sources/
 # Domain-facts lookup cache and evidence packs (created when Shield runs)
 data/facts_cache.jsonl
 data/evidence/
+
+# Local backups made while editing
+_backup*/
+*.zip

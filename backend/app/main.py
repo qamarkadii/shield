@@ -42,7 +42,7 @@ class Label(BaseModel):
 # ---------- pages ----------
 
 # New analyst console (React, built from frontend/src/admin into frontend/dist/admin.html).
-# Falls back to the classic static/index.html only if the built console is missing.
+# If it has not been built yet, a short message explains how to build it.
 CONSOLE = os.path.join(HERE, "..", "..", "frontend", "dist")
 
 
@@ -51,7 +51,8 @@ def dashboard():
     built = os.path.join(CONSOLE, "admin.html")
     if os.path.isfile(built):
         return FileResponse(built, headers={"Cache-Control": "no-cache"})
-    return FileResponse(os.path.join(HERE, "static", "index.html"))
+    from fastapi.responses import PlainTextResponse
+    return PlainTextResponse("Analyst console not built. Run: cd frontend && npm run build:shield", status_code=503)
 
 
 @app.get("/health")

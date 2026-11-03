@@ -138,3 +138,11 @@ code{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-pro
 @media(max-width:1280px){.kpis{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:1100px){.admin-grid{grid-template-columns:1fr}.ops-band{height:260px}}
 @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}.header-actions .text-button,.radar-pill{display:none}.ops-left{max-width:70%}.ops-big{font-size:var(--text-2xl)}.input-shell.search{width:100%}.det-tools{width:100%}.metric-tiles{grid-template-columns:repeat(2,1fr)}.kv>div{grid-template-columns:1fr;gap:0}.row-actions{white-space:normal}}
+
+/* Header: console label + radar on the left, AIDA logo centred, actions on the right */
+.admin-header .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.header-left{grid-column:1;justify-self:start;display:flex;align-items:center;gap:var(--spacing-4)}
+.admin-header .brand-logo{grid-column:2}
+.admin-header .header-actions{grid-column:3;justify-self:end}
+.admin-header .brand-logo img{height:40px}
+@media(max-width:760px){.header-left .brand-sub{display:none}.admin-header .brand-logo img{height:30px}}

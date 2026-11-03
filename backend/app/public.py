@@ -111,8 +111,9 @@ def _public_view(r: dict) -> dict:
 
 @app.get("/check", include_in_schema=False)
 def page():
-    """The citizen "Is this link official?" page (the AIDA website is the home page, see the end of this file)."""
-    return FileResponse(os.path.join(HERE, "static", "public.html"))
+    """Old citizen page address: the link check now lives in the AIDA website's assistant."""
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse("/#demo")
 
 
 @app.get("/api/health")
@@ -199,4 +200,5 @@ if os.path.isdir(SITE):
 else:
     @app.get("/", include_in_schema=False)
     def home_fallback():
-        return FileResponse(os.path.join(HERE, "static", "public.html"))
+        from fastapi.responses import PlainTextResponse
+        return PlainTextResponse("Website not built. Run: cd frontend && npm run build:shield", status_code=503)
