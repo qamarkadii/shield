@@ -41,8 +41,16 @@ class Label(BaseModel):
 
 # ---------- pages ----------
 
+# New analyst console (React, built from frontend/src/admin into frontend/dist/admin.html).
+# Falls back to the classic static/index.html only if the built console is missing.
+CONSOLE = os.path.join(HERE, "..", "..", "frontend", "dist")
+
+
 @app.get("/", include_in_schema=False)
 def dashboard():
+    built = os.path.join(CONSOLE, "admin.html")
+    if os.path.isfile(built):
+        return FileResponse(built, headers={"Cache-Control": "no-cache"})
     return FileResponse(os.path.join(HERE, "static", "index.html"))
 
 
@@ -227,4 +235,24 @@ def stats():
     s["certs_per_second"] = r["certs_per_second"]
     s["uae_seen_now"] = r["uae_seen"]
     s["radar_running"] = r["running"]
+    s["review"] = db.review_metrics()
     return s
+
+
+@app.get("/review/queue")
+def pending_review(limit: int = 100):
+    """Analyst queue; only available on the Access-protected dashboard service."""
+    return {"metrics": db.review_metrics(), "detections": db.review_queue(max(1, min(limit, 500)))}
+
+
+@app.get("/review/brand-activity")
+def recent_brand_activity(hours: int = 24):
+    """Possible campaign leads for analysts; common brand alone is not proof of a campaign."""
+    return {"window_hours": max(1, min(hours, 720)), "groups": db.brand_activity(hours),
+            "note": "Shared brand and timing suggest review; verify hosting, registrar and page evidence before linking domains."}
+
+
+# JS/CSS/fonts for the analyst console (frontend/dist/assets). Mounted last so API routes win.
+if os.path.isdir(os.path.join(CONSOLE, "assets")):
+    from fastapi.staticfiles import StaticFiles
+    app.mount("/assets", StaticFiles(directory=os.path.join(CONSOLE, "assets")), name="console-assets")

@@ -1,0 +1,6 @@
+{
+  "role": "local prototype serving model",
+  "archive_relative_path": "checkpoints/models/20261103T072732Z-77dafd24.joblib",
+  "sha256": "66c0ff1b8b8bd2dde1a325ca65f70600246adaf313af7476229f1ded6aafb9dd",
+  "candidate_promoted": false
+}

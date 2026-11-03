@@ -1,0 +1,2 @@
+Restored existing model; no training: C:\Users\qamar\.codex\.chatgpt-projects\g-p-6ae504451c088191a4cec89a68a4a312\recovery\restore-final-20261103\checkpoints\models\20261103T072732Z-77dafd24.joblib
+Model reload and inference verified: C:\Users\qamar\.codex\.chatgpt-projects\g-p-6ae504451c088191a4cec89a68a4a312\recovery\restore-final-20261103\ml\domain_model.joblib

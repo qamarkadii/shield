@@ -1,0 +1,13 @@
+Popularity list: 250,000 sites
+Detected 131 multi-tenant hosting platforms
+Real legitimate hostnames: 40,000 for training, 45,575 reserved for evaluation (their owners are never trained on)
+Removed 6,466 training rows whose owner is in an evaluation set (leakage)
+Synthetic UAE impersonations (training only): 3,000
+Real UAE-targeted phishing (train part): 302 (weight x5); extra never-in-base rows: 120,000 (60,000 phishing)
+Rows: fit 425,414 (incl. augmented copies), held-out 64,559 (phishing share 0.46)
+Extracting warning signs ...
+  text model C=1.0: grouped validation log-loss 0.3725
+  text model C=4.0: grouped validation log-loss 0.3511
+  text model C=16.0: grouped validation log-loss 0.3667
+Text model: C=4.0; out-of-fold scores (5 folds by owner) ...
+  fold 1/5 done

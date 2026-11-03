@@ -1,0 +1,20 @@
+{
+  "openphish.txt": {
+    "url": "https://openphish.com/feed.txt",
+    "bytes": 19495,
+    "sha256": "71884aab77a932d4e971c49913c963624441b8fe625fc6136128eb04d39d4014",
+    "fetched_at": "2026-11-03T06:41:28.252364+00:00"
+  },
+  "tranco.zip": {
+    "url": "https://tranco-list.eu/top-1m.csv.zip",
+    "bytes": 9720191,
+    "sha256": "fb13748679f7b9d165c8997d5e2d37f745e970085b4fb856203175aa57408112",
+    "fetched_at": "2026-11-03T06:41:32.809722+00:00"
+  },
+  "umbrella.zip": {
+    "url": "https://s3-us-west-1.amazonaws.com/umbrella-static/top-1m.csv.zip",
+    "bytes": 12835951,
+    "sha256": "61c3f8833996437ddd8fcbb176fe539be47029a30659062c01147d5658a509ce",
+    "fetched_at": "2026-11-03T06:44:03.163190+00:00"
+  }
+}

@@ -8,8 +8,8 @@ interface Message {id:number;role:'user'|'assistant';content:string;checks:Analy
 const SUGGESTIONS=[
  'I got an SMS: "Unpaid Salik fine, pay now at salik-pay.com". Is it real?',
  'Check emirates-post.org',
- 'How do I spot a fake bank message?',
- 'كيف أبلغ عن رسالة احتيال في الإمارات؟',
+ 'Check https://innocent.example/adcb/verify',
+ 'افحص الرابط https://salik-pay.com',
 ];
 const danger=(v:string)=>v==='high risk'||v==='suspicious';
 const tone=(v:string)=>danger(v)?'danger':v==='official'?'safe':'';
@@ -86,15 +86,15 @@ export default function Chat(){
  const reset=()=>{abort.current?.abort();setMessages([]);setSelected(null);setInput('')};
 
  return <section id="demo" className="section wrap">
-  <div className="section-heading reveal"><div><p className="eyebrow">03 / ASK SHIELD</p><h2>Paste a link.<br/><span>Ask why.</span></h2></div><p>Shield's model checks every link you share, then the assistant explains how the scam works and what to do. Ask anything about online fraud in English or Arabic.</p></div>
+  <div className="section-heading reveal"><div><p className="eyebrow">03 / ASK SHIELD</p><h2>Paste a link.<br/><span>Ask why.</span></h2></div><p>Paste a suspicious link for a check and explanation. General chat is unavailable with the default privacy settings.</p></div>
   <div className="demo-grid chat-grid glass">
    <div className="chat-panel">
-    <div className="panel-header"><span className="mono">SHIELD ASSISTANT</span><span className="chat-header-actions">{messages.length>0&&<button type="button" className="text-button" onClick={reset}>New chat</button>}<span className="badge">{chatUrl?'LIVE MODEL':'OFFLINE'}</span></span></div>
+    <div className="panel-header"><span className="mono">SHIELD ASSISTANT</span><span className="chat-header-actions">{messages.length>0&&<button type="button" className="text-button" onClick={reset}>New chat</button>}<span className="badge">{chatUrl?'LINK CHECK':'OFFLINE'}</span></span></div>
     <div className="chat-log" ref={log} aria-live="polite" aria-busy={busy}>
      {messages.length===0?<div className="chat-empty">
       <div className="idle-reticle"><span>⌕</span></div>
       <h3>Is that link real?</h3>
-      <p>Paste a link from an SMS, WhatsApp or email, or ask a question. Shield never opens the links you share.</p>
+      <p>Paste a link from an SMS, WhatsApp or email. Shield never opens the links you share.</p>
       <div className="examples">{SUGGESTIONS.map(s=><button type="button" key={s} dir="auto" onClick={()=>send(s)} disabled={busy||!chatUrl}>{s} ↗</button>)}</div>
      </div>:<AnimatePresence initial={false}>{messages.map(m=><motion.div key={m.id} className={`bubble ${m.role}`} initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{duration:.2}}>
       <span className="mono bubble-who">{m.role==='user'?'YOU':'SHIELD'}</span>
@@ -106,7 +106,7 @@ export default function Chat(){
     <form className="chat-composer" onSubmit={submit}>
      <div className={`input-shell ${busy?'scanning':''}`}>
       <label htmlFor="chat-input" className="sr-only">Message Shield</label>
-      <textarea id="chat-input" ref={field} rows={1} dir="auto" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={onKey} placeholder={chatUrl?'Paste a link or ask a question…':'Start Shield to chat with the assistant'} maxLength={2000} disabled={!chatUrl} autoComplete="off" spellCheck/>
+      <textarea id="chat-input" ref={field} rows={1} dir="auto" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={onKey} placeholder={chatUrl?'Paste a suspicious link…':'Start Shield to chat with the assistant'} maxLength={2000} disabled={!chatUrl} autoComplete="off" spellCheck/>
       {busy?<button type="button" className="send" onClick={()=>abort.current?.abort()} aria-label="Stop">■</button>:<button type="submit" className="send" disabled={!input.trim()||!chatUrl} aria-label="Send">↗</button>}
      </div>
      <p className="small">Answers explain Shield's model results; the assistant can make mistakes. Never share passwords, OTP codes or card numbers.</p>

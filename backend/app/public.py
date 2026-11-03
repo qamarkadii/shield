@@ -120,6 +120,29 @@ def health():
     return {"status": "ok"}
 
 
+@app.get("/api/model-status")
+def public_model_status():
+    """Aggregate evidence for the actual serving model, without admin data."""
+    import json
+    from . import scoring
+    info = scoring.model_info()
+    if not info:
+        return {"available": False}
+    model_hash = info["model_sha256"]
+    results = info.get("results") or {}
+    out = {"available": True, "model_sha256": model_hash, "trained_at": info["trained_at"],
+           "train_rows": info.get("train_rows"), "experimental": True,
+           "results": {k: results.get(k) for k in ("auc", "at_suspicious", "at_high")}}
+    audit = os.path.join(HERE, "..", "..", "audit", "independent_baseline.json")
+    if os.path.exists(audit):
+        with open(audit, encoding="utf-8") as f:
+            benchmark = json.load(f)
+        if benchmark.get("model_sha256") == model_hash:
+            out["fresh_frozen"] = {k.split("/", 1)[1]: v for k, v in benchmark["groups"].items()
+                                   if k.startswith("frozen/")}
+    return out
+
+
 @app.post("/api/check")
 def check(body: Link, request: Request):
     _limit(request, "check")
@@ -166,6 +189,11 @@ if os.path.isdir(SITE):
     @app.get("/site/", include_in_schema=False)
     def old_site_link():
         return RedirectResponse("/")       # old links to /site/ still work
+
+    @app.get("/admin.html", include_in_schema=False)
+    def no_admin_here():
+        # the analyst console is only served on app.aidashield.tech (behind Cloudflare Access)
+        raise HTTPException(404, "Not found")
 
     app.mount("/", StaticFiles(directory=SITE, html=True), name="site")
 else:

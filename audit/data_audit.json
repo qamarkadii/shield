@@ -1,0 +1,149 @@
+{
+  "datasets": {
+    "independent_reserved.csv": {
+      "rows": 2588,
+      "unique_domains": 2588,
+      "labels": {
+        "1": 188,
+        "0": 2400
+      }
+    },
+    "phiusiil_urls_labeled.csv": {
+      "rows": 235795,
+      "unique_domains": 0,
+      "labels": {
+        "0": 134850,
+        "1": 100945
+      }
+    },
+    "shield_test_domains.csv": {
+      "rows": 10000,
+      "unique_domains": 10000,
+      "labels": {
+        "0": 5000,
+        "1": 5000
+      }
+    },
+    "shield_training_domains.csv": {
+      "rows": 276270,
+      "unique_domains": 276270,
+      "labels": {
+        "1": 138131,
+        "0": 138139
+      }
+    },
+    "uae_phishing_collected.csv": {
+      "rows": 670,
+      "unique_domains": 670,
+      "labels": {
+        "unlabelled": 670
+      }
+    },
+    "uae_phishing_domains_real.csv": {
+      "rows": 66,
+      "unique_domains": 66,
+      "labels": {
+        "unlabelled": 66
+      }
+    },
+    "uae_test_frozen.csv": {
+      "rows": 238,
+      "unique_domains": 238,
+      "labels": {
+        "unlabelled": 238
+      }
+    },
+    "unseen_dev.csv": {
+      "rows": 20000,
+      "unique_domains": 20000,
+      "labels": {
+        "0": 10000,
+        "1": 10000
+      }
+    },
+    "unseen_frozen.csv": {
+      "rows": 20000,
+      "unique_domains": 20000,
+      "labels": {
+        "0": 10000,
+        "1": 10000
+      }
+    },
+    "unseen_train.csv": {
+      "rows": 120000,
+      "unique_domains": 120000,
+      "labels": {
+        "0": 60000,
+        "1": 60000
+      }
+    }
+  },
+  "exact_overlap": [
+    {
+      "a": "shield_test_domains.csv",
+      "b": "uae_test_frozen.csv",
+      "exact_overlap": 1
+    },
+    {
+      "a": "shield_training_domains.csv",
+      "b": "uae_phishing_collected.csv",
+      "exact_overlap": 41
+    },
+    {
+      "a": "shield_training_domains.csv",
+      "b": "uae_test_frozen.csv",
+      "exact_overlap": 20
+    },
+    {
+      "a": "uae_phishing_collected.csv",
+      "b": "uae_phishing_domains_real.csv",
+      "exact_overlap": 66
+    },
+    {
+      "a": "uae_phishing_collected.csv",
+      "b": "unseen_dev.csv",
+      "exact_overlap": 7
+    },
+    {
+      "a": "uae_phishing_collected.csv",
+      "b": "unseen_train.csv",
+      "exact_overlap": 50
+    },
+    {
+      "a": "uae_test_frozen.csv",
+      "b": "unseen_frozen.csv",
+      "exact_overlap": 8
+    }
+  ],
+  "historical_projections": {
+    "dev": {
+      "suspicious_or_higher": {
+        "recall": 0.7278,
+        "fpr": 0.0611,
+        "precision_at_1pct": 0.10739740581699057,
+        "source": "historical bundled report; not reproduced"
+      },
+      "high": {
+        "recall": 0.5949,
+        "fpr": 0.0108,
+        "precision_at_1pct": 0.35749053542455383,
+        "source": "historical bundled report; not reproduced"
+      }
+    },
+    "frozen": {
+      "suspicious_or_higher": {
+        "recall": 0.7369,
+        "fpr": 0.0644,
+        "precision_at_1pct": 0.10360632688927945,
+        "source": "historical bundled report; not reproduced"
+      },
+      "high": {
+        "recall": 0.5969,
+        "fpr": 0.0096,
+        "precision_at_1pct": 0.38576875848251796,
+        "source": "historical bundled report; not reproduced"
+      }
+    }
+  },
+  "warning": "Exact overlap is diagnostic. Owner-level training purges must also be verified."
+}

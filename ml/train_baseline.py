@@ -178,13 +178,17 @@ def write_model_card(bundle, results, path):
 def system_check(log=print):
     """The full app (learned score + labelled UAE-impersonation rules), as the dashboard uses it."""
     sys.path.insert(0, ROOT)
-    from backend.app import scoring
+    from eval_unseen import score
     from common import EVAL_SUBDOMAINS
-    scoring.reload_model()
+    bundle = joblib.load(MODEL_PATH)
     test, uae, _ = load_eval_sets()
     rnd = random.Random(11)
     flagged = ("suspicious", "high risk")
-    v = lambda ds: Counter(scoring.score_domain(d)["verdict"] for d in ds)
+    def v(ds):
+        frame = score(bundle, ds)
+        return Counter({"high risk": int((frame.level_app == 2).sum()),
+                        "suspicious": int((frame.level_app == 1).sum()),
+                        "no warning signs": int((frame.level_app == 0).sum())})
     leg = test[test.is_phishing == 0].domain.tolist()
     u, l, h = v(uae.domain), v(leg), v(f"{rnd.choice(EVAL_SUBDOMAINS)}.{d}" for d in leg)
     out = {"uae_fakes": {"high risk": u["high risk"], "suspicious": u["suspicious"],
@@ -197,9 +201,8 @@ def system_check(log=print):
 
 def _save(bundle, results):
     bundle["results"] = results
-    tmp = MODEL_PATH + ".tmp"
-    joblib.dump(bundle, tmp)
-    os.replace(tmp, MODEL_PATH)
+    from recovery import publish
+    publish(bundle, MODEL_PATH)
     with open(os.path.join(HERE, "model_report.json"), "w", encoding="utf-8") as f:
         json.dump({"weights": weights_table(bundle), "thresholds": bundle["thresholds"],
                    "raw_thresholds": bundle["raw_thresholds"], "calibration": bundle["calib"],

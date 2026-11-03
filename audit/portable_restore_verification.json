@@ -1,0 +1,11 @@
+{
+  "archive": "recovery/shield-checkpoint-20261103T080248330090Z.zip",
+  "restored_files": 282,
+  "all_manifest_hashes_verified": true,
+  "checkpoint_pointer_paths_rebased": 4,
+  "serving_model_removed_then_automatically_restored_without_training": true,
+  "baseline_prediction_parity_exact": true,
+  "candidate_prediction_parity_exact": true,
+  "serving_model_sha256": "66c0ff1b8b8bd2dde1a325ca65f70600246adaf313af7476229f1ded6aafb9dd",
+  "environment": "Existing verified .venv reused; no fresh environment installation during restore test"
+}

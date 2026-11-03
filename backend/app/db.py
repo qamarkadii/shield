@@ -113,6 +113,46 @@ def list_detections(limit=100, source=None, flagged_only=True):
         return [_row(r) for r in conn().execute(q, args).fetchall()]
 
 
+def review_queue(limit=100):
+    """Pending alerts first; keep analyst decisions visible to prevent repeat alerts."""
+    with _lock:
+        rows = conn().execute("""
+            SELECT * FROM detections
+            WHERE verdict IN ('suspicious', 'high risk') AND status = 'pending'
+            ORDER BY CASE verdict WHEN 'high risk' THEN 0 ELSE 1 END,
+                     COALESCE(score, 0) DESC, first_seen ASC LIMIT ?
+        """, (limit,)).fetchall()
+    return [_row(r) for r in rows]
+
+
+def review_metrics():
+    with _lock:
+        c = conn()
+        row = c.execute("""SELECT COUNT(*) total,
+            SUM(CASE WHEN status='pending' THEN 1 ELSE 0 END) pending,
+            SUM(CASE WHEN status='confirmed' THEN 1 ELSE 0 END) confirmed,
+            SUM(CASE WHEN status='legit' THEN 1 ELSE 0 END) false_alarms
+            FROM detections WHERE verdict IN ('suspicious','high risk')""").fetchone()
+        labels = c.execute("SELECT COUNT(*) FROM labels").fetchone()[0]
+    return {"total": row["total"], "pending": row["pending"] or 0,
+            "confirmed": row["confirmed"] or 0, "false_alarms": row["false_alarms"] or 0,
+            "analyst_labels": labels}
+
+
+def brand_activity(hours=24):
+    """Group recent flags by claimed brand for analyst triage, not attribution."""
+    with _lock:
+        rows = conn().execute("""SELECT brand, COUNT(DISTINCT domain) domains,
+            MIN(first_seen) first_seen, MAX(last_seen) last_seen,
+            SUM(CASE WHEN status='pending' THEN 1 ELSE 0 END) pending
+            FROM detections WHERE brand IS NOT NULL AND brand != ''
+              AND first_seen >= datetime('now', ?)
+              AND verdict IN ('suspicious','high risk')
+            GROUP BY brand ORDER BY domains DESC, last_seen DESC""",
+            (f"-{max(1, min(hours, 720))} hours",)).fetchall()
+    return [dict(r) for r in rows]
+
+
 def get_detection(det_id: int):
     with _lock:
         r = conn().execute("SELECT * FROM detections WHERE id=?", (det_id,)).fetchone()

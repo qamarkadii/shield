@@ -1,0 +1,2 @@
+  with rules (full app): {'uae_fakes': {'high risk': 65, 'suspicious': 1, 'missed': 0, 'total': 66}, 'legit_test_flagged': 0.015, 'legit_hostnames_flagged': 0.037}
+Evaluation completed from existing model; no fitting repeated

@@ -1,0 +1,126 @@
+{
+  "model_path": "ml\\domain_model.joblib",
+  "selection": "No thresholds selected on this benchmark",
+  "groups": {
+    "dev/openphish_current": {
+      "n": 133,
+      "is_phishing": 1,
+      "high": {
+        "flagged": 103,
+        "rate": 0.7744360902255639,
+        "ci95": [
+          0.696,
+          0.837
+        ]
+      },
+      "suspicious": {
+        "flagged": 109,
+        "rate": 0.8195488721804511,
+        "ci95": [
+          0.746,
+          0.876
+        ]
+      }
+    },
+    "dev/tranco_current_proxy_legit": {
+      "n": 1426,
+      "is_phishing": 0,
+      "high": {
+        "flagged": 22,
+        "rate": 0.015427769985974754,
+        "ci95": [
+          0.01,
+          0.023
+        ]
+      },
+      "suspicious": {
+        "flagged": 86,
+        "rate": 0.06030855539971949,
+        "ci95": [
+          0.049,
+          0.074
+        ]
+      }
+    },
+    "dev/umbrella_hosting_proxy_legit": {
+      "n": 277,
+      "is_phishing": 0,
+      "high": {
+        "flagged": 232,
+        "rate": 0.8375451263537906,
+        "ci95": [
+          0.79,
+          0.876
+        ]
+      },
+      "suspicious": {
+        "flagged": 258,
+        "rate": 0.9314079422382672,
+        "ci95": [
+          0.895,
+          0.956
+        ]
+      }
+    },
+    "frozen/openphish_current": {
+      "n": 55,
+      "is_phishing": 1,
+      "high": {
+        "flagged": 42,
+        "rate": 0.7636363636363637,
+        "ci95": [
+          0.637,
+          0.856
+        ]
+      },
+      "suspicious": {
+        "flagged": 45,
+        "rate": 0.8181818181818182,
+        "ci95": [
+          0.697,
+          0.898
+        ]
+      }
+    },
+    "frozen/tranco_current_proxy_legit": {
+      "n": 574,
+      "is_phishing": 0,
+      "high": {
+        "flagged": 7,
+        "rate": 0.012195121951219513,
+        "ci95": [
+          0.006,
+          0.025
+        ]
+      },
+      "suspicious": {
+        "flagged": 33,
+        "rate": 0.05749128919860627,
+        "ci95": [
+          0.041,
+          0.08
+        ]
+      }
+    },
+    "frozen/umbrella_hosting_proxy_legit": {
+      "n": 123,
+      "is_phishing": 0,
+      "high": {
+        "flagged": 102,
+        "rate": 0.8292682926829268,
+        "ci95": [
+          0.753,
+          0.886
+        ]
+      },
+      "suspicious": {
+        "flagged": 113,
+        "rate": 0.9186991869918699,
+        "ci95": [
+          0.857,
+          0.955
+        ]
+      }
+    }
+  }
+}

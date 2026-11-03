@@ -1,0 +1,13 @@
+{
+  "path": "C:\\Users\\qamar\\.codex\\.chatgpt-projects\\g-p-6ae504451c088191a4cec89a68a4a312\\shield-main\\ml\\domain_model.joblib",
+  "sha256": "66c0ff1b8b8bd2dde1a325ca65f70600246adaf313af7476229f1ded6aafb9dd",
+  "prediction_parity_exact": true,
+  "probes": {
+    "example.com": 0.007586689714322112,
+    "react-docs.vercel.app": 0.9954621449431119,
+    "careers.dubaiholding.com": 0.9279055845067229,
+    "salik-pay.com": 0.9826370354121197
+  },
+  "recovery_run": "c8c7e9c87180f68e41981b7ec7cd9bf970b3842d3de6a8bd3319826986ec5adc",
+  "version": 2
+}

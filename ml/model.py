@@ -96,7 +96,7 @@ def never_train_domains():
     the real UAE dev/frozen parts (ml/collect_uae.py), and the sites the facts model is
     trained on (ml/train_facts.py), so its name-score input is out-of-sample."""
     names = []
-    for f in ("unseen_dev.csv", "unseen_frozen.csv", "uae_test_frozen.csv"):
+    for f in ("unseen_dev.csv", "unseen_frozen.csv", "uae_test_frozen.csv", "independent_reserved.csv"):
         names += _csv(f).domain.tolist()
     c = _csv("uae_phishing_collected.csv", ("domain", "part"))
     names += c[c.part == "dev"].domain.tolist()
@@ -215,6 +215,8 @@ def _fit(model, X, y, w):
 
 def build(train: pd.DataFrame, log=print, seed=SEED):
     """train: columns domain, is_phishing [, weight, source]. Returns the model bundle (dict)."""
+    from recovery import Run
+    run = Run(train, seed)
     t0 = time.time()
     train = train.copy()
     train["domain"] = train.domain.map(clean)
@@ -261,6 +263,14 @@ def build(train: pd.DataFrame, log=print, seed=SEED):
                            ["domain", "is_phishing", "weight", "source", "owner"]],
                        synth.assign(owner=[owner(d, platforms) for d in synth.domain])], ignore_index=True)
     data = pd.concat([train, extra], ignore_index=True).drop_duplicates("domain", keep="first").reset_index(drop=True)
+    # Supplemental sources are merged AFTER the original base purge. Apply the
+    # exclusion to the complete corpus so unseen_train/synthetic rows cannot
+    # reintroduce owners from the real-hostname diagnostic or other evaluation.
+    excluded_owners = held | set(real.owner[real["eval"]])
+    late_purged = data.owner.isin(excluded_owners)
+    data = data[~late_purged].reset_index(drop=True)
+    log(f"Removed {int(late_purged.sum()):,} supplemental rows reintroducing evaluation owners")
+    assert not set(data.owner) & excluded_owners
 
     # held-out slice for thresholds + calibration: real rows only, whole owners
     cand = data[data.source.isin(["base", "real_host", "unseen_train"])]
@@ -274,27 +284,33 @@ def build(train: pd.DataFrame, log=print, seed=SEED):
         f"(phishing share {hold.is_phishing.mean():.2f})")
 
     log("Extracting warning signs ...")
-    S_fit, suf_fit = _static(fit.domain, ranks, platforms)
-    S_hold, suf_hold = _static(hold.domain, ranks, platforms)
+    S_fit, suf_fit = run.stage('static_fit', lambda: _static(fit.domain, ranks, platforms))
+    S_hold, suf_hold = run.stage('static_hold', lambda: _static(hold.domain, ranks, platforms))
     y, w = fit.is_phishing.values, fit.weight.values
     i_lg, i_tld = FEATURE_NAMES.index("ml_logit"), FEATURE_NAMES.index("tld_risk")
 
     # Character vocabulary + IDF built ONCE (no labels involved) and shared by every fit:
     # rebuilding it per fold was most of the training time.
-    vec, _ = _text_model(1.0)
-    T = vec.fit_transform([text_input(d, platforms, MASK_PLATFORMS) for d in fit.domain]).tocsr()
-    C = tune_text_C(fit, T, seed, log)
+    def vectorize():
+        vec, _ = _text_model(1.0)
+        return vec, vec.fit_transform([text_input(d, platforms, MASK_PLATFORMS) for d in fit.domain]).tocsr()
+    vec, T = run.stage('vectorizer', vectorize)
+    C = run.stage('text_C', lambda: tune_text_C(fit, T, seed, log))
     log(f"Text model: C={C}; out-of-fold scores (5 folds by owner) ...")
     X_fit = S_fit.copy()
-    for k, (tr, va) in enumerate(GroupKFold(n_splits=5, shuffle=True, random_state=seed).split(fit, groups=fit.owner)):
-        _, clf = _text_model(C)
-        clf.fit(T[tr], y[tr], sample_weight=w[tr])
+    for k, (tr, va) in enumerate(GroupKFold(n_splits=5, shuffle=True, random_state=seed).split(fit, groups=pd.factorize(fit.owner, sort=True)[0])):
+        def fit_fold():
+            _, clf = _text_model(C)
+            return clf.fit(T[tr], y[tr], sample_weight=w[tr])
+        clf = run.stage(f'text_fold_{k}', fit_fold)
         X_fit[va, i_lg] = riskmodel.logit(clf.predict_proba(T[va])[:, 1])
         X_fit[va, i_tld] = _tld_column([suf_fit[i] for i in va],
                                        tld_table([suf_fit[i] for i in tr], y[tr], w[tr]))
         log(f"  fold {k + 1}/5 done")
-    _, text_clf = _text_model(C)
-    text_clf.fit(T, y, sample_weight=w)
+    def fit_text():
+        _, clf = _text_model(C)
+        return clf.fit(T, y, sample_weight=w)
+    text_clf = run.stage('text_final', fit_text)
     ttable = tld_table(suf_fit, y, w)
 
     X_hold = S_hold.copy()
@@ -305,7 +321,7 @@ def build(train: pd.DataFrame, log=print, seed=SEED):
     log("Training combiners ...")
     scores, best = {}, None
     for name, m in _combiners(seed).items():
-        _fit(m, X_fit, y, w)
+        m = run.stage('combiner_' + name, lambda: _fit(m, X_fit, y, w))
         ph = m.predict_proba(X_hold)[:, 1]
         scores[name] = {"holdout_log_loss": round(float(log_loss(yh, ph)), 4),
                         "holdout_auc": round(float(roc_auc_score(yh, ph)), 4)}
@@ -326,7 +342,7 @@ def build(train: pd.DataFrame, log=print, seed=SEED):
     reference = {k: (0.0 if k in ("ml_logit", "tld_risk", "popularity") or riskmodel.is_binary(k)
                      else float(np.median(legit_rows[:, j]))) for j, k in enumerate(FEATURE_NAMES)}
 
-    bundle = {"version": riskmodel.BUNDLE_VERSION, "vec": vec, "text_clf": text_clf, "text_C": C,
+    bundle = {"recovery_run": run.key, "version": riskmodel.BUNDLE_VERSION, "vec": vec, "text_clf": text_clf, "text_C": C,
               "tld_table": ttable, "platforms": platforms, "uses_popularity": bool(ranks),
               "mask_platforms": MASK_PLATFORMS,
               "combiner": combiner, "combiner_kind": kind, "combiner_scores": scores,
@@ -342,6 +358,7 @@ def build(train: pd.DataFrame, log=print, seed=SEED):
                                "analyst": int((data.source == "analyst").sum()),
                                "fresh_feed": int((data.source == "feed").sum()),
                                "purged_for_leakage": int(purged.sum()),
+                               "late_purged_for_leakage": int(late_purged.sum()),
                                "heldout_rows": int(len(hold)), "platforms": len(platforms)}}
     bundle["thresholds"] = {k: float(riskmodel.calibrated(bundle, np.array([v]))[0]) for k, v in raw_th.items()}
     bundle["weights"] = effects_table(bundle, X_hold, yh)
@@ -349,7 +366,7 @@ def build(train: pd.DataFrame, log=print, seed=SEED):
     bundle["_real_eval"] = real[real["eval"]].domain.tolist()
     log(f"Thresholds (score 0-100): suspicious {100 * bundle['thresholds']['suspicious']:.0f}, "
         f"high {100 * bundle['thresholds']['high']:.0f}")
-    return bundle
+    return run.stage('fitted_bundle', lambda: bundle)
 
 
 def effects_table(bundle, X, y, n=6000, seed=SEED):

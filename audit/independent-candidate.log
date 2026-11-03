@@ -1,0 +1,142 @@
+{
+  "model_path": "checkpoints\\models\\20261103T072930Z-9f600af3.joblib",
+  "selection": "No thresholds selected on this benchmark",
+  "groups": {
+    "dev/openphish_current": {
+      "n": 133,
+      "is_phishing": 1,
+      "suspicious": {
+        "flagged": 110,
+        "rate": 0.8270676691729323,
+        "ci95": [
+          0.754,
+          0.882
+        ]
+      },
+      "high": {
+        "flagged": 102,
+        "rate": 0.7669172932330827,
+        "ci95": [
+          0.688,
+          0.831
+        ]
+      }
+    },
+    "dev/tranco_current_proxy_legit": {
+      "n": 1426,
+      "is_phishing": 0,
+      "suspicious": {
+        "flagged": 71,
+        "rate": 0.04978962131837307,
+        "ci95": [
+          0.04,
+          0.062
+        ]
+      },
+      "high": {
+        "flagged": 18,
+        "rate": 0.012622720897615708,
+        "ci95": [
+          0.008,
+          0.02
+        ]
+      }
+    },
+    "dev/umbrella_hosting_proxy_legit": {
+      "n": 277,
+      "is_phishing": 0,
+      "suspicious": {
+        "flagged": 141,
+        "rate": 0.5090252707581228,
+        "ci95": [
+          0.45,
+          0.567
+        ]
+      },
+      "high": {
+        "flagged": 39,
+        "rate": 0.1407942238267148,
+        "ci95": [
+          0.105,
+          0.187
+        ]
+      }
+    },
+    "frozen/openphish_current": {
+      "n": 55,
+      "is_phishing": 1,
+      "suspicious": {
+        "flagged": 45,
+        "rate": 0.8181818181818182,
+        "ci95": [
+          0.697,
+          0.898
+        ]
+      },
+      "high": {
+        "flagged": 39,
+        "rate": 0.7090909090909091,
+        "ci95": [
+          0.579,
+          0.812
+        ]
+      }
+    },
+    "frozen/tranco_current_proxy_legit": {
+      "n": 574,
+      "is_phishing": 0,
+      "suspicious": {
+        "flagged": 35,
+        "rate": 0.06097560975609756,
+        "ci95": [
+          0.044,
+          0.084
+        ]
+      },
+      "high": {
+        "flagged": 8,
+        "rate": 0.013937282229965157,
+        "ci95": [
+          0.007,
+          0.027
+        ]
+      }
+    },
+    "frozen/umbrella_hosting_proxy_legit": {
+      "n": 123,
+      "is_phishing": 0,
+      "suspicious": {
+        "flagged": 70,
+        "rate": 0.5691056910569106,
+        "ci95": [
+          0.481,
+          0.653
+        ]
+      },
+      "high": {
+        "flagged": 29,
+        "rate": 0.23577235772357724,
+        "ci95": [
+          0.169,
+          0.318
+        ]
+      }
+    }
+  },
+  "candidate_training": {
+    "source_sha256": "85a6d7529b1a5d4504f7f7a141f8dfe0a33a66fb6b3ad7fbbeb5238933a6a08d",
+    "protocol": "fresh-dev-owner-split-error-v1",
+    "proxy_negative_weight": 20.0,
+    "phishing_feed_weight": 5.0,
+    "free_host_monotonic_constraint": 0,
+    "rows": 1257,
+    "proxy_negative_rows": 1167,
+    "feed_positive_rows": 90,
+    "analyst_labels": 0,
+    "validation_rows": 579,
+    "text_model": "frozen baseline; OOF fits reused"
+  },
+  "independent_parts": [
+    "frozen"
+  ]
+}

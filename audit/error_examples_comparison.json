@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "react-docs.vercel.app": {
+      "raw": 0.9954621449431119,
+      "score": 99,
+      "level": "high risk"
+    },
+    "careers.dubaiholding.com": {
+      "raw": 0.9279055845067229,
+      "score": 91,
+      "level": "high risk"
+    }
+  },
+  "candidate": {
+    "react-docs.vercel.app": {
+      "raw": 0.8745483538656282,
+      "score": 91,
+      "level": "suspicious"
+    },
+    "careers.dubaiholding.com": {
+      "raw": 0.9064564191896951,
+      "score": 93,
+      "level": "high risk"
+    }
+  }
+}

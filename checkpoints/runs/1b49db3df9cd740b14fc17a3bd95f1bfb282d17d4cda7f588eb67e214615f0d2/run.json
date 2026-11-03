@@ -1,0 +1,8 @@
+{
+  "fingerprint": "1b49db3df9cd740b14fc17a3bd95f1bfb282d17d4cda7f588eb67e214615f0d2",
+  "seed": 42,
+  "sklearn": "1.9.1",
+  "python": "3.12.14",
+  "rows": 1257,
+  "optimizer_state": "not exposed by sklearn batch fit"
+}

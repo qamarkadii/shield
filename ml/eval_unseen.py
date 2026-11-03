@@ -49,7 +49,7 @@ def score(bundle, domains, chunk=20_000):
             rule = bool((uae and (any(f[k] for k in IMPERSONATION) or f["fake_country_label"]))
                         or f["fake_country_label"])
             lvl = 2 if pr >= th["high"] else 1 if pr >= th["suspicious"] else 0
-            if info["official"] and uae:
+            if info["official"] and bool(b) and "(global brand)" not in b:
                 lvl = 0
             app = max(lvl, 1) if rule and not info["official"] else lvl
             out.append((d, float(pr), lvl, rule, app, b or "", bool(info["official"])))

@@ -1,0 +1,8 @@
+{
+  "path": "C:\\Users\\qamar\\.codex\\.chatgpt-projects\\g-p-6ae504451c088191a4cec89a68a4a312\\shield-main\\checkpoints\\models\\20261103T073450Z-a7987f63.joblib",
+  "sha256": "dd642b33171b1a23375cc1918090fd5b547bd59d8e170743f45d20d223806b0c",
+  "run": "c8c7e9c87180f68e41981b7ec7cd9bf970b3842d3de6a8bd3319826986ec5adc",
+  "selection_metric": "internal_holdout_log_loss",
+  "value": 0.324,
+  "prediction_reload_verified": true
+}

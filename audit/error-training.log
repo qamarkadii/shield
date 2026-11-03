@@ -1,0 +1,70 @@
+Popularity list: 250,000 sites
+Detected 131 multi-tenant hosting platforms
+Real legitimate hostnames: 40,000 for training, 45,575 reserved for evaluation (their owners are never trained on)
+Removed 6,466 training rows whose owner is in an evaluation set (leakage)
+Synthetic UAE impersonations (training only): 3,000
+Real UAE-targeted phishing (train part): 302 (weight x5); extra never-in-base rows: 120,000 (60,000 phishing)
+Rows: fit 425,414 (incl. augmented copies), held-out 64,559 (phishing share 0.46)
+Extracting warning signs ...
+{
+  "receipt": {
+    "path": "C:\\Users\\qamar\\.codex\\.chatgpt-projects\\g-p-6ae504451c088191a4cec89a68a4a312\\shield-main\\checkpoints\\models\\20261103T072930Z-9f600af3.joblib",
+    "sha256": "ffddfd1e65e66e994ea44a9b1687f5d4bb921ce6e6192e33a3ed52bb4bef17b9",
+    "run": "1b49db3df9cd740b14fc17a3bd95f1bfb282d17d4cda7f588eb67e214615f0d2",
+    "selection_metric": "internal_holdout_log_loss",
+    "value": 0.3304832113170005,
+    "prediction_reload_verified": true
+  },
+  "training": {
+    "source_sha256": "85a6d7529b1a5d4504f7f7a141f8dfe0a33a66fb6b3ad7fbbeb5238933a6a08d",
+    "protocol": "fresh-dev-owner-split-error-v1",
+    "proxy_negative_weight": 20.0,
+    "phishing_feed_weight": 5.0,
+    "free_host_monotonic_constraint": 0,
+    "rows": 1257,
+    "proxy_negative_rows": 1167,
+    "feed_positive_rows": 90,
+    "analyst_labels": 0,
+    "validation_rows": 579,
+    "text_model": "frozen baseline; OOF fits reused"
+  },
+  "inner_validation": {
+    "baseline": {
+      "phishing": {
+        "n": 43,
+        "high": 0.7906976744186046,
+        "suspicious": 0.8372093023255814
+      },
+      "proxy_legitimate": {
+        "n": 536,
+        "high": 0.14365671641791045,
+        "suspicious": 0.19962686567164178
+      },
+      "hosting_proxy_legitimate": {
+        "n": 89,
+        "high": 0.8314606741573034,
+        "suspicious": 0.9550561797752809
+      }
+    },
+    "candidate": {
+      "phishing": {
+        "n": 43,
+        "suspicious": 0.8372093023255814,
+        "high": 0.813953488372093
+      },
+      "proxy_legitimate": {
+        "n": 536,
+        "suspicious": 0.14925373134328357,
+        "high": 0.041044776119402986
+      },
+      "hosting_proxy_legitimate": {
+        "n": 89,
+        "suspicious": 0.6629213483146067,
+        "high": 0.20224719101123595
+      }
+    }
+  },
+  "development_gate_passed": true,
+  "promoted": false,
+  "caveat": "Ranking-based negatives are proxies. This experiment is not analyst-supervised or a live UAE pilot."
+}

@@ -65,7 +65,21 @@ def download_feeds() -> dict:
                 f.write(r.content)
             out[name] = "ok"
         except Exception as ex:
-            out[nadef _freeze_uae(lab: pd.DataFrame, log=print) -> pd.DataFrame:
+            out[name] = str(ex)
+    return out
+
+
+def _read_feed_domains():
+    domains = set()
+    for name in FEED_URLS:
+        path = os.path.join(FEEDS, name)
+        if os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                domains.update(_norm(line) for line in f if line.strip() and not line.startswith("#"))
+    return {d for d in domains if "." in d and " " not in d}
+
+
+def _freeze_uae(lab: pd.DataFrame, log=print) -> pd.DataFrame:
     """Move every third confirmed UAE-brand fake (by a stable hash) to the frozen holdout."""
     import zlib
     from backend.app.scoring import mentions_brand
@@ -131,15 +145,6 @@ def retrain(labels=None, fetch=True, feed_sample=30000, log=print) -> dict:
             "recall_suspicious": r["at_suspicious"]["recall"],
             "fpr_high": r["at_high"]["false_positive_rate"], "uae_fakes": r["uae_fakes"],
             "fresh_feed_domains": len(fresh), "new_legit_sites": len(legit_new), "analyst_labels": n_labels,
-            "trained_at": bundle["trained_at"], "seconds": bundle["seconds"]}
-
-
-_labels else None)
-    r = bundle["results"]
-    return {"auc": r["auc"], "precision_suspicious": r["at_suspicious"]["precision"],
-            "recall_suspicious": r["at_suspicious"]["recall"],
-            "fpr_high": r["at_high"]["false_positive_rate"], "uae_fakes": r["uae_fakes"],
-            "fresh_feed_domains": len(fresh), "analyst_labels": n_labels,
             "trained_at": bundle["trained_at"], "seconds": bundle["seconds"]}
 
 

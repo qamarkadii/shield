@@ -16,10 +16,9 @@ COPY --chown=user requirements.txt .
 RUN pip install --no-cache-dir --user -r requirements.txt && python -m playwright install chromium
 
 COPY --chown=user . .
-# Download the top-sites lists the model uses, then train during the build
-# (20-45 minutes, needs about 4 GB RAM), so the app starts ready
-RUN python backend/scripts/download_data.py && python ml/train_baseline.py && \
-    (python -m backend.app.pagecheck --refs || echo "reference screenshots failed; page check still works")
+# Preserve packaged models/checkpoints and their matching data snapshots.
+# Train only if no recoverable model exists; partial runs resume rather than reset.
+RUN python tools/ensure_model.py --train-if-missing
 
 EXPOSE 7860
 CMD ["python", "-m", "uvicorn", "space_app:app", "--host", "0.0.0.0", "--port", "7860", "--proxy-headers", "--forwarded-allow-ips", "*"]

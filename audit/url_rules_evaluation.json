@@ -1,0 +1,43 @@
+{
+  "protocol": "URL rules only: domain ML and known feeds disabled",
+  "parts": {
+    "dev": {
+      "n": 17,
+      "caught": 17,
+      "recall": 1.0
+    },
+    "frozen": {
+      "n": 28,
+      "caught": 28,
+      "recall": 1.0
+    }
+  },
+  "curated_benign_regressions": [
+    {
+      "url": "https://example.org/articles/rta/transport-history",
+      "verdict": "unknown"
+    },
+    {
+      "url": "https://example.org/news/adcb/annual-results",
+      "verdict": "unknown"
+    },
+    {
+      "url": "https://example.org/research/salik/traffic",
+      "verdict": "suspicious"
+    },
+    {
+      "url": "https://example.org/partners/aramex/shipping",
+      "verdict": "suspicious"
+    },
+    {
+      "url": "https://example.org/myrtaexample/payment",
+      "verdict": "unknown"
+    },
+    {
+      "url": "https://example.org/rtanews/login",
+      "verdict": "unknown"
+    }
+  ],
+  "curated_benign_flagged": 2,
+  "limitation": "A domain-only model cannot see URL paths. These rates do not measure ML and must not be presented as deployment accuracy."
+}

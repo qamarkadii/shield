@@ -1,0 +1,20 @@
+test_backup_committed_wal_and_excludes_secrets (test_backup.BackupTests.test_backup_committed_wal_and_excludes_secrets) ... ok
+test_restore_rebases_paths_and_preserves_existing_work (test_backup.BackupTests.test_restore_rebases_paths_and_preserves_existing_work) ... ok
+test_unsafe_archive_path_is_rejected_before_write (test_backup.BackupTests.test_unsafe_archive_path_is_rejected_before_write) ... ok
+test_competing_fit_is_refused_instead_of_recomputed (test_recovery.RecoveryTests.test_competing_fit_is_refused_instead_of_recomputed) ... ok
+test_completed_stage_is_reloaded_and_corruption_is_rejected (test_recovery.RecoveryTests.test_completed_stage_is_reloaded_and_corruption_is_rejected) ... ok
+test_default_chat_never_calls_external_provider (test_recovery.RecoveryTests.test_default_chat_never_calls_external_provider) ... ok
+test_encoded_and_short_brand_paths (test_recovery.RecoveryTests.test_encoded_and_short_brand_paths) ... ok
+test_failed_or_empty_page_capture_never_returns_clean_verdict (test_recovery.RecoveryTests.test_failed_or_empty_page_capture_never_returns_clean_verdict) ... ok
+test_feed_parser (test_recovery.RecoveryTests.test_feed_parser) ... ok
+test_fitted_estimator_prediction_survives_resume (test_recovery.RecoveryTests.test_fitted_estimator_prediction_survives_resume) ... ok
+test_input_changes_create_different_runs (test_recovery.RecoveryTests.test_input_changes_create_different_runs) ... ok
+test_known_feed_not_required_for_url_review (test_recovery.RecoveryTests.test_known_feed_not_required_for_url_review) ... ok
+test_model_identity_describes_loaded_bytes_until_reload (test_recovery.RecoveryTests.test_model_identity_describes_loaded_bytes_until_reload) ... ok
+test_unsupported_scheme_rejected (test_recovery.RecoveryTests.test_unsupported_scheme_rejected) ... ok
+test_supplemental_rows_cannot_reintroduce_real_evaluation_owner (test_training_exclusions.TrainingExclusionTests.test_supplemental_rows_cannot_reintroduce_real_evaluation_owner) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.849s
+
+OK

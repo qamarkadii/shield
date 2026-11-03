@@ -150,12 +150,14 @@ def main():
 
     from sklearn.linear_model import LogisticRegression
     from sklearn.metrics import roc_auc_score
+    from recovery import Run
+    run = Run(df, SEED)
     bundle = joblib.load(os.path.join(HERE, "domain_model.joblib"))
     tr, te = df[df.split == "train"].reset_index(drop=True), df[df.split == "test"].reset_index(drop=True)
     Xtr, ytr, _ = matrix(tr, facts, bundle)
     Xte, yte, _ = matrix(te, facts, bundle)
     print(f"Online now: train {len(ytr):,} ({ytr.sum():,} phishing), test {len(yte):,} ({yte.sum():,} phishing)")
-    clf = LogisticRegression(C=1.0, max_iter=2000, class_weight="balanced").fit(Xtr, ytr)
+    clf = run.stage('facts_classifier', lambda: LogisticRegression(C=1.0, max_iter=2000, class_weight="balanced").fit(Xtr, ytr))
     p_comb = clf.predict_proba(Xte)[:, 1]
     p_name = riskmodel.sigmoid(Xte[:, 0])
 
@@ -175,8 +177,15 @@ def main():
     # cut-offs on the combined probability: same false-alarm budget as the name model (3% / 0.5%)
     p_tr = clf.predict_proba(Xtr)[:, 1]
     th = {"suspicious": float(np.quantile(p_tr[ytr == 0], 0.97)), "high": float(np.quantile(p_tr[ytr == 0], 0.995))}
-    joblib.dump({"version": 1, "names": names, "clf": clf, "thresholds": th, "results": res,
-                 "trained_at": time.strftime("%Y-%m-%d %H:%M"), "train_rows": int(len(ytr))}, OUT)
+    facts_bundle = {"version": 1, "names": names, "clf": clf, "thresholds": th, "results": res,
+                    "trained_at": time.strftime("%Y-%m-%d %H:%M"), "train_rows": int(len(ytr))}
+    run.stage('facts_bundle', lambda: facts_bundle)
+    if not os.path.exists(OUT):
+        tmp = OUT + '.tmp'
+        joblib.dump(facts_bundle, tmp)
+        check = joblib.load(tmp)
+        np.testing.assert_allclose(clf.predict_proba(Xte), check['clf'].predict_proba(Xte), rtol=0, atol=0)
+        os.replace(tmp, OUT)
     with open(os.path.join(HERE, "facts_report.json"), "w") as f:
         json.dump(res, f, indent=1)
     print(json.dumps(res, indent=1))

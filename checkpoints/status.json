@@ -1,0 +1,9 @@
+{
+  "last_event": "portable_backup_restore_verified",
+  "archive": "../recovery/shield-checkpoint-20261103T080248330090Z.zip",
+  "files": 282,
+  "baseline_and_candidate_prediction_parity_exact": true,
+  "automatic_model_recovery_without_training": true,
+  "regression_tests_passed": 15,
+  "cloud_upload": false
+}

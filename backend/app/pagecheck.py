@@ -192,6 +192,11 @@ def _inputs(res):
 
 
 def analyse(res: dict, domain: str) -> dict:
+    if res.get("error") is not None or not res.get("final_url"):
+        return {"opened": False, "error": res.get("error") or "page capture did not complete",
+                "status": res.get("status"), "signs": [], "verdict": "not checked",
+                "asks_for": {}, "brands_shown": [], "looks_like": [],
+                "blocked_requests": res.get("blocked_requests", []), "screenshot": None}
     from .features import clean, split_domain
     from .i18n import BRAND_AR
     from .registry import UAE_BRANDS
