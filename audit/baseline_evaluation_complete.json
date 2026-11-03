@@ -1,0 +1,19 @@
+{
+  "identity": {
+    "model_sha256": "66c0ff1b8b8bd2dde1a325ca65f70600246adaf313af7476229f1ded6aafb9dd",
+    "evaluator_sha256": "4df65d5395e6cc461134636d5a48fad1e0ac23512cc069ba3df0edea4b617694",
+    "system_check_sha256": "0462ac25121b8c5d8f30080a80de2034881d889791d21e356deec7f2d99c1498"
+  },
+  "completed": true,
+  "trained_again": false,
+  "with_rules": {
+    "uae_fakes": {
+      "high risk": 65,
+      "suspicious": 1,
+      "missed": 0,
+      "total": 66
+    },
+    "legit_test_flagged": 0.015,
+    "legit_hostnames_flagged": 0.037
+  }
+}

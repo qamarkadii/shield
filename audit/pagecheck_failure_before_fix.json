@@ -1,0 +1,25 @@
+{
+  "opened": false,
+  "error": "simulated capture timeout",
+  "status": null,
+  "final_url": null,
+  "title": null,
+  "asks_for": {
+    "password": false,
+    "card": false,
+    "otp": false,
+    "id_number": false
+  },
+  "brands_shown": [],
+  "claims_brand_off_domain": [],
+  "looks_like": [],
+  "form_targets": [],
+  "redirects": [],
+  "blocked_requests": [],
+  "requests": null,
+  "screenshot": null,
+  "favicon_sha256": null,
+  "signs": [],
+  "verdict": "nothing found",
+  "text_excerpt": ""
+}

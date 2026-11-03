@@ -16,7 +16,7 @@ import ipaddress
 import os
 import re
 import unicodedata
-from urllib.parse import urlparse
+from urllib.parse import urlparse, unquote
 
 from .features import _match, _tokens, split_domain
 from .registry import UAE_BRANDS
@@ -71,10 +71,20 @@ def _raise(result, level):
 
 
 def path_brand(path: str):
-    """A UAE brand named as a whole word (or word start) in the link's path/query, 5+ letters."""
-    for t in _tokens(path.lower()):
+    """Decode encoded paths; short brand names require an exact token and action context.
+
+    A mention alone is not proof of fraud. This function supplies a review signal.
+    """
+    decoded = path
+    for _ in range(2):
+        decoded = unquote(decoded)
+    tokens = _tokens(decoded.lower())
+    action = bool(re.search(r'(login|signin|verify|payment|pay|fine|refund|otp|card|kyc|update)', decoded.lower()))
+    for t in tokens:
         for k in sorted(UAE_BRANDS, key=len, reverse=True):
             if len(k) >= 5 and _match(t, k) in ("exact", "prefix"):
+                return UAE_BRANDS[k]
+            if 3 <= len(k) < 5 and t == k and action:
                 return UAE_BRANDS[k]
     return None
 
@@ -88,6 +98,8 @@ def check_link(raw: str, facts_budget: float | None = None) -> dict:
     url = raw if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", raw) else "http://" + raw
     try:
         p = urlparse(url)
+        if p.scheme.lower() not in ('http', 'https'):
+            return {"error": "Only HTTP and HTTPS links can be checked."}
         host = (p.hostname or "").lower().rstrip(".")
     except ValueError:
         return {"error": "That doesn't look like a valid link."}
@@ -155,7 +167,7 @@ def check_link(raw: str, facts_budget: float | None = None) -> dict:
         _, reg_d = split_domain(host)
         if not any(reg_d == o or reg_d.endswith("." + o) for o in official):
             rules.append(f"Rule: the link's path names {name}, but the site is {reg_d}, not {', '.join(official)}. "
-                         f"Real {name} pages are only on its own domain.")
+                         "This needs review; a brand mention can also be a legitimate reference or partner.")
             result["brand"] = result.get("brand") or name
             _raise(result, "suspicious")
     if re.search(r"(login|signin|verify|update|pay|payment|fine|refund|otp|card|bank|kyc)", (p.path + p.query).lower()):

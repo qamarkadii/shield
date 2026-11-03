@@ -1,0 +1,595 @@
+{
+  "model_path": "checkpoints\\models\\20261103T072930Z-9f600af3.joblib",
+  "selection": "No thresholds selected on this benchmark",
+  "groups": {
+    "dev/openphish_current": {
+      "n": 133,
+      "is_phishing": 1,
+      "suspicious": {
+        "flagged": 110,
+        "rate": 0.8270676691729323,
+        "ci95": [
+          0.754,
+          0.882
+        ]
+      },
+      "high": {
+        "flagged": 102,
+        "rate": 0.7669172932330827,
+        "ci95": [
+          0.688,
+          0.831
+        ]
+      }
+    },
+    "dev/tranco_current_proxy_legit": {
+      "n": 1426,
+      "is_phishing": 0,
+      "suspicious": {
+        "flagged": 71,
+        "rate": 0.04978962131837307,
+        "ci95": [
+          0.04,
+          0.062
+        ]
+      },
+      "high": {
+        "flagged": 18,
+        "rate": 0.012622720897615708,
+        "ci95": [
+          0.008,
+          0.02
+        ]
+      }
+    },
+    "dev/umbrella_hosting_proxy_legit": {
+      "n": 277,
+      "is_phishing": 0,
+      "suspicious": {
+        "flagged": 141,
+        "rate": 0.5090252707581228,
+        "ci95": [
+          0.45,
+          0.567
+        ]
+      },
+      "high": {
+        "flagged": 39,
+        "rate": 0.1407942238267148,
+        "ci95": [
+          0.105,
+          0.187
+        ]
+      }
+    },
+    "frozen/openphish_current": {
+      "n": 55,
+      "is_phishing": 1,
+      "suspicious": {
+        "flagged": 45,
+        "rate": 0.8181818181818182,
+        "ci95": [
+          0.697,
+          0.898
+        ]
+      },
+      "high": {
+        "flagged": 39,
+        "rate": 0.7090909090909091,
+        "ci95": [
+          0.579,
+          0.812
+        ]
+      }
+    },
+    "frozen/tranco_current_proxy_legit": {
+      "n": 574,
+      "is_phishing": 0,
+      "suspicious": {
+        "flagged": 35,
+        "rate": 0.06097560975609756,
+        "ci95": [
+          0.044,
+          0.084
+        ]
+      },
+      "high": {
+        "flagged": 8,
+        "rate": 0.013937282229965157,
+        "ci95": [
+          0.007,
+          0.027
+        ]
+      }
+    },
+    "frozen/umbrella_hosting_proxy_legit": {
+      "n": 123,
+      "is_phishing": 0,
+      "suspicious": {
+        "flagged": 70,
+        "rate": 0.5691056910569106,
+        "ci95": [
+          0.481,
+          0.653
+        ]
+      },
+      "high": {
+        "flagged": 29,
+        "rate": 0.23577235772357724,
+        "ci95": [
+          0.169,
+          0.318
+        ]
+      }
+    }
+  },
+  "candidate_training": {
+    "source_sha256": "85a6d7529b1a5d4504f7f7a141f8dfe0a33a66fb6b3ad7fbbeb5238933a6a08d",
+    "protocol": "fresh-dev-owner-split-error-v1",
+    "proxy_negative_weight": 20.0,
+    "phishing_feed_weight": 5.0,
+    "free_host_monotonic_constraint": 0,
+    "rows": 1257,
+    "proxy_negative_rows": 1167,
+    "feed_positive_rows": 90,
+    "analyst_labels": 0,
+    "validation_rows": 579,
+    "text_model": "frozen baseline; OOF fits reused"
+  },
+  "independent_parts": [
+    "frozen"
+  ],
+  "dev_errors": [
+    {
+      "domain": "s4w.in",
+      "url": "https://s4w.in/recwU",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "s4w.in",
+      "part": "dev",
+      "p": 0.2573576860803448
+    },
+    {
+      "domain": "compositura.com",
+      "url": "https://compositura.com/js/indexe.html#lawrence",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "compositura.com",
+      "part": "dev",
+      "p": 0.15495696864544495
+    },
+    {
+      "domain": "qr-codes.io",
+      "url": "https://qr-codes.io/j8aWFr",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "qr-codes.io",
+      "part": "dev",
+      "p": 0.0307861834797467
+    },
+    {
+      "domain": "mplays.topup-diamonds.com",
+      "url": "https://mplays.topup-diamonds.com/",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "topup-diamonds.com",
+      "part": "dev",
+      "p": 0.33415603392088744
+    },
+    {
+      "domain": "owalotte.net",
+      "url": "https://owalotte.net/owa/",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "owalotte.net",
+      "part": "dev",
+      "p": 0.10628988985666646
+    },
+    {
+      "domain": "admintegral.com.ar",
+      "url": "https://admintegral.com.ar/.home/exeedumntt.html",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "admintegral.com.ar",
+      "part": "dev",
+      "p": 0.3072003105269592
+    },
+    {
+      "domain": "hameem.net",
+      "url": "https://hameem.net/docu/",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "hameem.net",
+      "part": "dev",
+      "p": 0.23706921036574424
+    },
+    {
+      "domain": "bet63uu.com",
+      "url": "https://www.bet63uu.com/",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "bet63uu.com",
+      "part": "dev",
+      "p": 0.5070333441774981
+    },
+    {
+      "domain": "d33wubrfki0l68.cloudfront.net",
+      "url": "https://d33wubrfki0l68.cloudfront.net/e152d61e-e770-49d6-99b7-7193d2588b00/indLi2.html",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "d33wubrfki0l68.cloudfront.net",
+      "part": "dev",
+      "p": 0.02307638357094654
+    },
+    {
+      "domain": "cuq.in",
+      "url": "https://cuq.in/Qjzsp",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "cuq.in",
+      "part": "dev",
+      "p": 0.40960977793472503
+    },
+    {
+      "domain": "fischliamsee.ch",
+      "url": "https://fischliamsee.ch/hutarchitecturedocs",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "fischliamsee.ch",
+      "part": "dev",
+      "p": 0.13366829590860863
+    },
+    {
+      "domain": "eiytryyde.com",
+      "url": "https://www.eiytryyde.com/",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "eiytryyde.com",
+      "part": "dev",
+      "p": 0.5662360842989071
+    },
+    {
+      "domain": "pucmk.com",
+      "url": "https://pucmk.com/",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "pucmk.com",
+      "part": "dev",
+      "p": 0.3655161811843066
+    },
+    {
+      "domain": "it-harting.com",
+      "url": "https://it-harting.com/app/5WiJwcqaPNAsiaJLYyhJ5f",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "it-harting.com",
+      "part": "dev",
+      "p": 0.2309480653313349
+    },
+    {
+      "domain": "prsnrw.de",
+      "url": "https://prsnrw.de/eftpack",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "prsnrw.de",
+      "part": "dev",
+      "p": 0.13025915711423747
+    },
+    {
+      "domain": "brinoedu.com.br",
+      "url": "https://brinoedu.com.br/doc/download.html",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "brinoedu.com.br",
+      "part": "dev",
+      "p": 0.3479985519324986
+    },
+    {
+      "domain": "swispostch.com",
+      "url": "https://swispostch.com/portal/home/index.php?MTc5MzYzMjgwNTgxOTNiZjkwOTI5M2JjMGVjYTFjYWI2ZDU0NGIzMGQxMWQxOWE3MjNiYjg1ZmVjOWVlZWJmMjBhMWYzZDBlZGIxMTc2N2UyOQ==",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "swispostch.com",
+      "part": "dev",
+      "p": 0.6014015815228042
+    },
+    {
+      "domain": "postzustellen.com",
+      "url": "https://postzustellen.com/portal",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "postzustellen.com",
+      "part": "dev",
+      "p": 0.4863282557018649
+    },
+    {
+      "domain": "theholyoliveoil.com",
+      "url": "http://theholyoliveoil.com/",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "theholyoliveoil.com",
+      "part": "dev",
+      "p": 0.09519241085176397
+    },
+    {
+      "domain": "asiapacificrefinery.com",
+      "url": "https://asiapacificrefinery.com/cfgs",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "asiapacificrefinery.com",
+      "part": "dev",
+      "p": 0.3528241036950504
+    },
+    {
+      "domain": "svminternational.org",
+      "url": "https://svminternational.org/less/index.html",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "svminternational.org",
+      "part": "dev",
+      "p": 0.18177929852896066
+    },
+    {
+      "domain": "higuchi-ph.vn",
+      "url": "https://higuchi-ph.vn/paga/new.html",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "higuchi-ph.vn",
+      "part": "dev",
+      "p": 0.2587530396324244
+    },
+    {
+      "domain": "tuespaciocreativo.com",
+      "url": "https://tuespaciocreativo.com/wp-content/file-view-pdf/view.php",
+      "is_phishing": 1,
+      "source": "openphish_current",
+      "owner": "tuespaciocreativo.com",
+      "part": "dev",
+      "p": 0.6100843928870228
+    },
+    {
+      "domain": "zxdm.top",
+      "url": "https://zxdm.top",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "zxdm.top",
+      "part": "dev",
+      "p": 0.8998155454066171
+    },
+    {
+      "domain": "c168k.top",
+      "url": "https://c168k.top",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "c168k.top",
+      "part": "dev",
+      "p": 0.7277023172418285
+    },
+    {
+      "domain": "apartments-sales.com",
+      "url": "https://apartments-sales.com",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "apartments-sales.com",
+      "part": "dev",
+      "p": 0.7819913761881802
+    },
+    {
+      "domain": "reelrewardapp.com",
+      "url": "https://reelrewardapp.com",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "reelrewardapp.com",
+      "part": "dev",
+      "p": 0.7632756941185317
+    },
+    {
+      "domain": "freedomcomputerservice.net",
+      "url": "https://freedomcomputerservice.net",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "freedomcomputerservice.net",
+      "part": "dev",
+      "p": 0.8801389428586742
+    },
+    {
+      "domain": "dagestan-bot.fun",
+      "url": "https://dagestan-bot.fun",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "dagestan-bot.fun",
+      "part": "dev",
+      "p": 0.7029622471457888
+    },
+    {
+      "domain": "ek06yfht.xyz",
+      "url": "https://ek06yfht.xyz",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "ek06yfht.xyz",
+      "part": "dev",
+      "p": 0.9297804575186427
+    },
+    {
+      "domain": "6603379.com",
+      "url": "https://6603379.com",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "6603379.com",
+      "part": "dev",
+      "p": 0.7992831282515217
+    },
+    {
+      "domain": "avogadro.cc",
+      "url": "https://avogadro.cc",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "avogadro.cc",
+      "part": "dev",
+      "p": 0.7233853626660838
+    },
+    {
+      "domain": "ubet789kh.live",
+      "url": "https://ubet789kh.live",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "ubet789kh.live",
+      "part": "dev",
+      "p": 0.7579833835453375
+    },
+    {
+      "domain": "emergencyservicestimes.com",
+      "url": "https://emergencyservicestimes.com",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "emergencyservicestimes.com",
+      "part": "dev",
+      "p": 0.7268025049509689
+    },
+    {
+      "domain": "situspusatjp.site",
+      "url": "https://situspusatjp.site",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "situspusatjp.site",
+      "part": "dev",
+      "p": 0.8917643220511561
+    },
+    {
+      "domain": "encryptionconsulting.com",
+      "url": "https://encryptionconsulting.com",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "encryptionconsulting.com",
+      "part": "dev",
+      "p": 0.9170851606206398
+    },
+    {
+      "domain": "muucehmlg.cc",
+      "url": "https://muucehmlg.cc",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "muucehmlg.cc",
+      "part": "dev",
+      "p": 0.7762924977045874
+    },
+    {
+      "domain": "bahislion1027.com",
+      "url": "https://bahislion1027.com",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "bahislion1027.com",
+      "part": "dev",
+      "p": 0.6595890867182701
+    },
+    {
+      "domain": "pencarihoki.autos",
+      "url": "https://pencarihoki.autos",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "pencarihoki.autos",
+      "part": "dev",
+      "p": 0.6361799181098367
+    },
+    {
+      "domain": "hostpp.live",
+      "url": "https://hostpp.live",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "hostpp.live",
+      "part": "dev",
+      "p": 0.9155054984227059
+    },
+    {
+      "domain": "puojgoqf.cc",
+      "url": "https://puojgoqf.cc",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "puojgoqf.cc",
+      "part": "dev",
+      "p": 0.926391015807252
+    },
+    {
+      "domain": "servbr.xyz",
+      "url": "https://servbr.xyz",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "servbr.xyz",
+      "part": "dev",
+      "p": 0.9492391587981407
+    },
+    {
+      "domain": "yamahaservicosfinanceiros.com.br",
+      "url": "https://yamahaservicosfinanceiros.com.br",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "yamahaservicosfinanceiros.com.br",
+      "part": "dev",
+      "p": 0.9274048480695016
+    },
+    {
+      "domain": "newvids.xyz",
+      "url": "https://newvids.xyz",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "newvids.xyz",
+      "part": "dev",
+      "p": 0.7230823110366406
+    },
+    {
+      "domain": "arena39world.xyz",
+      "url": "https://arena39world.xyz",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "arena39world.xyz",
+      "part": "dev",
+      "p": 0.7592016244490516
+    },
+    {
+      "domain": "zqq8dzjgy7.com",
+      "url": "https://zqq8dzjgy7.com",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "zqq8dzjgy7.com",
+      "part": "dev",
+      "p": 0.7543820239015163
+    },
+    {
+      "domain": "nmdemo.net",
+      "url": "https://nmdemo.net",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "nmdemo.net",
+      "part": "dev",
+      "p": 0.7181531567975095
+    },
+    {
+      "domain": "tvtambov.ru",
+      "url": "https://tvtambov.ru",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "tvtambov.ru",
+      "part": "dev",
+      "p": 0.6661782308667632
+    },
+    {
+      "domain": "24-info.lol",
+      "url": "https://24-info.lol",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "24-info.lol",
+      "part": "dev",
+      "p": 0.7358383295126634
+    },
+    {
+      "domain": "bdgwink.xyz",
+      "url": "https://bdgwink.xyz",
+      "is_phishing": 0,
+      "source": "tranco_current_proxy_legit",
+      "owner": "bdgwink.xyz",
+      "part": "dev",
+      "p": 0.8291128990318917
+    }
+  ],
+  "model_sha256": "ffddfd1e65e66e994ea44a9b1687f5d4bb921ce6e6192e33a3ed52bb4bef17b9"
+}

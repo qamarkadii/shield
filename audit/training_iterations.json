@@ -1,0 +1,22 @@
+{
+  "text_fold_0": [
+    96
+  ],
+  "text_fold_1": [
+    35
+  ],
+  "text_fold_2": [
+    58
+  ],
+  "text_fold_3": [
+    26
+  ],
+  "text_fold_4": [
+    57
+  ],
+  "text_final": [
+    46
+  ],
+  "baseline_boosting_iterations": 400,
+  "candidate_boosting_iterations": 358
+}

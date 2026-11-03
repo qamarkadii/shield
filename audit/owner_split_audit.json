@@ -1,0 +1,11 @@
+{
+  "fit_rows": 425414,
+  "hold_rows": 64559,
+  "fit_hold_owner_overlap": 0,
+  "fit_reserved_evaluation_owner_overlap": 0,
+  "fit_fresh_benchmark_owner_overlap": 0,
+  "hold_fresh_benchmark_owner_overlap": 0,
+  "fit_real_hostname_evaluation_owner_overlap": 18,
+  "fit_owner_sha256": "970018e824ff91fe86c6f42dd942f8d9c189143fae208e5fa661018a0ddc99f8",
+  "hold_owner_sha256": "ea9cdce4fe181834a6045bd3efb1a04a07df123623aa44cbff328a24551c03f3"
+}

@@ -1,0 +1,6 @@
+{
+  "model_before_sha256": "0d20344368ddb30da9343480158f9b76aa15238d0a5cfd629ca93630f7553bba",
+  "model_after_sha256": "862f8a2b287738369f037564d667df011fc4af791c2bc8bae50c15daf219a763",
+  "change": "Only GroupKFold owner representation: sorted factorized codes preserve exact grouping/permutation",
+  "run": "c8c7e9c87180f68e41981b7ec7cd9bf970b3842d3de6a8bd3319826986ec5adc"
+}

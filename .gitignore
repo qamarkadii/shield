@@ -1,14 +1,20 @@
 # Python
 __pycache__/
 *.pyc
-.venv/
+.venv*/
 venv/
 
-# Trained model (rebuild with: python ml\train_baseline.py)
+# Keep the serving model; full experimental/stage checkpoints live in backups.
 *.joblib
+!ml/domain_model.joblib
+checkpoints/
+*.zip
 
 # Secrets (API keys go in .env, never in code)
 .env
+.env.*
+!.env.example
+!frontend/.env.shield
 
 # Generated data
 data/crtsh_lookalikes.csv
@@ -23,12 +29,13 @@ node_modules/
 Thumbs.db
 
 # Runtime data (created when Shield runs)
-data/shield.db
+data/shield.db*
 data/outbox/
 data/feeds/
 
 # Downloaded top-sites lists (python backend\scripts\download_data.py)
-data/lists/
+data/lists/*
+!data/lists/tranco.zip
 
 # Downloaded phishing lists (python ml/collect_uae.py)
 data/sources/
@@ -36,3 +43,8 @@ data/sources/
 # Domain-facts lookup cache and evidence packs (created when Shield runs)
 data/facts_cache.jsonl
 data/evidence/
+
+# Local caches and raw audit downloads (provenance manifests remain tracked)
+audit/tld-cache/
+data/external_audit/**/*.txt
+*.tsbuildinfo

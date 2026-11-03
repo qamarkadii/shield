@@ -126,6 +126,24 @@ def run(messages, public_view) -> "iter[str]":
         checks.append(r)
         yield line({"type": "check", "data": public_view(r)})
 
+    # Keep the link-check experience useful without sending citizen text to a provider.
+    # This is a factual template from Shield's own result, not an LLM verdict.
+    if os.environ.get("SHIELD_EXTERNAL_CHAT_ENABLED") != "1":
+        if checks:
+            for result in checks:
+                view = public_view(result)
+                reasons = (view.get("en") or {}).get("rules", []) + (view.get("en") or {}).get("facts", []) + (view.get("en") or {}).get("signals", [])
+                verdict = result.get("verdict", "unknown")
+                explanation = f"{result['domain']}: {verdict}. "
+                if reasons:
+                    explanation += " ".join(reasons[:3]) + " "
+                explanation += (view.get("en") or {}).get("advice", "")
+                yield line({"type": "delta", "text": explanation.strip() + "\n\n"})
+        else:
+            yield line({"type": "delta", "text": "Paste a link or domain and I will explain Shield's check. External chat is disabled, so questions without a link are unavailable."})
+        yield line({"type": "done"})
+        return
+
     context = SYSTEM
     if checks:
         context += "\n\nSHIELD CHECK RESULTS for the links in the user's latest message:\n" + \

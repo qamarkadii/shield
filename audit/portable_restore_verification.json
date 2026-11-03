@@ -1,0 +1,11 @@
+{
+  "archive": "shield-checkpoint-20261103T081130195204Z.zip",
+  "restored_files": 289,
+  "all_original_hashes_verified": true,
+  "rebased_checkpoint_pointers": 4,
+  "removed_serving_model_recovered_without_training": true,
+  "baseline_prediction_parity_exact": true,
+  "candidate_prediction_parity_exact": true,
+  "public_frontend_build_flag_restored": true,
+  "environment": "Existing verified Python environment reused"
+}

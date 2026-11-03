@@ -227,4 +227,18 @@ def stats():
     s["certs_per_second"] = r["certs_per_second"]
     s["uae_seen_now"] = r["uae_seen"]
     s["radar_running"] = r["running"]
+    s["review"] = db.review_metrics()
     return s
+
+
+@app.get("/review/queue")
+def pending_review(limit: int = 100):
+    """Analyst queue; only available on the Access-protected dashboard service."""
+    return {"metrics": db.review_metrics(), "detections": db.review_queue(max(1, min(limit, 500)))}
+
+
+@app.get("/review/brand-activity")
+def recent_brand_activity(hours: int = 24):
+    """Possible campaign leads for analysts; common brand alone is not proof of a campaign."""
+    return {"window_hours": max(1, min(hours, 720)), "groups": db.brand_activity(hours),
+            "note": "Shared brand and timing suggest review; verify hosting, registrar and page evidence before linking domains."}

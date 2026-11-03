@@ -22,6 +22,8 @@ Shield scoring: how one domain gets its score, level and reasons.
 
 import math
 import os
+import hashlib
+import io
 
 import joblib
 
@@ -33,6 +35,7 @@ from .registry import UAE_BRANDS
 
 _MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "ml", "domain_model.joblib")
 _model = None
+_model_sha256 = None
 
 IMPERSONATION = ("brand_typosquat", "brand_with_lure", "brand_in_subdomain", "brand_homoglyph")
 HOW = {"brand_typosquat": "the name is re-spelled",
@@ -43,17 +46,21 @@ HOW = {"brand_typosquat": "the name is re-spelled",
 
 
 def _load_model():
-    global _model
+    global _model, _model_sha256
     if _model is None and os.path.exists(_MODEL_PATH):
-        m = joblib.load(_MODEL_PATH)
+        with open(_MODEL_PATH, 'rb') as f:
+            raw = f.read()
+        m = joblib.load(io.BytesIO(raw))
         ok = isinstance(m, dict) and m.get("version") == riskmodel.BUNDLE_VERSION
         _model = m if ok else None   # old format -> retrain
+        _model_sha256 = hashlib.sha256(raw).hexdigest() if ok else None
     return _model
 
 
 def reload_model():
-    global _model
+    global _model, _model_sha256
     _model = None
+    _model_sha256 = None
     return _load_model() is not None
 
 
@@ -61,7 +68,7 @@ def model_info():
     m = _load_model()
     if not m:
         return None
-    return {"trained_at": m["trained_at"], "thresholds": m["thresholds"], "weights": m["weights"],
+    return {"model_sha256": _model_sha256, "trained_at": m["trained_at"], "thresholds": m["thresholds"], "weights": m["weights"],
             "combiner": m.get("combiner_kind"), "results": m.get("results"), "train_rows": m.get("train_rows"),
             "data": m.get("data_summary")}
 
