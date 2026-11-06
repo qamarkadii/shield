@@ -44,3 +44,6 @@ _backup*/
 
 # Windows shortcuts
 *.lnk
+
+# tldextract download cache
+audit/tld-cache/

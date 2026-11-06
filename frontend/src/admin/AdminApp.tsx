@@ -271,12 +271,13 @@ export default function AdminApp() {
   const [ask, setAsk] = useState<Ask | null>(null);
   const [replayBusy, setReplayBusy] = useState(false);
   const feedPath = `/feed?limit=150${source === 'watch' ? '&source=live&flagged_only=false' : source ? `&source=${source}` : ''}`;
-  const [stats, loadStats] = usePoll<Stats>('/stats', 2000);
-  const [radar, loadRadar] = usePoll<Radar>('/radar', 2000);
-  const [feed, loadFeed] = usePoll<Detection[]>(feedPath, 4000, [feedPath]);
-  const [alerts, loadAlerts] = usePoll<Alert[]>('/alerts', 6000);
-  const [model, loadModel] = usePoll<ModelStatus>('/model', 3000);
+  const [stats, loadStats, errorStats] = usePoll<Stats>('/stats', 2000);
+  const [radar, loadRadar, errorRadar] = usePoll<Radar>('/radar', 2000);
+  const [feed, loadFeed, errorFeed] = usePoll<Detection[]>(feedPath, 4000, [feedPath]);
+  const [alerts, loadAlerts, errorAlerts] = usePoll<Alert[]>('/alerts', 6000);
+  const [model, loadModel, errorModel] = usePoll<ModelStatus>('/model', 3000);
   const refresh = () => { loadStats(); loadFeed(); loadAlerts(); };
+  const failures = [errorStats, errorRadar, errorFeed, errorAlerts, errorModel].filter(Boolean);
   const confirm = (title: string, body: string, ok: string) => new Promise<boolean>(resolve => setAsk({ title, body, ok, resolve }));
 
   const toggleRadar = async () => {
@@ -301,9 +302,10 @@ export default function AdminApp() {
     <Header radar={radar} onRadar={toggleRadar} onReplay={replay} busy={replayBusy} />
     <main id="console" className="admin-wrap admin">
       <OpsBand stats={stats} radar={radar} feed={feed && source === '' ? feed : null} />
-      <Kpis stats={stats} />
+      {failures.length > 0 && <section className="panel glass" role="alert" style={{padding: 20, borderColor: '#ff2e4d'}}><h2>Live data unavailable</h2><p>{failures[0]}</p><p>Previously loaded values may be out of date.</p><button className="button" onClick={() => window.location.reload()}>Reload and sign in</button></section>}
+      {!(errorStats && !stats) && <Kpis stats={stats} />}
       <div className="admin-grid">
-        <Detections rows={feed} source={source} setSource={s => { setSource(s); }} selected={selected?.id ?? null} onSelect={setSelected} onLabel={label} onAlert={alert} />
+        {errorFeed && !feed ? <section className="panel glass" style={{padding: 24}}>Detections could not load. See the connection message above.</section> : <Detections rows={feed} source={source} setSource={s => { setSource(s); }} selected={selected?.id ?? null} onSelect={setSelected} onLabel={label} onAlert={alert} />}
         <aside className="side">
           <AnimatePresence initial={false}>{selected && <motion.div key={selected.id} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: .25 }}>
             <InvestigationPanel d={selected} onClose={() => setSelected(null)} onLabel={label} onAlert={alert} toast={push} />

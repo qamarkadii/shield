@@ -38,3 +38,10 @@
 - Final full backup `shield-checkpoint-20261103T080248330090Z.zip` verified (282 files, SHA-256 a320cbdf6bd95992b4c652bf193a2dcaeaf884ddad8403c9c5bed0a84485946f), restored separately with four pointer paths rebased; automatic recovery restored removed serving weights without fitting. Baseline and candidate predictions matched exactly after restore. External receipt/LATEST_BACKUP.json include the restore proof.
 
 - Backup review caught the non-secret frontend/.env.shield build flag being excluded with secret environment files. Added a precise allowlist and regression coverage while preserving exclusion of private environment files. Creating a superseding complete archive with this config and restore evidence; the earlier archive already passed model recovery tests.
+
+
+## Active console loading fix — 2026-11-03
+The live server now runs from C:/shield, a newer React admin checkout, NOT the earlier shield-main/shield-git copies. Preserve that newer design. Local /stats, /feed and /radar return HTTP 200; browser loaded real data with zero KPI skeletons and zero JS errors. Public hostname redirected the test browser to Cloudflare Access login; the user's authenticated failure was not directly observable.
+Confirmed UI defect: usePoll stored errors but AdminApp ignored them, leaving loading skeletons indefinitely. Added 12-second default request timeout, no-store requests, explicit authentication/non-JSON errors, visible failure banner and reload/sign-in action. Initial failed stats/feed no longer render endless skeletons. Built active frontend successfully with old hashed assets retained for open tabs. Browser test of simulated HTTP 403 passed: visible error and zero stats/feed skeletons. No backend restart, training or Git push.
+Recoverable pre-fix frontend archive: workspace recovery/console-before-loading-fix.zip, SHA256 a0ee67c334ba98bc97d4d7ad21ff92c51cf6fe30aabbf206fde6ed706ab9ac78.
+Next: reload app.aidashield.tech, authenticate if requested, inspect displayed request error if issue remains. Do not bypass Cloudflare Access.

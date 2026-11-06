@@ -1,9 +1,19 @@
 // Analyst dashboard API. Paths are RELATIVE on purpose: the dashboard works at "/" on a laptop
 // (http://127.0.0.1:8000) and under "/admin/" on the server (space_app.py).
 export async function api<T>(path: string, opts: RequestInit = {}): Promise<T> {
-  const r = await fetch(path.replace(/^\//, ''), { headers: { 'Content-Type': 'application/json' }, ...opts });
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error((j as { detail?: string }).detail || r.statusText);
+  let r: Response;
+  try {
+    r = await fetch(path.replace(/^\//, ''), { ...opts, credentials: 'same-origin', cache: 'no-store',
+      headers: { 'Content-Type': 'application/json', ...opts.headers }, signal: opts.signal ?? AbortSignal.timeout(12000) });
+  } catch (e) {
+    if ((e as Error).name === 'TimeoutError') throw new Error('Server did not respond within 12 seconds. Retrying automatically.');
+    throw new Error('Cannot reach the server. Check your connection or sign in again.');
+  }
+  if (r.redirected || r.status === 401 || r.status === 403 || !(r.headers.get('content-type') || '').includes('application/json')) {
+    throw new Error('API access unavailable. Reload to renew your Cloudflare login. If this continues, check the tunnel and Access policy for this hostname.');
+  }
+  const j = await r.json();
+  if (!r.ok) throw new Error((j as { detail?: string }).detail || `Server error ${r.status}`);
   return j as T;
 }
 export const post = <T,>(path: string, body?: unknown) => api<T>(path, { method: 'POST', body: body === undefined ? undefined : JSON.stringify(body) });
